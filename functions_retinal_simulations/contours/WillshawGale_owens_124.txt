@@ -1,0 +1,26 @@
+obj.nSC = 10000; % 2000;
+obj.nRGC = 10000; % 2000;
+obj.eyeType = 'disk';
+obj.gradientGenerationMethod = 'phenotype';
+obj.phenotype = 'Isl2heterozygous';
+obj.RGCnoiseLevelN = 0.000000;
+obj.SCnoiseLevelN = 0.000000;
+obj.kMask = 0.000000;
+obj.typeFlag = 2;
+obj.alphaForwardChem = 19; % 20 * 0.95
+obj.betaForwardChem = 28.5; % 30 * 0.95
+obj.alphaReverseChem = 0;
+obj.betaReverseChem = 0;
+obj.gammaAct = 0.06;
+obj.simName = 'WillshawGale-Isl2+124';
+obj.dataPath = 'SAVE/WillshawGale';
+obj.figurePath = 'FIGS/WillshawGale';
+obj.nSteps = obj.nRGC*1000;
+obj.useLocalJumps = false;
+obj.plotFigures = 0;
+obj.gradientGenerationMethod = 'naive'
+obj.naiveGradientCase = 'WillshawGale+124';
+
+
+%%You need to look in the MakeNaiveGradients file and add various cases for the knock in
+%%Alpha, Beta, and Gamma changed by 0.95, 0.95, and 1.2 multipliers respectively
