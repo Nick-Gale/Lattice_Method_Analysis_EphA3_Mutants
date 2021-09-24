@@ -1,0 +1,22 @@
+obj.eyeType = 'disk';
+obj.gradientGenerationMethod = 'phenotype';
+obj.phenotype = 'Isl2heterozygous';
+obj.RGCnoiseLevelN = 0;
+obj.SCnoiseLevelN = 0;
+obj.kMask = 0.000000;
+obj.typeFlag = 1;
+obj.useLocalJumps = false;
+obj.plotFigures = 0;
+obj.maxConnections = 1000;obj.gradientInfoFile = '../results_experiments/gradient_files/experiment_id_n_neurones=2000_EphA3-ki=1.302000_Ilset2ratio=0.500000_beta2truth=0.csv'
+obj.nSC = 2000;, 
+obj.nRGC = 2000;, 
+obj.nSteps = 20000000;, 
+obj.alphaForwardChem = 90.000000;, 
+obj.betaForwardChem = 135.000000;, 
+obj.alphaReverseChem = 0;;, 
+obj.betaReverseChem = 0;, 
+obj.gammaAct = 0.006250;, 
+obj.reportStep = 20000001.000000, 
+obj.simName = 'WillshawGale_n=2000_iterations=20000000_ephA3KI=1.302000_ilset2proportion=0.500000_beta2=0_repeat=1' 
+obj.dataPath = '../results_experiments' 
+obj.dataPath = '../results_experiments' 
