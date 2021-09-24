@@ -1,2 +1,3 @@
 # ignore the plots
-./results_* -r
+results_plots/*
+results_experiments/*
