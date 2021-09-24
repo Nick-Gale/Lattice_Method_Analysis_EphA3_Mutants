@@ -1,9 +1,10 @@
-function [CTOF_full_field_positions, CTOF_full_collicular_positions, FTOC_full_field_positions, FTOC_full_collicular_positions] = anatomical_map(collicular_connections, collicular_positions_RC, collicular_positions_ML, retinal_positions_NT, retinal_positions_DV)
+function [CTOF_full_field_positions, CTOF_full_collicular_positions, FTOC_full_field_positions, FTOC_full_collicular_positions] = anatomical_map(idxs, collicular_connections,  collicular_positions_RC, collicular_positions_ML, retinal_positions_NT, retinal_positions_DV)
 
 %useful to convert the collicular connections into a matrix with collicular connections in the first index, retinal connections in the second
 connection_matrix = zeros(length(collicular_positions_RC), length(retinal_positions_NT));
-
-for i = 1:length(collicular_positions_RC)
+idxs = find(idxs);
+for idx = 1:length(idxs)
+   i = idxs(idx);
    indexes = collicular_connections(:, i);
    non_zero = indexes(indexes ~= 0);
    %colliculus indexes are in the rows, retinal connections are in the columnss

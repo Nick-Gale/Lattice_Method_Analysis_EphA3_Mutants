@@ -16,13 +16,16 @@ function [bulk_activity_average, phases_average] = activity(collicular_spikes_fo
       
     f = 1/dt * (0:size(fourier_transform_forward, 2)/2)/size(fourier_transform_forward, 2);
     target_freq = bar_freq;
-    [~, frequency_index] = min( abs( f-target_freq ));
+    [~, frequency_index] = min( abs(f -target_freq ));
     
     phases_forward = angle(fourier_transform_forward);
     phases_backward = angle(fourier_transform_backward);
     
     phases = mod((phases_backward(:, frequency_index) - phases_forward(:, frequency_index)) / 2, 2 * pi);
+    phases = (phases_backward(:, frequency_index) - phases_forward(:, frequency_index)) / 2;
 
+    % phases = phases_backward(:, frequency_index);
+    % phases = phases_forward(:, frequency_index);
     phases_average = zeros(size(phases));
     
     for i = 1:length(phases)
@@ -30,20 +33,24 @@ function [bulk_activity_average, phases_average] = activity(collicular_spikes_fo
         phases_average(i) = sum(phases(inds_within_radius))/length(inds_within_radius);
     end
 
-    inset = 0.01;
-    offset = 0.0;
-    if orientation == "azimuthal" 
-        inds = find(collicular_positions(:, 1) < 1 - inset);
-        mean_high_phase = min(phases_average(inds));
-        phases_average = mod((mean_high_phase - phases_average + offset), 2 * pi);
-    elseif orientation == "elevational"
-        inds = find(collicular_positions(:, 2) < inset);
-        mean_high_phase = min(phases_average(inds));
-        phases_average = mod(-(mean_high_phase - phases_average - offset), 2 * pi);
-    end
+    % inset = 0.0;
+    % offset = 0.0;
+    % if orientation == "azimuthal" 
+    %     inds = find(collicular_positions(:, 1) < 1 - inset);
+    %     mean_high_phase = min(phases_average(inds));
+    %     phases_average = mod((mean_high_phase - phases_average + offset), 2 * pi);
+    % elseif orientation == "elevational"
+    %     inds = find(collicular_positions(:, 2) < inset);
+    %     mean_high_phase = min(phases_average(inds));
+    %     phases_average = mod(-(mean_high_phase - phases_average - offset), 2 * pi);
+    % end
 
-    inds = convhull(collicular_positions);
+    % phases_average = phases;  % mod(phases_average, 2 * pi);
+
+    % normalise the phase to a number between 0 and 2 pi
+    inds = 1:length(collicular_positions);
     min_phase = min(phases_average(inds));
     max_phase = max(phases_average(inds));
     phase_delta = max_phase - min_phase;
-    phases_average = mod(1/phase_delta * (phases_average - min_phase) * 2 * pi, 2 * pi);
+    epsilon = 10^-7; % to stop the mod operation wrapping the largest value to 0 and interfering with the lattice method
+    phases_average = mod((1 - epsilon) / phase_delta * (phases_average - min_phase) * 2 * pi, 2 * pi);

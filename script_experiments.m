@@ -19,7 +19,7 @@ n_neurones = 10000;
 n_iterations = n_neurones ^ 2 * 5;
 
 global gradients ratios beta2 repeats sz L
-tel = 1.0
+tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients = [0 knock_in];
 ratios = [0.4, 0.5, 0.6];
@@ -62,9 +62,9 @@ cd('functions_retinal_simulations')
 tic
 parfor ind = 1:L
         [u, s, t, rep] = ind2sub(sz, ind);
-        grad = gradients(u);
-        rat = ratios(s);
-        b2_truth = beta2(t);
+        grad = gradients(u)
+        rat = ratios(s)
+        b2_truth = beta2(t)
 
         % for the beta2 knock-outs a parameter modification needs to be performed; see eLife2019 Eglen Hjorth Willshaw etc
         % if b2_truth == 0
@@ -92,10 +92,10 @@ parfor ind = 1:L
         copyfile('../results_experiments/WillshawGale_owens_base.txt', file_name)
 
         %modify the gradient file
-        gradient_file = sprintf('../results_experiments/gradient_files/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_beta2truth=%d.csv', n_neurones, grad, rat, b2_truth)
+        gradient_file = sprintf('../results_experiments/gradient_files/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_beta2truth=%d.csv', n_neurones, grad, rat, b2_truth);
         
         %modify the key experimental parameters
-        fileID = fopen(file_name, 'a+')
+        fileID = fopen(file_name, 'a+');
         fprintf(fileID, [sprintf('obj.gradientInfoFile = %s', ''''), gradient_file, sprintf('%s\n', '''')]);
         fprintf(fileID, 'obj.nSC = %d;, \n', n_neurones);
         fprintf(fileID, 'obj.nRGC = %d;, \n', n_neurones); 
@@ -112,15 +112,20 @@ parfor ind = 1:L
         fprintf(fileID, [sprintf('obj.dataPath = %s', ''''), '../results_experiments', sprintf('%s \n', '''')]);
         fprintf(fileID, [sprintf('obj.dataPath = %s', ''''), '../results_experiments', sprintf('%s \n', '''')]);
 
-        fclose(fileID)
+        fclose(fileID);
         %run
         
         %run the computation
-        tic
-        obj = RetinalMap(file_name);
-        initializeRandomGenerator(obj)
-        obj.run()
-        toc
+        if ~isfile(sprintf('../results_experiments/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_beta2=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, b2_truth, rep))
+                tic
+                obj = RetinalMap(file_name);
+                initializeRandomGenerator(obj)
+                obj.run()
+                toc
+        else
+                disp("This experiment was already completed.")
+                disp(ind2sub(sz, ind))
+        end
 end
 toc
 

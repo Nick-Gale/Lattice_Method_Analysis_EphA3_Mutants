@@ -9,7 +9,7 @@ spike_trains_backward = zeros(n_neurones, intervals);
 off_set = bar_width/2;
 
 for t = 1:intervals
-    bar_loc = mod(bar_freq * t * dt, 1 + off_set) - off_set;
+    bar_loc = mod(0.5 - bar_freq * t * dt, 1 + off_set) - off_set;
     bar_right = bar_loc + bar_width/2; 
     bar_left = bar_loc - bar_width/2;
     if orientation == "azimuthal"
@@ -24,9 +24,9 @@ for t = 1:intervals
 end
 
 for t = 1:intervals
-    bar_loc = mod(1 - bar_freq * t * dt + off_set, 1) - off_set;
-    bar_right = bar_loc + bar_width/2;
+    bar_loc = mod(0.5 + bar_freq * t * dt, 1 + off_set) - off_set;
     bar_left = bar_loc - bar_width/2;
+    bar_right = bar_loc + bar_width/2; 
     if orientation == "azimuthal"
         neurones_active = (bar_left < retinal_positions(:, 1)) .* (retinal_positions(:, 1) < bar_right);
     elseif orientation == "elevational"

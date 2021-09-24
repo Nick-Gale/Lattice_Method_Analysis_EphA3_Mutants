@@ -110,26 +110,21 @@ while mean_min_spacing < lower_mean_min_spacing
 
     %print a status to let the user know what is going on
     if mean_min_spacing < lower_mean_min_spacing
-        msg = sprintf(['Numpoints= ', num2str(numpoints), '. Node spacing= ', num2str(mean_min_spacing),' too low']);
-        fprintf([reverseStr, msg]);
-        reverseStr = repmat(sprintf('\b'), 1, length(msg));
-        % disp();
+        str_append = ', too low.';
+    elseif mean_min_spacing > upper_mean_min_spacing
+        str_append = ', too high.';
+    elseif mean_min_spacing  >= lower_mean_min_spacing && mean_min_spacing <= upper_mean_min_spacing 
+        str_append = ', within bounds.';
+    else
+        str_append = [];
     end
 
-    if mean_min_spacing > upper_mean_min_spacing
-        msg = sprintf(['Numpoints= ', num2str(numpoints), '. Node spacing= ', num2str(mean_min_spacing),' too high']);
-        fprintf([reverseStr, msg]);
-        reverseStr = repmat(sprintf('\b'), 1, length(msg));
-    end
+    msg = [sprintf('Numpoints = %3d. Node spacing = %.3f', numpoints, mean_min_spacing), str_append];
+    fprintf([reverseStr, msg]);
+    reverseStr = repmat(sprintf('\b'), 1, length(msg));
 
-      
-    if mean_min_spacing  >= lower_mean_min_spacing && mean_min_spacing <= upper_mean_min_spacing 
-        msg = sprintf(['Numpoints= ', num2str(numpoints), '. Node spacing= ', num2str(mean_min_spacing),' within bounds']);
-        fprintf([reverseStr, msg]);
-        reverseStr = repmat(sprintf('\b'), 1, length(msg));
-    end
 
     numpoints = numpoints - 1;
 end
-
+fprintf('\n')
 

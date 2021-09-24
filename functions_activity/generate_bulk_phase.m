@@ -1,4 +1,4 @@
-function [phases_azimuthal, phases_elevational, bulk_activity_azimuthal, bulk_activity_elevational] = generate_bulk_phase(retinal_firing_rate, baseline_collicular_firing_rate, collicular_inhibitory_scale, collicular_excitatory_scale, collicular_inhibtory_amplitude, collicular_excitatory_amplitude, dt, bar_width, bar_freq, time, average_radius, rx, ry, cx, cy, connections, weights, seed)
+function [phases_azimuthal, phases_elevational, bulk_activity_azimuthal, bulk_activity_elevational] = generate_bulk_phase(retinal_firing_rate, baseline_collicular_firing_rate, collicular_inhibitory_scale, collicular_excitatory_scale, collicular_inhibtory_amplitude, collicular_excitatory_amplitude, dt, bar_width, bar_freq, time, average_radius, idxs, rx, ry, cx, cy, connections, weights, seed)
 %% Load data and generate collicular connectivity
 L_c = length(cx);
 L_r = length(rx);
@@ -13,7 +13,9 @@ retinal_positions(:, 1) = rx;
 retinal_positions(:, 2) = ry;
 
 retinal_collicular_connectivity = zeros(L_c, L_r);
-for i = 1:L_c
+idxs = find(idxs);
+for idx = 1:length(idxs)
+    i = idxs(idx);
     indexes = connections(:, i);
     non_zero = indexes(indexes ~= 0);
     %colliculus indexes are in the rows, retinal connections are in the columns
