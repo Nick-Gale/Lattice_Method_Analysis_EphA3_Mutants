@@ -15,8 +15,8 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
     if create_new_map == 1
         [num_points_init, obj_radius, lower_mean_min_spacing, upper_mean_min_spacing] = define_spacings(length(indexes), spacing_points_fraction, spacing_radius_multiplier, spacing_upper_bound, spacing_lower_bound);
         %perform the 'digital electrode placement' on a series of retinal indexes
-        [chosen_points, stats_area_same_direction, stats_min_spacing, stats_used_hist, stats_use_mean, stats_use_max] = select_point_positions(lower_mean_min_spacing, upper_mean_min_spacing, full_x(indexes), full_y(indexes), num_points_init, min_points, obj_radius, max_trial_scale_factor, min_spacing_fraction, min_spacing_reduction_factor, area_scaling, random_seed);
-        chosen_indexes = ismember(full_x(indexes), chosen_points(:, 1)) .* ismember(full_y(indexes), chosen_points(:, 2));
+        [chosen_points, stats_area_same_direction, stats_min_spacing, stats_used_hist, stats_use_mean, stats_use_max] = select_point_positions(lower_mean_min_spacing, upper_mean_min_spacing, full_x, full_y, num_points_init, min_points, obj_radius, max_trial_scale_factor, min_spacing_fraction, min_spacing_reduction_factor, area_scaling, random_seed);
+        chosen_indexes = ismember(full_x, chosen_points(:, 1)) .* ismember(full_y, chosen_points(:, 2));
     else
         [num_points_init, obj_radius, lower_mean_min_spacing, upper_mean_min_spacing] = define_spacings(size(full_collicular_unique, 1), spacing_points_fraction, spacing_radius_multiplier, spacing_upper_bound, spacing_lower_bound);
 
@@ -30,34 +30,43 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
 
     [triangles, neighbours] = triangulate(chosen_points, candidates, triangle_tolerance);
     %create the projection from region to its complement
-    [projected_points, stats_area_compliment_direction, candidates] = create_projection(direction, full_field_unique(indexes, :), full_collicular_unique(indexes, :), chosen_points, takeout, num_points, area_scaling, obj_radius);
-    
+    [projected_points, stats_area_compliment_direction, candidates] = create_projection(direction, full_field_unique, full_collicular_unique, chosen_points, takeout, num_points, area_scaling, obj_radius);
     [list_of_neighbours, sets_of_intersections, stats_link_length_mean, stats_link_length_std, stats_min_link_length_mean, stats_min_link_length_std, stats_num_crossings, stats_nodes_crossing] = find_crossings(projected_points, neighbours);
 
     [points_in_subgraph, points_not_in_subgraph, percent_edges_in_subgraph, submap_list_of_neighbours, stats_num_nodes_in_subgraph] = find_largest_subgraph(sets_of_intersections, neighbours, list_of_neighbours, takeout, num_points, candidates);
-
     [full_map_link_ratios_RC, full_map_link_ratios_ML, full_map_flipped_links, full_map_norm_links, full_map_angles, stats_full_map_orientations, stats_full_map_orientation_mean, stats_full_map_orientation_std] = find_link_angles(list_of_neighbours, chosen_points, projected_points, triangles, takeout, points_not_in_subgraph, 1);
     [subgraph_link_ratios_RC, subgraph_link_ratios_ML, subgraph_flipped_links, subgraph_norm_links, subgraph_angles, stats_subgraph_orientations, stats_subgraph_orientation_mean, stats_subgraph_orientation_std] = find_link_angles(list_of_neighbours, chosen_points, projected_points, triangles, takeout, points_not_in_subgraph, 0);
 
     %field rotation angle is zero to reflect new_single_axis_order_hjorth
     field_rotation_angle = 0;
-    [ML_whole, ML_sub, RC_whole, RC_sub, new_field] = new_single_axis_order(list_of_neighbours, points_not_in_subgraph, full_collicular_unique, full_field_unique, field_rotation_angle, points_not_in_subgraph);
+    [ML_whole, ML_sub, RC_whole, RC_sub, new_field] = new_single_axis_order(list_of_neighbours, points_not_in_subgraph, full_collicular_unique, full_field_unique, field_rotation_angle, []);
 
     [full_map_relative_area, submap_relative_area, submap_coll_area, submap_field_area] = find_convex_hull(full_collicular_unique, full_field_unique, takeout, num_points, candidates, points_in_subgraph);
     
     %do the coverages
-    fbw_x = new_field(:, 1);
-    fbw_y = new_field(:, 2);
+    inds = find(indexes < size(new_field, 1));
+    fbw_x = new_field(inds, 1);
+    fbw_y = new_field(inds, 2);
     [fkw faw] = boundary(fbw_x, fbw_y);
+    
+    % new_field(1:10, 2)'
+    % points_in_subgraph(1:10)
     
     fbs_x = fbw_x(points_in_subgraph);
     fbs_y = fbw_y(points_in_subgraph);
     [fks fas] = boundary(fbs_x, fbs_y);
 
-    cbw_x = full_collicular_unique(find(chosen_indexes), 1);
-    cbw_y = full_collicular_unique(find(chosen_indexes), 2);
-    [ckw caw] = boundary(cbw_x, cbw_y);
+    cbw_x = full_collicular_unique(indexes, 1);
+    cbw_y = full_collicular_unique(indexes, 2);
+    [ckw caw] = boundary(cbw_x(~isnan(cbw_x)), cbw_y(~isnan(cbw_y)));
 
+    % full_field_unique(find(chosen_indexes), :)
+
+    max_extent_x = abs(max(cbw_x) - min(cbw_x));
+    max_extent_y = abs(max(cbw_y) - min(cbw_y));
+    mean_x = mean(cbw_x);
+    mean_y = mean(cbw_y);
+    % [~, area_colliculus] = [1, 1]; boundary(full_collicular_unique(:,1), full_collicular_unique(:,2), 0);
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Create the lattice object for this particular subset of points
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,6 +107,12 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
     object.field_cover = faw;
     object.fieldsub_cover = fas;
     object.collsub_cover = caw;
+
+    object.collarea = 1; % area_colliculus;
+    object.max_extent_x = max_extent_x;
+    object.max_extent_y = max_extent_y;
+    object.mean_x = mean_x;
+    object.mean_y = mean_y;
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Create the stats object for this particular subset of points
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

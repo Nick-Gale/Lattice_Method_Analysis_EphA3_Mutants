@@ -211,18 +211,18 @@ fig = figure('Position', [0, 0, 400, 1600]);
     axis equal;
     axis([0 1 0 1]);
     set(gca, 'YTick', [0, 0.5, 1, 1.5])
-%figure 3
-    subplot(7,1,5)
-    scatter(subplot3_x, subplot3_y, 'filled', 'MarkerEdgeColor', 'k', 'MarkerFaceColor', 'k')
-    alpha(transparency)
-    xlabel(subplot3_xlabel, 'FontSize', fs)
-    ylabel(subplot3_ylabel, 'FontSize', fs)
-    set(gca, 'YDir','reverse');
-    axis equal;
-    axis([0 1 0 1]);
-    set(gca, 'YTick', [0, 0.5, 1, 1.5])
+% %figure 3
+%     subplot(7,1,5)
+%     scatter(subplot3_x, subplot3_y, 'filled', 'MarkerEdgeColor', 'k', 'MarkerFaceColor', 'k')
+%     alpha(transparency)
+%     xlabel(subplot3_xlabel, 'FontSize', fs)
+%     ylabel(subplot3_ylabel, 'FontSize', fs)
+%     set(gca, 'YDir','reverse');
+%     axis equal;
+%     axis([0 1 0 1]);
+%     set(gca, 'YTick', [0, 0.5, 1, 1.5])
 %figure 4
-    subplot(7,1,6)
+    subplot(7,1,5)
     scatter(subplot4_EphA3_x, subplot4_EphA3_y, 'filled', 'MarkerEdgeColor', epha3_colour, 'MarkerFaceColor', epha3_colour)
     alpha(transparency)
     hold on
@@ -251,8 +251,8 @@ fig = figure('Position', [0, 0, 400, 1600]);
 
     % title(figure_label, 'FontSize', 4)
     subtitle(' ')
-    xlabel(subplot5_xlabel, 'FontSize', fs)
-    ylabel(subplot5_ylabel, 'FontSize', fs)
+    xlabel(subplot1_xlabel, 'FontSize', fs)
+    ylabel(subplot1_ylabel, 'FontSize', fs)
     line([0 1],[DV_slice_location DV_slice_location],'Color','k');
     set(gca, 'XDir', 'reverse');
     axis equal
@@ -260,7 +260,7 @@ fig = figure('Position', [0, 0, 400, 1600]);
     set(gca, 'YTick', [0, 0.5, 1, 1.5])
 
 %figure 6
-    subplot(7,1,7)
+    subplot(7,1,6)
     scatter(subplot6_EphA3_x, subplot6_EphA3_y, 'filled', 'MarkerEdgeColor', epha3_colour, 'MarkerFaceColor', epha3_colour)
     alpha(transparency)
     hold on
