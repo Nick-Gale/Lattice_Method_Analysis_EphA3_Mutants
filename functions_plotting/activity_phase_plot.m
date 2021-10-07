@@ -5,6 +5,7 @@ function [] = activity_phase_plot(collicular_positions, bulk_activity, phases, p
 x_vals = collicular_positions(:, 1);
 y_vals = collicular_positions(:, 2);
 
+
 activity_plot = figure;
 scatter(x_vals, y_vals, [], bulk_activity, 'filled');
 colormap(gray);

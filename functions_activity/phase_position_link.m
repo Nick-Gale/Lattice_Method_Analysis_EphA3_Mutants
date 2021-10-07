@@ -11,16 +11,17 @@ end
 
 if scan_type == "SCANNER"
     [phases_azimuthal, phases_elevational, bulk_activity_azimuthal, bulk_activity_elevational] = generate_bulk_phase(retinal_firing_rate, baseline_collicular_firing_rate, collicular_inhibitory_scale, collicular_excitatory_scale, collicular_inhibtory_amplitude, collicular_excitatory_amplitude, dt, bar_width, bar_freq, time, average_radius, idxs, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, seed);
-
     %convenience wrapper variables and phase normalisation
-    CTOF_full_field_positions(:,1) = phases_azimuthal / (2 * pi);
-    CTOF_full_field_positions(:,2) = phases_elevational / (2 * pi);
+    inds = find(~isnan(bulk_activity_azimuthal));
+    
+    CTOF_full_field_positions(:,1) = phases_azimuthal(inds) / (2 * pi);
+    CTOF_full_field_positions(:,2) = phases_elevational(inds) / (2 * pi);
 
-    CTOF_full_collicular_positions(:,1) = collicular_positions_RC;
-    CTOF_full_collicular_positions(:,2) = collicular_positions_ML;
+    CTOF_full_collicular_positions(:,1) = collicular_positions_RC(inds);
+    CTOF_full_collicular_positions(:,2) = collicular_positions_ML(inds);
 
     FTOC_full_field_positions = CTOF_full_field_positions;
+    % disp([min(FTOC_full_field_positions), max(FTOC_full_field_positions)])
     FTOC_full_collicular_positions = CTOF_full_collicular_positions;
-
     vargout = {CTOF_full_field_positions, CTOF_full_collicular_positions, FTOC_full_field_positions, FTOC_full_collicular_positions, phases_azimuthal, phases_elevational, bulk_activity_azimuthal, bulk_activity_elevational};
 end

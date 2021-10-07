@@ -15,15 +15,15 @@ addpath("functions_analysis/")
 %% set the parameters that need to be passed to all workers in the parallel pool as global
 
 global n_neurones n_iterations
-n_neurones = 10000;
+n_neurones = 2000;
 n_iterations = n_neurones ^ 2 * 5;
 
 global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients = [0 knock_in];
-ratios = [0.4, 0.5, 0.6];
-beta2 = [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
+gradients = 2.0; [0 knock_in];
+ratios = 0.5; % [0.4, 0.5, 0.6];
+beta2 = 0.00625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
 repeats = 1:1;
 
 % create the iteration object
@@ -53,34 +53,19 @@ end
 
 %% create the pool, be nice about system resources
 if isempty(gcp('nocreate'))
-    parpool('local', 28);
+    parpool('local', 14);
 end
 
 %change into the directory of the Hjorth pipeline
 cd('functions_retinal_simulations')
-
+counter = 0;
 tic
-parfor ind = 1:L
+for ind = 1:L
         [u, s, t, rep] = ind2sub(sz, ind);
-        grad = gradients(u)
-        rat = ratios(s)
-        b2_truth = beta2(t)
+        grad = gradients(u);
+        rat = ratios(s);
+        b2_truth = beta2(t);
 
-        % for the beta2 knock-outs a parameter modification needs to be performed; see eLife2019 Eglen Hjorth Willshaw etc
-        % if b2_truth == 0
-        %     %Stafford et al
-        %     bact = 1 / (0.05 * 4320);
-        %     gamma = 0.00625;
-        %     chemical_scale = 1;
-        %     alpha = 90; % 90%19 * chemical_scale;
-        %     beta = 135; % 135%28.5 * chemical_scale;
-        % elseif b2_truth == 1
-        %     %eLife 2019 papers
-        %     bact = 1 / (0.05 * 1260);
-        %     gamma = 0.0025 * 9.275/22.64;
-        %     alpha = 19;
-        %     beta = 28.5;
-        % end
         bact = 1 / (0.05 * 4320);
         gamma = b2_truth;
         chemical_scale = 1;
@@ -121,10 +106,11 @@ parfor ind = 1:L
                 obj = RetinalMap(file_name);
                 initializeRandomGenerator(obj)
                 obj.run()
+                disp([u, s, t, rep])
                 toc
         else
-                disp("This experiment was already completed.")
-                disp(ind2sub(sz, ind))
+                % disp("This experiment was already completed.")
+                % disp(ind2sub(sz, ind))
         end
 end
 toc

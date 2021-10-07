@@ -1,7 +1,7 @@
 function [ML_whole, ML_sub, RC_whole, RC_sub, new_field_points] = new_single_axis_order(list_of_neighbours, points_not_in_subgraph, coll_points, field_points, field_rotation_angle, take_out)
 
 new_field_points = new_rotate_field(field_points, field_rotation_angle);
-neighbours_sg = remove_links_including_nodes(list_of_neighbours, take_out);
+neighbours_sg = remove_links_including_nodes(list_of_neighbours, points_not_in_subgraph);
 
 fp = new_field_points(:,1);
 cp = coll_points(:,1);
