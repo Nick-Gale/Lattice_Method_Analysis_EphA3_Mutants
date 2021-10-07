@@ -9,7 +9,6 @@ spike_trains_backward = zeros(n_neurones, intervals);
 %retinal_adjacency(find(retinal_adjacency ~= 0))s
 r_weights_forward = retinal_adjacency * retinal_spikes_forward;
 r_weights_backward = retinal_adjacency * retinal_spikes_backward;
-
 retinal_normaliser = sum(retinal_adjacency, 2);
 
 event_count_forward = zeros(n_neurones, intervals);

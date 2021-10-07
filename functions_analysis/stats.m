@@ -58,24 +58,24 @@ function summary_stats = stats(A, B, C, D, E, F)
 
     % Sizes of maps in visual field (28=AB)
 
-    summary_stats(28)=A.fieldsub_cover;
-    summary_stats(29)=B.fieldsub_cover;
-    summary_stats(30)=C.fieldsub_cover;
-    summary_stats(31)= 100*summary_stats(29)/summary_stats(28);
-    summary_stats(32)= 100*summary_stats(30)/summary_stats(28);
-    summary_stats(33)=summary_stats(31)+summary_stats(32)-100;
- 
+    summary_stats(28) = A.fieldsub_cover; % A.field_cover % 
+    summary_stats(29) = B.fieldsub_cover;
+    summary_stats(30) = C.fieldsub_cover;
+    summary_stats(31) = summary_stats(29)/summary_stats(28);
+    summary_stats(32) = summary_stats(30)/summary_stats(28);
+    summary_stats(33) = summary_stats(31)+summary_stats(32)-1;
 
     %This is the overlap of the two partmaps in visual field. Only true if the two submaps together span the whole visual field.
 
     % Sizes of maps in colliculus
-
+    disp("s")
     summary_stats(34)=A.collsub_cover;
     summary_stats(35)=B.collsub_cover;
     summary_stats(36)=C.collsub_cover;
-    summary_stats(37)= 100*summary_stats(35)/summary_stats(34);
-    summary_stats(38)= 100*summary_stats(36)/summary_stats(34);
-    summary_stats(39)=100-summary_stats(37)-summary_stats(38);
+    disp([summary_stats(34), summary_stats(35), summary_stats(36)])
+    summary_stats(37)= summary_stats(35)/summary_stats(34);
+    summary_stats(38)= summary_stats(36)/summary_stats(34);
+    summary_stats(39)= 1-summary_stats(37)-summary_stats(38);
 
     %   Now FTOC data (40=AN)
 
@@ -116,19 +116,27 @@ function summary_stats = stats(A, B, C, D, E, F)
     summary_stats(65)=D.fieldsub_cover;
     summary_stats(66)=E.fieldsub_cover;
     summary_stats(67)=F.fieldsub_cover;
-    summary_stats(68)=100*summary_stats(66)/summary_stats(65);
-    summary_stats(69)=100*summary_stats(67)/summary_stats(65);
-    summary_stats(70)=summary_stats(68)+summary_stats(69)-100;
+    summary_stats(68)=summary_stats(66)/summary_stats(65);
+    summary_stats(69)=summary_stats(67)/summary_stats(65);
+    summary_stats(70)=summary_stats(68)+summary_stats(69)-1;
     % This is a true measure of overlap of the two submaps in visual field as jointly they will span the whole field.
 
     % Sizes of maps on colliculus (71=BS)
-    summary_stats(71)=D.collsub_cover;
+    summary_stats(71)=D.collarea; % D.submap_coll_area;
     summary_stats(72)=E.collsub_cover;
     summary_stats(73)=F.collsub_cover;
-    summary_stats(74)=100*summary_stats(72)/summary_stats(71);
-    summary_stats(75)=100*summary_stats(73)/summary_stats(71);
-    summary_stats(76)=summary_stats(74)+summary_stats(75)-100;
+    summary_stats(74)=summary_stats(72)/summary_stats(71);
+    summary_stats(75)=summary_stats(73)/summary_stats(71);
+    summary_stats(76)=summary_stats(74)+summary_stats(75)-1;
     % This is a true measure of overlap of the two submaps on colliculus as jointly they will span the whole colliculus.
 
+    summary_stats(77) = E.max_extent_x;
+    summary_stats(78) = F.max_extent_y;
+    summary_stats(79) = E.max_extent_x;
+    summary_stats(80) = F.max_extent_y;
 
+    summary_stats(81) = E.mean_x;
+    summary_stats(82) = F.mean_x;
 
+    summary_stats(83) = E.mean_y;
+    summary_stats(84) = F.mean_y;

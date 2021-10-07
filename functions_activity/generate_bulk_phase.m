@@ -13,11 +13,10 @@ retinal_positions(:, 1) = rx;
 retinal_positions(:, 2) = ry;
 
 retinal_collicular_connectivity = zeros(L_c, L_r);
-idxs = find(idxs);
-for idx = 1:length(idxs)
-    i = idxs(idx);
-    indexes = connections(:, i);
+for i = 1:L_c
+    indexes = intersect(connections(:, i), idxs);
     non_zero = indexes(indexes ~= 0);
+
     %colliculus indexes are in the rows, retinal connections are in the columns
     %retinal_collicular_connectivity(i, non_zero) = weights(indexes ~= 0);
     for j = 1:length(indexes)
@@ -39,8 +38,8 @@ end
 %% Generate spiking activity
 disp("Generating spiking activity")
 %retinal
-[retinal_spike_trains_forward_azimuthal, retinal_spike_trains_backward_azimuthal] = retinal_spikes(retinal_positions, time, dt, retinal_firing_rate, bar_width, bar_freq, 'azimuthal', seed);
-[retinal_spike_trains_forward_elevational, retinal_spike_trains_backward_elevational] = retinal_spikes(retinal_positions, time, dt, retinal_firing_rate, bar_width, bar_freq, 'elevational', seed);
+[retinal_spike_trains_forward_azimuthal, retinal_spike_trains_backward_azimuthal] = retinal_spikes(retinal_positions, time, dt, retinal_firing_rate, bar_width, bar_freq, 'azimuthal', seed, idxs);
+[retinal_spike_trains_forward_elevational, retinal_spike_trains_backward_elevational] = retinal_spikes(retinal_positions, time, dt, retinal_firing_rate, bar_width, bar_freq, 'elevational', seed, idxs);
 
 %collicular
 [collicular_spike_trains_forward_azimuthal, collicular_spike_trains_backward_azimuthal] = collicular_spikes(collicular_positions, retinal_spike_trains_forward_azimuthal, retinal_spike_trains_backward_azimuthal, retinal_collicular_connectivity, collicular_collicular_connectivity, baseline_collicular_firing_rate, time, dt, seed);

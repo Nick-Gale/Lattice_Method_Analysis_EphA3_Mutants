@@ -3,8 +3,7 @@ function [bulk_activity_average, phases_average] = activity(collicular_spikes_fo
     %and normalise by the average activity in the whole train at each location
     %return activity rates and Fourier phases for both (bar frequency in rads)
     intervals = floor(time / dt);
-    
-    bulk_activity = mean(collicular_spikes_forward + collicular_spikes_backward, 2) ./ transpose(sum(retinal_collicular_connectivity, 1));
+    bulk_activity = mean(collicular_spikes_forward + collicular_spikes_backward, 2) ./ sum(retinal_collicular_connectivity, 2);
     bulk_activity_average = zeros(size(bulk_activity));
     for i = 1:length(bulk_activity)
         inds_within_radius = find(sqrt((collicular_positions(i, 1) - collicular_positions(:, 1)).^2 + (collicular_positions(i, 2) - collicular_positions(:, 2)).^2) < average_radius);
