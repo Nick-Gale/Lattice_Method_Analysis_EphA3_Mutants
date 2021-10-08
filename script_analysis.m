@@ -24,10 +24,10 @@ n_iterations = n_neurones ^ 2 * 5;
 global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients = [0 knock_in];
+gradients = 2.0; [0 knock_in];
 ratios = 0.5; [0.4, 0.5, 0.6];
 beta2 = 0.00625; [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
-repeats = 1:10;
+repeats = 1:1;
 
 % create the iteration object
 sz = [length(gradients), length(ratios), length(beta2), length(repeats)];
@@ -157,8 +157,8 @@ L = prod(sz);
         plotting_dictionary.anatomy.injection_radius = 0.05;
 
         plotting_dictionary.anatomy.sc_colour = [0.4940 0.1840 0.5560];
-        plotting_dictionary.anatomy.epha3_colour = [0.6350 0.0780 0.1840]; 
-        plotting_dictionary.anatomy.wt_colour =  [0.9290 0.6940 0.1250]; % [0.8500, 0.3250, 0.0980]; %
+        plotting_dictionary.anatomy.epha3_colour = [1,1,0]; [0.9290 0.6940 0.1250]; % [0.8500, 0.3250, 0.0980]; %
+        plotting_dictionary.anatomy.wt_colour = [0.6350 0.0780 0.1840]; 
         plotting_dictionary.anatomy.inj_colour = [0 0.4470 0.7410];
         plotting_dictionary.anatomy.transparency = 0.1;
         plotting_dictionary.anatomy.fontsize = 8;
@@ -225,13 +225,13 @@ parfor ind = 1:L
         %append the statistics to an array
         stats_vec{ind} = analysis_obj_anatomy.Lattice.statistics;
         %construct a series of pure injection plots with axes labels only for the leftmost plot
-        % if rep <= 1
-        %         if u==1
-        %                 anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1)
-        %         else
-        %                 anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 0)
-        %         end
-        % end
+        if rep <= 1
+                if u==1
+                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1)
+                else
+                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 0)
+                end
+        end
         % disp("finished plot of anatomy")
 end
 % generate statistics

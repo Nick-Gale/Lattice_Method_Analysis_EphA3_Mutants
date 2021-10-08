@@ -21,10 +21,10 @@ n_iterations = n_neurones ^ 2 * 5;
 global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients = 2.0; [0 knock_in];
+gradients = [0 knock_in];
 ratios = 0.5; % [0.4, 0.5, 0.6];
 beta2 = 0.00625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
-repeats = 1:1;
+repeats = 1:100;
 
 % create the iteration object
 sz = [length(gradients), length(ratios), length(beta2), length(repeats)];
@@ -53,7 +53,7 @@ end
 
 %% create the pool, be nice about system resources
 if isempty(gcp('nocreate'))
-    parpool('local', 14);
+    parpool('local', 28);
 end
 
 %change into the directory of the Hjorth pipeline
