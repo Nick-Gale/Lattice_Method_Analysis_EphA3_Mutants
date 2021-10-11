@@ -23,29 +23,26 @@ clf
 
 text = A.description;
 
-h2 = subplot(2,2,1); %why is this 2? It's the first plot
+h2 = subplot(2,2,1);
 h1 = subplot(2,2,3);
 
 Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
-
 hold on
-if ~isempty(divider)
-    %line([0 1], [divider(2) divider(1) + divider(2)]); 
-end
 
 N1 = A.numpoints;
 N2 = length(A.points_in_subgraph);
 
 fig = gcf;
 
-subplot(h2)
+subplot(h2);
+if isfield(dictionary, 'whole_map_title1')
+    title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title1]);
+else
+    title('');
+end
+% title(h2, {['ID', sprintf('(%0.2f, %0.2f, %0.2f, %0.2f)', id)]; [text,', Whole map']});
 
-title(h2, {['ID', sprintf('(%0.2f, %0.2f, %0.2f, %0.2f)', id)]; [text,', Whole map']});
-
-%title(dictionary.whole_map_title1);
 subplot(h1)
-
-%title(dictionary.whole_map_title2);
 title(['n(nodes): ', num2str(N1)]);
 
 h2=subplot(2,2,2);
@@ -54,16 +51,20 @@ h1=subplot(2,2,4);
 Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
 
 subplot(h2);
-title({['(EphA3-Ki, Ilset2-Fraction, Beta2-KO): (', sprintf('%0.2f, %0.2f, %0.2f, %0.2f', id), ')', newline,  direction, ',', input_type]; ['Largest ordered submap']});
-%title(dictionary.submap_title1);
+if isfield(dictionary, 'whole_map_title2')
+    title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title2]);
+else
+    title('')
+end
+% title({['(EphA3-Ki, Ilset2-Fraction, Beta2-KO): (', sprintf('%0.2f, %0.2f, %0.2f, %0.2f', id), ')', newline,  direction, ',', input_type]; ['Largest ordered submap']});
+
 subplot(h1)
 title(['n(nodes): ', num2str(N2), ' of ', num2str(N1), ' (',num2str(round(100 * N2 / N1)),'%)']);
-%title(dictionary.submap_title2);
+
 orient tall
 
 if PRINT==1
     filename=[dir, 'figure_wholemaps_ID(EphA3Ki, Ratio, B2, Repeats): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
-    % exportgraphics(gcf, filename, 'Resolution', 500)
     print(filename, '-dpng')
 end
 
@@ -77,36 +78,50 @@ if ~isempty(divider)
     h2=subplot(2,2,1);
     h1=subplot(2,2,3);
 
-    Dplot_lattice(SuperObject.Lattice, B, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
-
-    hold on
-
-    % if filtering using a regression line
-    % line([0 1], [divider(2) divider(1) + divider(2)]);
+    Dplot_lattice(SuperObject.Lattice, B, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both')
+    hold on;
 
     % if filtering using mean RC values
     line([divider  divider], [0 1]);
 
     N11=B.numpoints;
     N12=length(B.points_in_subgraph);
-    %text1='Part-map 1';
 
     fig=gcf;
-    subplot(h2)
+    subplot(h2);
 
-    %title({['ID (EphA3-Ki, Ilset2 Fraction, Beta2): (', sprintf('%0.2f, %0.2f, %0.2f, %0.2f', id), '),', newline,  direction, ',', input_type]; [text,', ',text1]});
-    title([direction ' ' SuperObject.Lattice.input_type ' : ' dictionary.part_title1]);
-    subtitle('')
-    xlabel(dictionary.part_subplot1_xlabel)
-    ylabel(dictionary.part_subplot1_ylabel)
+    if isfield(dictionary, 'part_title1')
+        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title1]);
+    else
+        title('');
+    end
+
+    subtitle('');
+
+    if isfield(dictionary, 'part_subplot1_xlabel')
+        xlabel(dictionary.part_subplot1_xlabel);
+    else
+        xlabel('')
+    end
+
+    if isfield(dictionary, 'part_subplot1_ylabel')
+        ylabel(dictionary.part_subplot1_ylabel);
+    else
+        ylabel('');
+    end
+
     subplot(h1)
 
-    %title(['n(nodes): ', num2str(N12), ' of ', num2str(N11), ' (',num2str(round(100*N12/N11)),'%)']);
-    title2 = sprintf('n(nodes): %d of %d (%d %%)', N12, N11, round(100*N12/N11));
+    title2 = sprintf('n(nodes): %d of %d (%d%%)', N12, N11, round(100*N12/N11));
     title(title2)
-    xlabel(dictionary.part_subplot3_xlabel)
+
+    if isfield(dictionary, 'part_subplot3_xlabel')
+        xlabel(dictionary.part_subplot3_xlabel);
+    else
+        xlabel('');
+    end
+
     ylabel(dictionary.part_subplot3_ylabel)
-    %title(dictionary.part_title2);
     h2=subplot(2,2,2);
 
     h1=subplot(2,2,4);
@@ -114,8 +129,6 @@ if ~isempty(divider)
     Dplot_lattice(SuperObject.Lattice, C, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
 
     hold on
-    % if filtering using a regression line
-    % line([0 1], [divider(2) divider(1) + divider(2)]);
 
     % if filtering using mean RC values
     line([divider  divider], [0 1]);
@@ -126,19 +139,42 @@ if ~isempty(divider)
 
     subplot(h2)
     plot(1:100/100, 1:100/100)
+    if isfield(dictionary, 'part_title3')
+        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title3]);
+    else
+        title('');
+    end
+    subtitle('');
     
-    title([direction ' ' SuperObject.Lattice.input_type ' : ' dictionary.part_title3]);
-    subtitle('')
-    xlabel(dictionary.part_subplot2_xlabel)
-    ylabel(dictionary.part_subplot2_ylabel)
-    %title({[text1, ', %extra nodes'];['in separate maps: ', num2str(round(100*(N12+N22-N2)/N2))]});
+    if isfield(dictionary, 'part_subplot2_xlabel')
+        xlabel(dictionary.part_subplot2_xlabel);
+    else
+        xlabel('');
+    end
+
+    if isfield(dictionary, 'part_subplot2_ylabel')
+        ylabel(dictionary.part_subplot2_ylabel);
+    else
+        ylabel('');
+    end
+
     subplot(h1)
 
-    title4 = sprintf('n(nodes): %d of %d (%d %%)', N22, N21, round(100*N22/N21));
+    title4 = sprintf('n(nodes): %d of %d (%d%%)', N22, N21, round(100*N22/N21));
     title(title4);
-    xlabel(dictionary.part_subplot4_xlabel)
-    ylabel(dictionary.part_subplot4_ylabel)
-    %title(dictionary.part_title4);
+
+    if isfield(dictionary, 'part_subplot4_xlabel')
+        xlabel(dictionary.part_subplot4_xlabel);
+    else
+        xlabel('');
+    end
+    
+    if isfield(dictionary, 'part_subplot4_ylabel')
+        ylabel(dictionary.part_subplot4_ylabel);
+    else
+        ylabel('');
+    end
+
     orient tall
 
     if PRINT==1

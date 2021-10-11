@@ -115,7 +115,7 @@ function h = Dplot_lattice_hjorth(so, object, plotting_dictionary, direction, h1
     end
 
     if (HighStd)
-        %high_points = object.filtered_points;
+        %high_points = object.filtkered_points;
         if direction == 'CTOF'
             filtered_coll_coords = so.filtered_colliculus_CTOF;
             filtered_field_coords = so.filtered_field_CTOF;
@@ -159,7 +159,7 @@ function h = Dplot_lattice_hjorth(so, object, plotting_dictionary, direction, h1
         points_not_in_subgraph = object.points_not_in_subgraph;
         xticks([0.0 0.5 1.0])
         
-        disp(find((field_coords(:,1) - 0.5) .^2  + (field_coords(:,2) - 0.5) .^2 > 1))
+        
         % Lattice on Field
         subplot(h2)
         hold on
@@ -247,8 +247,17 @@ function h = Dplot_lattice_hjorth(so, object, plotting_dictionary, direction, h1
         title(plotting_dictionary.title);
     end
     axis on
-    xlabel(plotting_dictionary.xlabel);
-    ylabel(plotting_dictionary.ylabel);
+    if isfield(plotting_dictionary, 'xlabel')
+        xlabel(plotting_dictionary.xlabel);
+    else
+        xlabel('');
+    end
+
+    if isfield(plotting_dictionary, 'ylabel')
+        ylabel(plotting_dictionary.ylabel);
+    else
+        xlabel('')
+    end
 
     % Set axis properties for CTOF colliculus plot (h1) subplot(h2)
     subplot(h1)
@@ -272,8 +281,17 @@ function h = Dplot_lattice_hjorth(so, object, plotting_dictionary, direction, h1
     end
 
     axis on
-    xlabel(plotting_dictionary.xlabel);
-    ylabel(plotting_dictionary.ylabel);
+    if isfield(plotting_dictionary, 'xlabel')
+        xlabel(plotting_dictionary.xlabel);
+    else
+        xlabel('');
+    end
+    
+    if isfield(plotting_dictionary, 'ylabel')
+        ylabel(plotting_dictionary.ylabel);
+    else
+        ylabel('');
+    end
 end
 
 
