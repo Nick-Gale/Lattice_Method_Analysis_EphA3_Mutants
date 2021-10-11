@@ -16,7 +16,6 @@
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
 %% set the parameters that need to be passed to all workers in the parallel pool as global
-
 global n_neurones n_iterations
 n_neurones = 2000;
 n_iterations = n_neurones ^ 2 * 5;
@@ -24,10 +23,11 @@ n_iterations = n_neurones ^ 2 * 5;
 global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients = 2.0; [0 knock_in];
-ratios = 0.5; [0.4, 0.5, 0.6];
-beta2 = 0.00625; [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
-repeats = 1:1;
+gradients = 0; [0 knock_in];
+ratios = 0.5; % [0.4, 0.5, 0.6];
+beta2 = 0.00625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
+repeats = 1:2;
+
 
 % create the iteration object
 sz = [length(gradients), length(ratios), length(beta2), length(repeats)];
@@ -61,7 +61,7 @@ L = prod(sz);
                 analysis_parameter_dictionary.collicular_excitatory_amplitude = 0.02;
 
         % Filtering: these determine the threshold for standard deviation and the search radius
-                analysis_parameter_dictionary.filter_threshold = 0.1; %not used - currently using clustering %currently filtering on percentages
+                analysis_parameter_dictionary.filter_threshold = 0.1;
                 analysis_parameter_dictionary.filter_collicular_radius = sqrt(5/2000); %not used - currently using clusteri
                 analysis_parameter_dictionary.filter_field_radius = 0.05; %not used - currently using clusteri
 
@@ -89,23 +89,10 @@ L = prod(sz);
         plotting_dictionary.FTOCdictionary.XTick = [0, 1];
         plotting_dictionary.FTOCdictionary.YTick = [0, 1];
         plotting_dictionary.FTOCdictionary.FlipY = 0;
-        plotting_dictionary.FTOCdictionary.XTickLabel = '';
-        plotting_dictionary.FTOCdictionary.YTickLabel = '';
-        plotting_dictionary.FTOCdictionary.xlabel = '';
-        plotting_dictionary.FTOCdictionary.ylabel = '';
-
-        plotting_dictionary.FTOCdictionary.whole_map_title1 = '';
+        plotting_dictionary.FTOCdictionary.whole_map_title1 = 'Whole map';
+        plotting_dictionary.FTOCdictionary.whole_map_title2 = 'Largest Submap';
         plotting_dictionary.FTOCdictionary.part_title1 = 'First Part-Map';
         plotting_dictionary.FTOCdictionary.part_title3 = 'Second Part-Map';
-        plotting_dictionary.FTOCdictionary.part_subplot1_xlabel = '';
-        plotting_dictionary.FTOCdictionary.part_subplot1_ylabel = '';
-        plotting_dictionary.FTOCdictionary.part_subplot2_xlabel = '';
-        plotting_dictionary.FTOCdictionary.part_subplot2_ylabel = '';
-        plotting_dictionary.FTOCdictionary.part_subplot3_xlabel = '';
-        plotting_dictionary.FTOCdictionary.part_subplot3_ylabel = '';
-        plotting_dictionary.FTOCdictionary.part_subplot4_xlabel = '';
-        plotting_dictionary.FTOCdictionary.part_subplot4_ylabel = '';
-
         plotting_dictionary.FTOCdictionary.part_subplot1_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot1_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot2_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
@@ -121,22 +108,10 @@ L = prod(sz);
         plotting_dictionary.CTOFdictionary.XTick = [0, 1];
         plotting_dictionary.CTOFdictionary.YTick = [0, 1];
         plotting_dictionary.CTOFdictionary.FlipY = 0;
-        plotting_dictionary.CTOFdictionary.XTickLabel = '';
-        plotting_dictionary.CTOFdictionary.YTickLabel = '';
-        plotting_dictionary.CTOFdictionary.xlabel = '';
-        plotting_dictionary.CTOFdictionary.ylabel = '';
-        plotting_dictionary.CTOFdictionary.whole_map_title1 = '';
+        plotting_dictionary.CTOFdictionary.whole_map_title1 = 'Whole map';
+        plotting_dictionary.CTOFdictionary.whole_map_title2 = 'Largest Submap';
         plotting_dictionary.CTOFdictionary.part_title1 = 'First Part-Map';
         plotting_dictionary.CTOFdictionary.part_title3 = 'Second Part-Map';
-        plotting_dictionary.CTOFdictionary.part_subplot1_xlabel = '';
-        plotting_dictionary.CTOFdictionary.part_subplot1_ylabel = '';
-        plotting_dictionary.CTOFdictionary.part_subplot2_xlabel = '';
-        plotting_dictionary.CTOFdictionary.part_subplot2_ylabel = '';
-        plotting_dictionary.CTOFdictionary.part_subplot3_xlabel = '';
-        plotting_dictionary.CTOFdictionary.part_subplot3_ylabel = '';
-        plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = '';
-        plotting_dictionary.CTOFdictionary.part_subplot4_ylabel = '';
-
         plotting_dictionary.CTOFdictionary.part_subplot1_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot1_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot2_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
@@ -146,41 +121,28 @@ L = prod(sz);
         plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot4_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
 
-
-
         plotting_dictionary.anatomy.directory = 'results_plots/';
-
         plotting_dictionary.anatomy.DV = 0.5;
         plotting_dictionary.anatomy.ML = 0.4;
         plotting_dictionary.anatomy.threshold = 0.05;
         plotting_dictionary.anatomy.injection_location = [0.67, 0.5];
         plotting_dictionary.anatomy.injection_radius = 0.05;
-
         plotting_dictionary.anatomy.sc_colour = [0.4940 0.1840 0.5560];
-        plotting_dictionary.anatomy.epha3_colour = [1,1,0]; [0.9290 0.6940 0.1250]; % [0.8500, 0.3250, 0.0980]; %
+        plotting_dictionary.anatomy.epha3_colour = [0.9290 0.6940 0.1250]; % [1,1,0];  %  [0.8500, 0.3250, 0.0980]; %
         plotting_dictionary.anatomy.wt_colour = [0.6350 0.0780 0.1840]; 
         plotting_dictionary.anatomy.inj_colour = [0 0.4470 0.7410];
         plotting_dictionary.anatomy.transparency = 0.1;
         plotting_dictionary.anatomy.fontsize = 8;
-
-        plotting_dictionary.anatomy.subplot5_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.anatomy.subplot5_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')') ;
-
         plotting_dictionary.anatomy.subplot1_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.anatomy.subplot1_ylabel = 'EphA3 Label';
-
-        plotting_dictionary.anatomy.subplot2_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
-        plotting_dictionary.anatomy.subplot2_ylabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-
+        plotting_dictionary.anatomy.subplot1_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')') ;
+        plotting_dictionary.anatomy.subplot2_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.anatomy.subplot2_ylabel = 'EphA3 Label';
         plotting_dictionary.anatomy.subplot3_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.anatomy.subplot3_ylabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-
         plotting_dictionary.anatomy.subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.anatomy.subplot4_ylabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-
-        plotting_dictionary.anatomy.subplot6_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
-        plotting_dictionary.anatomy.subplot6_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
-
+        plotting_dictionary.anatomy.subplot5_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        plotting_dictionary.anatomy.subplot5_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
 
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Run analysis, and plot
@@ -188,7 +150,7 @@ L = prod(sz);
 
 %% % create a parallel pool
 if isempty(gcp('nocreate'))
-        parpool('local', 14);
+        parpool('local', 28);
 end
 
 global stats_vec 
@@ -196,7 +158,7 @@ for i = 1:L
         stats_vec{i} = [0];
 end
 
-parfor ind = 1:L
+for ind = 1:L
         %choose the experiment
         [u, s, t, rep] = ind2sub(sz, ind); 
         grad = gradients(u);
@@ -218,24 +180,24 @@ parfor ind = 1:L
         %perform an anatomical experiment, plot, and analyse
         analysis_obj_anatomy = experiment_analysis(experiment_obj, 'ANATOMY', analysis_parameter_dictionary, [grad, rat, b2_truth, rep], 'SIMULATION');
         disp("finished analysis of anatomy")
-        % if rep <= 1
-        %         experiment_plot(analysis_obj_anatomy, plotting_dictionary);
-        % end
+        if rep <= 1
+                experiment_plot(analysis_obj_anatomy, plotting_dictionary);
+        end
 
         %append the statistics to an array
         stats_vec{ind} = analysis_obj_anatomy.Lattice.statistics;
         %construct a series of pure injection plots with axes labels only for the leftmost plot
         if rep <= 1
                 if u==1
-                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1)
+                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 else
-                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 0)
+                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 end
         end
         % disp("finished plot of anatomy")
 end
 % generate statistics
-plot_statistics(stats_vec, gradients, ratios, beta2, repeats)
+% plot_statistics(stats_vec, gradients, ratios, beta2, repeats);
 
 % generate paper plots
 

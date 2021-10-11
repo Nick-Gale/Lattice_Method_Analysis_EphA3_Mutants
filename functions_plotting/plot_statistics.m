@@ -24,7 +24,7 @@ L = prod(sz);
     mean_st = mean(st, 2);
     error_st = std(st')'; %note the transpose because Matlab does not have consistent grammar
     confidence_st = error_st * tinv(0.975, length(gradients)-1);
-    plot(gradients, mean_st)
+    plot(gradients, mean_st);
     hold on
     ciplot(mean_st - confidence_st, mean_st + confidence_st, gradients, 'red');
     % boxplot(st')
@@ -61,11 +61,11 @@ L = prod(sz);
 
     hold on
     % ciplot(mean_st - confidence_st, mean_st + confidence_st, gradients, 'red');
-    boxplot(st')
-    boxplot(st2')
+    boxplot(st');
+    boxplot(st2');
     mi = min([min(st2'), min(st')]);
     ma = max([max(st2'), max(st')]);
-    ylim([mi, ma])
+    ylim([mi, ma]);
     alpha(0.2);
     xlabel('Magnitude of EphA3-Ilset2 knock-in');
     ylabel('Overlap Fraction');
