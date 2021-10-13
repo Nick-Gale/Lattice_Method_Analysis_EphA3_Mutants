@@ -97,7 +97,7 @@ end
 
     %% Part-Maps
 
-    chosen_indexes = find(CTOFwholemap.chosen_indexes);
+    chosen_indexes = CTOFwholemap.chosen_indexes;
     CTOF_submap1_indexes = chosen_indexes(filter_divider(CTOFwholemap.coll_chosen, divider, "right"));
     CTOF_submap2_indexes = chosen_indexes(filter_divider(CTOFwholemap.coll_chosen, divider, "left"));
 
@@ -128,7 +128,7 @@ end
         CTOF_full_field_positions_part = phase_activity_readout{1}; CTOF_full_collicular_positions_part = phase_activity_readout{2};
         FTOC_full_field_positions_part = phase_activity_readout{3}; FTOC_full_collicular_positions_part = phase_activity_readout{4};
     
-        FTOCsubmap1 = lattice("FTOC", FTOC_submap2_indexes, FTOC_full_field_positions, FTOC_full_collicular_positions, dict.FTOC_area_scaling, dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
+        FTOCsubmap1 = lattice("FTOC", FTOC_submap2_indexes, FTOC_full_field_positions_part, FTOC_full_collicular_positions_part, dict.FTOC_area_scaling, dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
     end
     disp("FTOC: Submap 1 - done")
 
@@ -144,7 +144,7 @@ end
         CTOF_full_field_positions_part = phase_activity_readout{1}; CTOF_full_collicular_positions_part = phase_activity_readout{2};
         FTOC_full_field_positions_part = phase_activity_readout{3}; FTOC_full_collicular_positions_part = phase_activity_readout{4};
     
-        FTOCsubmap2 = lattice("FTOC", FTOC_submap1_indexes, FTOC_full_field_unique, FTOC_full_collicular_positions_part, dict.FTOC_area_scaling, dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
+        FTOCsubmap2 = lattice("FTOC", FTOC_submap1_indexes, FTOC_full_field_positions_part, FTOC_full_collicular_positions_part, dict.FTOC_area_scaling, dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
     end
     disp("FTOC: Submap 2 - done")
 
@@ -177,27 +177,17 @@ end
     SuperObject.Lattice.CTOFsubmap1 = CTOFsubmap1;
     SuperObject.Lattice.CTOFsubmap2 = CTOFsubmap2;
     SuperObject.Lattice.FTOCwholemap = FTOCwholemap;
-
     SuperObject.Lattice.CTOF_full_field_positions = CTOF_full_field_positions;
     SuperObject.Lattice.filtered_indexes_CTOF = CTOF_filtered_indexes;
     SuperObject.Lattice.filtered_field_CTOF = CTOF_full_field_positions(CTOF_filtered_indexes, :);
     SuperObject.Lattice.filtered_colliculus_CTOF = CTOF_full_collicular_positions(CTOF_filtered_indexes, :);
     SuperObject.Lattice.retained_field_CTOF = CTOF_full_field_positions(CTOF_retained_indexes, :);
     SuperObject.Lattice.retained_colliculus_CTOF = CTOF_full_collicular_positions(CTOF_retained_indexes, :);
-
     SuperObject.Lattice.filtered_indexes_FTOC = FTOC_filtered_indexes;
     SuperObject.Lattice.filtered_field_FTOC = FTOC_full_field_positions(FTOC_filtered_indexes, :);
     SuperObject.Lattice.filtered_colliculus_FTOC = FTOC_full_collicular_positions(FTOC_filtered_indexes, :);    
     SuperObject.Lattice.retained_field_FTOC = FTOC_full_field_positions(FTOC_retained_indexes, :);
     SuperObject.Lattice.retained_colliculus_FTOC = FTOC_full_collicular_positions(FTOC_retained_indexes, :);
-
-    % if ~isempty(FTOC_submap1_indexes);
-    %     SuperObject.Lattice.FTOCsubmap1 = FTOCsubmap1;
-    % else
-    %     SuperObject.Lattice.FTOCsubmap1 = FTOCsubmap2;
-    % end
     SuperObject.Lattice.FTOCsubmap1 = FTOCsubmap1;
-
     SuperObject.Lattice.FTOCsubmap2 = FTOCsubmap2;
-
     SuperObject.Lattice.statistics = stats(CTOFwholemap, CTOFsubmap1, CTOFsubmap2, FTOCwholemap, FTOCsubmap1, FTOCsubmap2);

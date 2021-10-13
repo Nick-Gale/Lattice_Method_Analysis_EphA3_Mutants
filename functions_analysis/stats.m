@@ -58,21 +58,26 @@ function summary_stats = stats(A, B, C, D, E, F)
 
     % Sizes of maps in visual field (28=AB)
 
-    summary_stats(28) = A.fieldsub_cover; % A.field_cover % 
-    summary_stats(29) = B.fieldsub_cover;
-    summary_stats(30) = C.fieldsub_cover;
+    summary_stats(28) = A.field_cover; % A.field_cover % 
+    summary_stats(29) = B.fieldsub_cover; %B.fieldsub_cover;
+    summary_stats(30) = C.fieldsub_cover; %C.fieldsub_cover;
     summary_stats(31) = summary_stats(29)/summary_stats(28);
     summary_stats(32) = summary_stats(30)/summary_stats(28);
     summary_stats(33) = summary_stats(31)+summary_stats(32)-1;
 
+    % B.field_chosen
+    % C.field_chosen
+
+    poly1 = polyshape(B.field_chosen(convhull(B.field_chosen), :));
+    poly2 = polyshape(C.field_chosen(convhull(C.field_chosen), :));
+    overlap_area = area(intersect(poly1, poly2));
+    summary_stats(33) = overlap_area / A.field_cover;
     %This is the overlap of the two partmaps in visual field. Only true if the two submaps together span the whole visual field.
 
     % Sizes of maps in colliculus
-    disp("s")
     summary_stats(34)=A.collsub_cover;
     summary_stats(35)=B.collsub_cover;
     summary_stats(36)=C.collsub_cover;
-    disp([summary_stats(34), summary_stats(35), summary_stats(36)])
     summary_stats(37)= summary_stats(35)/summary_stats(34);
     summary_stats(38)= summary_stats(36)/summary_stats(34);
     summary_stats(39)= 1-summary_stats(37)-summary_stats(38);
@@ -128,6 +133,11 @@ function summary_stats = stats(A, B, C, D, E, F)
     summary_stats(74)=summary_stats(72)/summary_stats(71);
     summary_stats(75)=summary_stats(73)/summary_stats(71);
     summary_stats(76)=summary_stats(74)+summary_stats(75)-1;
+
+    poly1 = polyshape(E.field_chosen(convhull(E.field_chosen), :));
+    poly2 = polyshape(F.field_chosen(convhull(F.field_chosen), :));
+    overlap_area = area(intersect(poly1, poly2));
+    summary_stats(76) = overlap_area / D.field_cover;
     % This is a true measure of overlap of the two submaps on colliculus as jointly they will span the whole colliculus.
 
     summary_stats(77) = E.max_extent_x;

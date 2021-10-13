@@ -16,7 +16,6 @@ function [projected_points, area, candidates] = create_projection(direction, ful
     for point = 1:num_points
         centre = set_points(point,:);
         [~, all_projected_points] = find_projection(centre, radius, from_coords, to_coords);
-
         mean_projection = mean(all_projected_points, 1);
         projected_points(point,:) = mean_projection;
     end
