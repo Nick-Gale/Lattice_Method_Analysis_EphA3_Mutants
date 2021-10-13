@@ -11,12 +11,12 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
         full_y = full_field_unique(:, 2);
     end
     takeout = [];
-    
+    disp(find(isnan(full_collicular_unique)))
     if create_new_map == 1
         [num_points_init, obj_radius, lower_mean_min_spacing, upper_mean_min_spacing] = define_spacings(length(indexes), spacing_points_fraction, spacing_radius_multiplier, spacing_upper_bound, spacing_lower_bound);
         %perform the 'digital electrode placement' on a series of retinal indexes
         [chosen_points, stats_area_same_direction, stats_min_spacing, stats_used_hist, stats_use_mean, stats_use_max] = select_point_positions(lower_mean_min_spacing, upper_mean_min_spacing, full_x, full_y, num_points_init, min_points, obj_radius, max_trial_scale_factor, min_spacing_fraction, min_spacing_reduction_factor, area_scaling, random_seed);
-        chosen_indexes = ismember(full_x, chosen_points(:, 1)) .* ismember(full_y, chosen_points(:, 2));
+        chosen_indexes = find(ismember(full_x, chosen_points(:, 1)) .* ismember(full_y, chosen_points(:, 2)));
     else
         [num_points_init, obj_radius, lower_mean_min_spacing, upper_mean_min_spacing] = define_spacings(size(full_collicular_unique, 1), spacing_points_fraction, spacing_radius_multiplier, spacing_upper_bound, spacing_lower_bound);
 
@@ -27,6 +27,7 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
     end
     num_points = size(chosen_points, 1);
     candidates = 1:num_points;
+
 
     [triangles, neighbours] = triangulate(chosen_points, candidates, triangle_tolerance);
     %create the projection from region to its complement
@@ -45,8 +46,8 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
     
     %do the coverages
     inds = find(indexes < size(new_field, 1));
-    fbw_x = new_field(inds, 1);
-    fbw_y = new_field(inds, 2);
+    fbw_x = new_field(:, 1);
+    fbw_y = new_field(:, 2);
     [fkw faw] = boundary(fbw_x, fbw_y);
     
     % new_field(1:10, 2)'
@@ -56,8 +57,8 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
     fbs_y = fbw_y(points_in_subgraph);
     [fks fas] = boundary(fbs_x, fbs_y);
 
-    cbw_x = full_collicular_unique(indexes, 1);
-    cbw_y = full_collicular_unique(indexes, 2);
+    cbw_x = full_collicular_unique(:, 1);
+    cbw_y = full_collicular_unique(:, 2);
     [ckw caw] = boundary(cbw_x(~isnan(cbw_x)), cbw_y(~isnan(cbw_y)));
 
     % full_field_unique(find(chosen_indexes), :)
@@ -77,8 +78,8 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
     object.upper_mean_min_spacing = upper_mean_min_spacing;
     object.chosen_points = chosen_points;
     object.chosen_indexes = chosen_indexes;
-    object.coll_chosen = full_collicular_unique(find(chosen_indexes), :);
-    object.field_chosen = full_field_unique(find(chosen_indexes), :);
+    object.coll_chosen = full_collicular_unique(chosen_indexes, :);
+    object.field_chosen = full_field_unique(chosen_indexes, :);
     object.candidates = candidates;
     object.triangles = triangles;
     object.projected_points = projected_points;

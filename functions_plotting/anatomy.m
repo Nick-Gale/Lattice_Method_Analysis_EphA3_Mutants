@@ -58,9 +58,6 @@ function [] = anatomy(obj, dict, plot_axes)
 
         subplot5_xlabel = dict.subplot5_xlabel;
         subplot5_ylabel = dict.subplot5_ylabel;
-
-        subplot6_xlabel = dict.subplot6_xlabel;
-        subplot6_ylabel = dict.subplot6_ylabel;
     elseif plot_axes == 0
         figure_label = sprintf('Object ID (EphA3Ki, Ratio, B2, Repeat): (%0.2f, %0.2f, %d, %d)', id(1), id(2), id(3), id(4));
         subplot1_xlabel = ''; % dict.subplot1_xlabel;

@@ -60,7 +60,7 @@ end
 cd('functions_retinal_simulations')
 counter = 0;
 tic
-for ind = 1:L
+parfor ind = 1:L
         [u, s, t, rep] = ind2sub(sz, ind);
         grad = gradients(u);
         rat = ratios(s);
@@ -87,7 +87,7 @@ for ind = 1:L
         fprintf(fileID, 'obj.nSteps = %d;, \n', n_iterations); 
         fprintf(fileID, 'obj.alphaForwardChem = %f;, \n', alpha); 
         fprintf(fileID, 'obj.betaForwardChem = %f;, \n', beta);
-        fprintf(fileID, 'obj.alphaReverseChem = 0;;, \n'); 
+        fprintf(fileID, 'obj.alphaReverseChem = 0;, \n'); 
         fprintf(fileID, 'obj.betaReverseChem = 0;, \n');
         fprintf(fileID, 'obj.gammaAct = %f;, \n', gamma);
         
@@ -109,8 +109,8 @@ for ind = 1:L
                 disp([u, s, t, rep])
                 toc
         else
-                % disp("This experiment was already completed.")
-                % disp(ind2sub(sz, ind))
+                disp("This experiment was already completed.")
+                disp(ind2sub(sz, ind))
         end
 end
 toc

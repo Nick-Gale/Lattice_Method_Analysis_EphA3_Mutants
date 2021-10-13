@@ -17,16 +17,16 @@
 %%
 %% set the parameters that need to be passed to all workers in the parallel pool as global
 global n_neurones n_iterations
-n_neurones = 2000;
+n_neurones = 10000;
 n_iterations = n_neurones ^ 2 * 5;
 
 global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients = 0; [0 knock_in];
+gradients = [0 knock_in];
 ratios = 0.5; % [0.4, 0.5, 0.6];
 beta2 = 0.00625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
-repeats = 1:2;
+repeats = 1:1;
 
 
 % create the iteration object
@@ -37,8 +37,8 @@ L = prod(sz);
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
         % Spacing: the spacing are parameters to the lattice method and are as follows but can be modified by N the number of points. N can be reduced by filtering, or in a part-map.
-                analysis_parameter_dictionary.spacing_points_fraction = 1/25;
-                analysis_parameter_dictionary.spacing_radius_multiplier = 5;
+                analysis_parameter_dictionary.spacing_points_fraction = 1/15;
+                analysis_parameter_dictionary.spacing_radius_multiplier = 4;
                 analysis_parameter_dictionary.spacing_lower_bound = 2 * 0.84;
                 analysis_parameter_dictionary.spacing_upper_bound = 2 * 1.16;
 
@@ -88,6 +88,8 @@ L = prod(sz);
         plotting_dictionary.FTOCdictionary.YLim = [0, 1];
         plotting_dictionary.FTOCdictionary.XTick = [0, 1];
         plotting_dictionary.FTOCdictionary.YTick = [0, 1];
+        plotting_dictionary.FTOCdictionary.XTickLabel = '';
+        plotting_dictionary.FTOCdictionary.YTickLabel = '';
         plotting_dictionary.FTOCdictionary.FlipY = 0;
         plotting_dictionary.FTOCdictionary.whole_map_title1 = 'Whole map';
         plotting_dictionary.FTOCdictionary.whole_map_title2 = 'Largest Submap';
@@ -107,6 +109,8 @@ L = prod(sz);
         plotting_dictionary.CTOFdictionary.YLim = [0, 1];
         plotting_dictionary.CTOFdictionary.XTick = [0, 1];
         plotting_dictionary.CTOFdictionary.YTick = [0, 1];
+        plotting_dictionary.CTOFdictionary.XTickLabel = '';
+        plotting_dictionary.CTOFdictionary.YTickLabel = '';
         plotting_dictionary.CTOFdictionary.FlipY = 0;
         plotting_dictionary.CTOFdictionary.whole_map_title1 = 'Whole map';
         plotting_dictionary.CTOFdictionary.whole_map_title2 = 'Largest Submap';
@@ -157,8 +161,8 @@ global stats_vec
 for i = 1:L
         stats_vec{i} = [0];
 end
-
-for ind = 1:L
+plot_figs = false;
+parfor ind = 1:L
         %choose the experiment
         [u, s, t, rep] = ind2sub(sz, ind); 
         grad = gradients(u);
@@ -170,34 +174,36 @@ for ind = 1:L
         experiment_obj = load(filename).old;
         
         %perform a scanning experiment, plot, and analyse
-        % analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, b2_truth, rep], 'SIMULATION');
-        % disp("finished analysis of scanning")
-        % if rep <= 1
-        %         experiment_plot(analysis_obj_scanner, plotting_dictionary);
-        % end
-        % disp("finished plot of scanning")
+        analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, b2_truth, rep], 'SIMULATION');
+        disp("finished analysis of scanning")
+        if rep <= 1 && plot_figs
+               experiment_plot(analysis_obj_scanner, plotting_dictionary);
+        end
+        disp("finished plot of scanning")
 
         %perform an anatomical experiment, plot, and analyse
         analysis_obj_anatomy = experiment_analysis(experiment_obj, 'ANATOMY', analysis_parameter_dictionary, [grad, rat, b2_truth, rep], 'SIMULATION');
         disp("finished analysis of anatomy")
-        if rep <= 1
+        if rep <= 1 && plot_figs
                 experiment_plot(analysis_obj_anatomy, plotting_dictionary);
         end
 
         %append the statistics to an array
         stats_vec{ind} = analysis_obj_anatomy.Lattice.statistics;
+
         %construct a series of pure injection plots with axes labels only for the leftmost plot
         if rep <= 1
                 if u==1
-                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
+                      %  anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 else
-                        anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
+                      %  anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 end
         end
-        % disp("finished plot of anatomy")
+        disp("finished plot of anatomy")
 end
+
 % generate statistics
-% plot_statistics(stats_vec, gradients, ratios, beta2, repeats);
+plot_statistics(stats_vec, gradients, ratios, beta2, repeats);
 
 % generate paper plots
 

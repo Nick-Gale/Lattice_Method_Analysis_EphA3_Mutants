@@ -18,55 +18,55 @@ input_type = SuperObject.Lattice.input_type;
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Whole-Map Plots
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-figure(1);
-clf
+    figure(1);
+    clf
 
-text = A.description;
+    text = A.description;
 
-h2 = subplot(2,2,1);
-h1 = subplot(2,2,3);
+    h2 = subplot(2,2,1);
+    h1 = subplot(2,2,3);
 
-Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
-hold on
+    Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
+    hold on
 
-N1 = A.numpoints;
-N2 = length(A.points_in_subgraph);
+    N1 = A.numpoints;
+    N2 = length(A.points_in_subgraph);
 
-fig = gcf;
+    fig = gcf;
 
-subplot(h2);
-if isfield(dictionary, 'whole_map_title1')
-    title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title1]);
-else
-    title('');
-end
-% title(h2, {['ID', sprintf('(%0.2f, %0.2f, %0.2f, %0.2f)', id)]; [text,', Whole map']});
+    subplot(h2);
+    if isfield(dictionary, 'whole_map_title1')
+        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title1]);
+    else
+        title('');
+    end
+    % title(h2, {['ID', sprintf('(%0.2f, %0.2f, %0.2f, %0.2f)', id)]; [text,', Whole map']});
 
-subplot(h1)
-title(['n(nodes): ', num2str(N1)]);
+    subplot(h1)
+    title(['n(nodes): ', num2str(N1)]);
 
-h2=subplot(2,2,2);
-h1=subplot(2,2,4);
+    h2=subplot(2,2,2);
+    h1=subplot(2,2,4);
 
-Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
+    Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
 
-subplot(h2);
-if isfield(dictionary, 'whole_map_title2')
-    title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title2]);
-else
-    title('')
-end
-% title({['(EphA3-Ki, Ilset2-Fraction, Beta2-KO): (', sprintf('%0.2f, %0.2f, %0.2f, %0.2f', id), ')', newline,  direction, ',', input_type]; ['Largest ordered submap']});
+    subplot(h2);
+    if isfield(dictionary, 'whole_map_title2')
+        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title2]);
+    else
+        title('')
+    end
+    % title({['(EphA3-Ki, Ilset2-Fraction, Beta2-KO): (', sprintf('%0.2f, %0.2f, %0.2f, %0.2f', id), ')', newline,  direction, ',', input_type]; ['Largest ordered submap']});
 
-subplot(h1)
-title(['n(nodes): ', num2str(N2), ' of ', num2str(N1), ' (',num2str(round(100 * N2 / N1)),'%)']);
+    subplot(h1)
+    title(['n(nodes): ', num2str(N2), ' of ', num2str(N1), ' (',num2str(round(100 * N2 / N1)),'%)']);
 
-orient tall
+    orient tall
 
-if PRINT==1
-    filename=[dir, 'figure_wholemaps_ID(EphA3Ki, Ratio, B2, Repeats): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
-    print(filename, '-dpng')
-end
+    if PRINT==1
+        filename=[dir, 'figure_wholemaps_ID(EphA3Ki, Ratio, B2, Repeats): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
+        print(filename, '-dpng')
+    end
 
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Part-Map Plots
@@ -174,6 +174,34 @@ if ~isempty(divider)
     else
         ylabel('');
     end
+
+
+    % put the overlaps
+    if direction == "FTOC"
+        poly1 = polyshape(B.coll_chosen(convhull(B.coll_chosen), :));
+        poly2 = polyshape(C.coll_chosen(convhull(C.coll_chosen), :));
+        poly_intersect = intersect(poly2, poly1);
+        subplot(2,2,3)
+        plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])
+        alpha(0.1)
+        subplot(2,2,4)
+        plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])
+        alpha(0.1)
+    end
+
+    if direction == "CTOF"
+        poly1 = polyshape(B.field_chosen(convhull(B.field_chosen), :));
+        poly2 = polyshape(C.field_chosen(convhull(C.field_chosen), :));
+        poly_intersect = intersect(poly2, poly1);
+        subplot(2,2,1)
+        plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])
+        alpha(0.1)
+        subplot(2,2,2)
+        plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])
+        alpha(0.1)
+    end
+
+
 
     orient tall
 
