@@ -24,8 +24,8 @@ global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients = [0 knock_in];
-ratios = 0.5; % [0.4, 0.5, 0.6];
-beta2 = 0.00625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
+ratios = [0.4, 0.5, 0.6];
+beta2 = [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
 repeats = 1:1;
 
 
@@ -37,7 +37,7 @@ L = prod(sz);
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
         % Spacing: the spacing are parameters to the lattice method and are as follows but can be modified by N the number of points. N can be reduced by filtering, or in a part-map.
-                analysis_parameter_dictionary.spacing_points_fraction = 1/15;
+                analysis_parameter_dictionary.spacing_points_fraction = 1/20;
                 analysis_parameter_dictionary.spacing_radius_multiplier = 4;
                 analysis_parameter_dictionary.spacing_lower_bound = 2 * 0.84;
                 analysis_parameter_dictionary.spacing_upper_bound = 2 * 1.16;
@@ -161,7 +161,7 @@ global stats_vec
 for i = 1:L
         stats_vec{i} = [0];
 end
-plot_figs = false;
+plot_figs = true;
 parfor ind = 1:L
         %choose the experiment
         [u, s, t, rep] = ind2sub(sz, ind); 
@@ -172,7 +172,7 @@ parfor ind = 1:L
         %load the data
         filename = sprintf('results_experiments/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_beta2=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, b2_truth, rep);
         experiment_obj = load(filename).old;
-        
+         
         %perform a scanning experiment, plot, and analyse
         analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, b2_truth, rep], 'SIMULATION');
         disp("finished analysis of scanning")
@@ -194,16 +194,19 @@ parfor ind = 1:L
         %construct a series of pure injection plots with axes labels only for the leftmost plot
         if rep <= 1
                 if u==1
-                      %  anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
+                      anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 else
-                      %  anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
+                      anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 end
         end
         disp("finished plot of anatomy")
+
+        %construct VFO plots
+        visual_field_overlap(analysis_obj_anatomy, plotting_dictionary.anatomy)
 end
 
 % generate statistics
-plot_statistics(stats_vec, gradients, ratios, beta2, repeats);
+%  plot_statistics(stats_vec, gradients, ratios, beta2, repeats);
 
 % generate paper plots
 

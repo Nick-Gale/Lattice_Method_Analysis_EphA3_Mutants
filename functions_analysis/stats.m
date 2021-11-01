@@ -137,7 +137,7 @@ function summary_stats = stats(A, B, C, D, E, F)
     poly1 = polyshape(E.field_chosen(convhull(E.field_chosen), :));
     poly2 = polyshape(F.field_chosen(convhull(F.field_chosen), :));
     overlap_area = area(intersect(poly1, poly2));
-    summary_stats(76) = overlap_area / D.field_cover;
+    summary_stats(76) = overlap_area / D.collarea;
     % This is a true measure of overlap of the two submaps on colliculus as jointly they will span the whole colliculus.
 
     summary_stats(77) = E.max_extent_x;
