@@ -59,9 +59,9 @@ function h = Dplot_lattice_hjorth(so, object, plotting_dictionary, direction, h1
     end
 
     if strcmp(direction, 'CTOF')
-        LatticeColour = 'b';
+        LatticeColour = 'k'; % 'b'
     else
-        LatticeColour = 'k';
+        LatticeColour = 'b'; % 'k'
     end
     if isfield(p, 'LatticeColour')
         LatticeColour = p.LatticeColour;

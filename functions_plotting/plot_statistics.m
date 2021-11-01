@@ -39,9 +39,42 @@ alp = 0.05;
     saveas(gcf, 'results_plots/stats_largest_vfo.png');
     hold off
     close(5);
-
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% collicular overlap of the two part maps (FTOC)
+%%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    st = zeros(length(gradients), length(repeats));
+    for u = 1:length(gradients)
+        for s = 1:length(repeats)
+            for t = 1:length(ratios)
+                for v = 1:length(beta2)
+                    ind = sub2ind(sz, u, t, v, s);
+                    stats = stats_vector{ind};
+                    st(u, s) = stats(76);
+                end
+            end
+        end
+    end
+
+    % plot submap ratios
+    figure(5);
+    hold on
+    for i=1:length(gradients)
+        dispersion = gradients(i)*ones(size(st(i,:))) + disp_factor * b_width * (0.5 - rand(size(st(i,:))));
+        scatter(dispersion, st(i,:), 10, 'filled', 'MarkerFaceColor', [0 0 0], 'MarkerEdgeColor', [1,1,1])
+        boxchart(gradients(i)*ones(size(st(i,:))), st(i,:), 'JitterOutliers', 'off', 'SeriesIndex', 1, 'BoxWidth', b_width)
+    end
+    xlim([gradients(1) - b_width, gradients(length(gradients)) + b_width])
+    alpha(alp);
+    xlabel('Magnitude of EphA3-Ilset2 knock-in');
+    ylabel('Overlap Fraction');
+    title('Colliculus Overlap of F-to-C Part-Maps');
+    saveas(gcf, 'results_plots/stats_largest_co.png');
+    hold off
+    close(5);
+
+
+%%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%% Mean projection location in the colliculus
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     st = zeros(length(gradients), length(repeats));
     for u = 1:length(gradients)
@@ -68,6 +101,7 @@ alp = 0.05;
         dispersion = gradients(i)*ones(size(st(i,:))) + disp_factor * b_width * (0.5 - rand(size(st(i,:))));
         scatter(dispersion, st2(i,:), 10, 'filled', 'MarkerFaceColor', [0 0 0], 'MarkerEdgeColor', [1,1,1])
         boxchart(gradients(i)*ones(size(st(i,:))), st2(i,:), 'JitterOutliers', 'off', 'SeriesIndex', 2, 'BoxWidth', b_width)
+        legend('EphA3+ Data', 'EphA3+ Distributions', 'Wild Type Data', 'Wild Type Distributions', 'Location', 'southwest')
     end
     xlim([gradients(1) - 0.1, gradients(length(gradients)) + 0.1])
     mi = min([min(st2'), min(st1')]);
@@ -76,13 +110,11 @@ alp = 0.05;
     alpha(alp);
     xlabel('Magnitude of EphA3-Ilset2 knock-in');
     ylabel('Overlap Fraction');
-    title('Collicular Overlap of F-to-C Part-Maps');
-    saveas(gcf, 'results_plots/stats_largest_co.png');
+    title('Mean Projection Location');
+    
+    saveas(gcf, 'results_plots/stats_mean_projection.png');
     hold off
     close(5)
-
-
-
 
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Map quality of C-to-F
