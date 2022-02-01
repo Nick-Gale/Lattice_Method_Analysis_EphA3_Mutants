@@ -15,20 +15,14 @@ addpath("functions_analysis/")
 %% set the parameters that need to be passed to all workers in the parallel pool as global
 
 global n_neurones n_iterations
-n_neurones = 10000;
+n_neurones = [100, 500, 1000, 2000, 3000, 4000, 5000];
 n_iterations = n_neurones ^ 2 * 5;
 
 global gradients ratios beta2 repeats sz L
-tel = 1.0;
-knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients = [0 knock_in];
-ratios = 0.5; % [0.4, 0.5, 0.6];
-beta2 = 0.000625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
-repeats = 1:1;
-
+grad = 0;
+rat = 0.5;
+b2_truth = 0.00625;
 % create the iteration object
-sz = [length(gradients), length(ratios), length(beta2), length(repeats)];
-L = prod(sz);
   
 % create the gradient files
 for ind = 1:L
@@ -73,7 +67,7 @@ parfor ind = 1:L
         beta = 135; % 135%28.5 * chemical_scale;
             
         %copy the base experimental file
-        file_name = sprintf('../results_experiments/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_beta2truth=%d.txt', n_neurones, grad, rat, b2_truth);
+        file_name = sprintf('../results_experiments/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_beta2truth=%d.txt', 10000, grad, rat, b2_truth);
         copyfile('../results_experiments/WillshawGale_owens_base.txt', file_name)
 
         %modify the gradient file
@@ -89,10 +83,7 @@ parfor ind = 1:L
         fprintf(fileID, 'obj.betaForwardChem = %f;, \n', beta);
         fprintf(fileID, 'obj.alphaReverseChem = 0;, \n'); 
         fprintf(fileID, 'obj.betaReverseChem = 0;, \n');
-        if b2_truth == 1
-                fprintf(fileID, 'obj.gammaAct = %f;, \n', 0.000625);
-                fprintf(fileID, 'obj.bAct = %f;, \n', 0.2);
-        end
+        fprintf(fileID, 'obj.gammaAct = %f;, \n', gamma);
         
         %set the save targets
         fprintf(fileID, 'obj.reportStep = %f, \n', n_iterations + 1);

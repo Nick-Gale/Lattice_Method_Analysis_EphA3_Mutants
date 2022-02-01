@@ -177,9 +177,10 @@ if ~isempty(divider)
 
 
     % put the overlaps
+    shrink = 0.2; % PUT THIS IN THE DICTIONARY
     if direction == "FTOC"
-        poly1 = polyshape(B.coll_chosen(convhull(B.coll_chosen), :));
-        poly2 = polyshape(C.coll_chosen(convhull(C.coll_chosen), :));
+        poly1 = polyshape(B.coll_chosen(boundary(B.coll_chosen(:, 1), B.coll_chosen(:, 2), shrink), :));
+        poly2 = polyshape(C.coll_chosen(boundary(C.coll_chosen(:, 1), C.coll_chosen(:, 2), shrink), :));
         poly_intersect = intersect(poly2, poly1);
         subplot(2,2,3)
         plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])
@@ -190,8 +191,8 @@ if ~isempty(divider)
     end
 
     if direction == "CTOF"
-        poly1 = polyshape(B.field_chosen(convhull(B.field_chosen), :));
-        poly2 = polyshape(C.field_chosen(convhull(C.field_chosen), :));
+        poly1 = polyshape(B.field_chosen(boundary(B.field_chosen(:, 1), B.field_chosen(:, 2), shrink), :));
+        poly2 = polyshape(C.field_chosen(boundary(C.field_chosen(:, 1), C.field_chosen(:, 2), shrink), :));
         poly_intersect = intersect(poly2, poly1);
         subplot(2,2,1)
         plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])

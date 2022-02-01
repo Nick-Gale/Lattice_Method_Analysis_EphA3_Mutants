@@ -39,7 +39,7 @@ function object = lattice(direction, indexes, full_field_unique, full_collicular
     [subgraph_link_ratios_RC, subgraph_link_ratios_ML, subgraph_flipped_links, subgraph_norm_links, subgraph_angles, stats_subgraph_orientations, stats_subgraph_orientation_mean, stats_subgraph_orientation_std] = find_link_angles(list_of_neighbours, chosen_points, projected_points, triangles, takeout, points_not_in_subgraph, 0);
 
     %field rotation angle is zero to reflect new_single_axis_order_hjorth
-    field_rotation_angle = 0;
+    field_rotation_angle = 20;
     [ML_whole, ML_sub, RC_whole, RC_sub, new_field] = new_single_axis_order(list_of_neighbours, points_not_in_subgraph, full_collicular_unique, full_field_unique, field_rotation_angle, []);
 
     [full_map_relative_area, submap_relative_area, submap_coll_area, submap_field_area] = find_convex_hull(full_collicular_unique, full_field_unique, takeout, num_points, candidates, points_in_subgraph);

@@ -22,6 +22,7 @@ function [] = visual_field_overlap(obj, dict)
     partmap2_field = obj.Lattice.CTOFsubmap2.field_chosen;
     partmap2_coll = obj.Lattice.CTOFsubmap2.coll_chosen;
     id = obj.id;
+    divider = obj.Lattice.divider;
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %Load Parameters
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,6 +69,7 @@ function [] = visual_field_overlap(obj, dict)
     if ~isempty(p2_indexes_g1)
         scatter(partmap2_coll(p2_indexes_g1, 1), partmap2_coll(p2_indexes_g1, 2), sz, cp, 'filled');
     end
+    line([divider  divider], [0 1], 'Color', 'black');
     axis equal;
     axis([0 1 0 1]);
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
