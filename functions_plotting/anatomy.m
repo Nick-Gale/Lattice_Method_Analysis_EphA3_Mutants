@@ -38,6 +38,7 @@ function [] = anatomy(obj, dict, plot_axes)
     sc_colour = dict.sc_colour;
     transparency = dict.transparency;
     fs = dict.fontsize;
+    markersize = dict.markersize;
 
     save_dir = strcat(dict.directory, sprintf('figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', id(1), id(2), id(3), id(4)));
 
@@ -175,17 +176,18 @@ fig = figure('Position', [0, 0, 400, 1600]);
 %fig.WindowState = 'maximized';
 
 %figure 1
-    subplot(7,1,2);
-    scatter(subplot1_ephA3_x, subplot1_ephA3_y, 'filled', 'MarkerEdgeColor', epha3_colour, 'MarkerFaceColor', epha3_colour);
+    plt1 = subplot(7,1,2);
+    scatter(subplot1_ephA3_x, subplot1_ephA3_y,  markersize, 'filled', 'MarkerEdgeColor', epha3_colour, 'MarkerFaceColor', epha3_colour);
     alpha(transparency);
     hold on;
 
-    scatter(subplot1_WT_x, subplot1_WT_y, 'filled', 'MarkerEdgeColor', wt_colour, 'MarkerFaceColor', wt_colour);
+    scatter(subplot1_WT_x, subplot1_WT_y,  markersize, 'filled', 'MarkerEdgeColor', wt_colour, 'MarkerFaceColor', wt_colour);
     alpha(transparency);
     hold on;
 
-    scatter(subplot1_inj_x, subplot1_inj_y, 'filled', 'MarkerEdgeColor', inj_colour, 'MarkerFaceColor', inj_colour);
+    scatter(subplot1_inj_x, subplot1_inj_y,  markersize, 'filled', 'MarkerEdgeColor', inj_colour, 'MarkerFaceColor', inj_colour);
     alpha(transparency * 2);
+
 
     % title(figure_label, 'FontSize', 4)
     subtitle(' ')
@@ -252,15 +254,15 @@ fig = figure('Position', [0, 0, 400, 1600]);
 
 %figure 5
     subplot(7,1,6)
-    scatter(subplot5_EphA3_x, subplot5_EphA3_y, 'filled', 'MarkerEdgeColor', epha3_colour, 'MarkerFaceColor', epha3_colour);
+    scatter(subplot5_EphA3_x, subplot5_EphA3_y, markersize,  'filled', 'MarkerEdgeColor', epha3_colour, 'MarkerFaceColor', epha3_colour);
     alpha(transparency);
     hold on
 
-    scatter(subplot5_WT_x, subplot5_WT_y, 'filled', 'MarkerEdgeColor', wt_colour, 'MarkerFaceColor', wt_colour);
+    scatter(subplot5_WT_x, subplot5_WT_y, markersize,  'filled', 'MarkerEdgeColor', wt_colour, 'MarkerFaceColor', wt_colour);
     alpha(transparency);
     hold on
 
-    scatter(subplot5_inj_x, subplot5_inj_y, 'filled', 'MarkerEdgeColor', inj_colour, 'MarkerFaceColor', inj_colour);
+    scatter(subplot5_inj_x, subplot5_inj_y, markersize, 'filled', 'MarkerEdgeColor', inj_colour, 'MarkerFaceColor', inj_colour);
     alpha(transparency * 2)
 
     line([0 1],[ML_slice_location ML_slice_location],'Color','k');
