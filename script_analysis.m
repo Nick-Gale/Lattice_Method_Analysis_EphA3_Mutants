@@ -91,14 +91,14 @@ L = prod(sz);
         plotting_dictionary.FTOCdictionary.XTickLabel = '';
         plotting_dictionary.FTOCdictionary.YTickLabel = '';
         plotting_dictionary.FTOCdictionary.FlipY = 0;
-        plotting_dictionary.FTOCdictionary.whole_map_title1 = 'Whole map';
-        plotting_dictionary.FTOCdictionary.whole_map_title2 = 'Largest Submap';
-        plotting_dictionary.FTOCdictionary.part_title1 = 'First Part-Map';
-        plotting_dictionary.FTOCdictionary.part_title3 = 'Second Part-Map';
-        plotting_dictionary.FTOCdictionary.part_subplot1_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot1_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot2_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot2_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')');
+        plotting_dictionary.FTOCdictionary.whole_map_title1 = ''; 'Whole map';
+        plotting_dictionary.FTOCdictionary.whole_map_title2 = ''; 'Largest Submap';
+        plotting_dictionary.FTOCdictionary.part_title1 = ''; 'First Part-Map';
+        plotting_dictionary.FTOCdictionary.part_title3 = ''; 'Second Part-Map';
+        plotting_dictionary.FTOCdictionary.part_subplot1_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.FTOCdictionary.part_subplot1_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
+        plotting_dictionary.FTOCdictionary.part_subplot2_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.FTOCdictionary.part_subplot2_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot3_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
@@ -112,14 +112,14 @@ L = prod(sz);
         plotting_dictionary.CTOFdictionary.XTickLabel = '';
         plotting_dictionary.CTOFdictionary.YTickLabel = '';
         plotting_dictionary.CTOFdictionary.FlipY = 0;
-        plotting_dictionary.CTOFdictionary.whole_map_title1 = 'Whole map';
-        plotting_dictionary.CTOFdictionary.whole_map_title2 = 'Largest Submap';
-        plotting_dictionary.CTOFdictionary.part_title1 = 'First Part-Map';
-        plotting_dictionary.CTOFdictionary.part_title3 = 'Second Part-Map';
-        plotting_dictionary.CTOFdictionary.part_subplot1_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot1_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot2_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot2_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')');
+        plotting_dictionary.CTOFdictionary.whole_map_title1 = ''; 'Whole map';
+        plotting_dictionary.CTOFdictionary.whole_map_title2 = ''; 'Largest Submap';
+        plotting_dictionary.CTOFdictionary.part_title1 = ''; 'First Part-Map';
+        plotting_dictionary.CTOFdictionary.part_title3 = ''; 'Second Part-Map';
+        plotting_dictionary.CTOFdictionary.part_subplot1_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.CTOFdictionary.part_subplot1_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
+        plotting_dictionary.CTOFdictionary.part_subplot2_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.CTOFdictionary.part_subplot2_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot3_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
@@ -211,3 +211,13 @@ end
 
 % generate paper plots
 
+% print statistics
+for i = 1:L
+        [u, s, t, rep] = ind2sub(sz, ind); 
+        grad = gradients(u);
+        rat = ratios(s); 
+        b2_truth = beta2(t);
+        if grad == 0.0 && rat == 0.5 && b2_truth = 0.00625 && rep == 1
+                disp("0.0")
+                disp("Map Quality")
+                disp()

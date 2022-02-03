@@ -1,10 +1,10 @@
 % ranges
-dr = [0, 0.8, 1.2, 1.6, 4.0]; % [0.00, 0.4, 0.8, 1.2, 1.6, 2.0]; %  [0.00, 0.4, 0.8, 1.2, 1.6, 2.0];
+dr = [0.00, 0.4, 0.8, 1.2, 1.6, 2.0]; % [0, 0.8, 1.2, 1.6, 4.0]; %  [0.00, 0.4, 0.8, 1.2, 1.6, 2.0];
 gamma = [0.000625, 0.00625, 0.00625 * 10];
 ratios = [0.4, 0.5, 0.6];
 
 %instances
-epha3 = 1.8;
+epha3 = 1.6;
 r = 0.50;
 g = 0.00625;
 rep = 1;
@@ -36,59 +36,59 @@ bar_size = 5;
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % Anatomy plots dGamma
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    %load the images 
-    fig = [];
-    titles = {"A", "B", "C", "D", "E", "F"};
-    plot_title = 'A B C D E F';
-    ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
+//     %load the images 
+//     fig = [];
+//     titles = {"A", "B", "C", "D", "E", "F"};
+//     plot_title = 'A B C D E F';
+//     ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
 
-    for i = 1:length(dr)
-        filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(1), rep);
-        fig = cat(2, fig, imread(filename));
-    end
-    imshow(fig)
-    annotation('textbox', [0.13 0.03 0.8 0.1],...
-                'String', titles)
-
-
-    imwrite(fig, "./results_plots/paper_anatomy_dr_low_gamma.png")
-
-    %load the images 
-    fig = [];
-    titles = {"A", "B", "C", "D", "E", "F"};
-    plot_title = 'A B C D E F';
-    ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
-
-    for i = 1:length(dr)
-        filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(3), rep);
-        fig = cat(2, fig, imread(filename));
-    end
-    imshow(fig)
-    annotation('textbox', [0.13 0.03 0.8 0.1],...
-                'String', titles)
+//     for i = 1:length(dr)
+//         filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(1), rep);
+//         fig = cat(2, fig, imread(filename));
+//     end
+//     imshow(fig)
+//     annotation('textbox', [0.13 0.03 0.8 0.1],...
+//                 'String', titles)
 
 
-    imwrite(fig, "./results_plots/paper_anatomy_dr_high_gamma.png")
+//     imwrite(fig, "./results_plots/paper_anatomy_dr_low_gamma.png")
 
-%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-% Anatomy plots dBeta2
-%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    %load the images 
-    fig = [];
-    titles = {"A", "B", "C", "D", "E", "F"};
-    plot_title = 'A B C D E F';
-    ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
+//     %load the images 
+//     fig = [];
+//     titles = {"A", "B", "C", "D", "E", "F"};
+//     plot_title = 'A B C D E F';
+//     ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
 
-    for i = 1:length(dr)
-        filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', dr(i), r, 1, rep);
-        fig = cat(2, fig, imread(filename));
-    end
-    imshow(fig)
-    annotation('textbox', [0.13 0.03 0.8 0.1],...
-                'String', titles)
+//     for i = 1:length(dr)
+//         filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(3), rep);
+//         fig = cat(2, fig, imread(filename));
+//     end
+//     imshow(fig)
+//     annotation('textbox', [0.13 0.03 0.8 0.1],...
+//                 'String', titles)
 
 
-    imwrite(fig, "./results_plots/paper_anatomy_dr_beta2.png")
+//     imwrite(fig, "./results_plots/paper_anatomy_dr_high_gamma.png")
+
+// %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// % Anatomy plots dBeta2
+// %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//     %load the images 
+//     fig = [];
+//     titles = {"A", "B", "C", "D", "E", "F"};
+//     plot_title = 'A B C D E F';
+//     ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
+
+//     for i = 1:length(dr)
+//         filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', dr(i), r, 1, rep);
+//         fig = cat(2, fig, imread(filename));
+//     end
+//     imshow(fig)
+//     annotation('textbox', [0.13 0.03 0.8 0.1],...
+//                 'String', titles)
+
+
+//     imwrite(fig, "./results_plots/paper_anatomy_dr_beta2.png")
 
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % Anatomy plots dGamma
@@ -96,7 +96,7 @@ bar_size = 5;
     fig = [];
     fig1 = [];
     fig2 = []; 
-    for i = 1:length(ratios)
+    for i = [1, 3]
         filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', epha3, ratios(i), g, rep);
         fig1 = cat(2, fig1, imread(filename));
     end
@@ -111,7 +111,7 @@ bar_size = 5;
     fig1 = cat(2, fig1, dividing_bar);
 
     % fig2 = cat(1, fig2, dividing_bar);
-    fig = cat(2, fig1, fig2);
+    fig = cat(2, fig2, fig1);
     fig = imresize(fig, 0.5);
     imwrite(fig, "./results_plots/paper_anatomy_dg_dn.png")
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

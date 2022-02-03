@@ -23,7 +23,7 @@ tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients = [0 knock_in];
 ratios = 0.5; % [0.4, 0.5, 0.6];
-beta2 = 0.000625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
+beta2 = [0.01, 0.001]; % 0.000625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
 repeats = 1:1;
 
 % create the iteration object
