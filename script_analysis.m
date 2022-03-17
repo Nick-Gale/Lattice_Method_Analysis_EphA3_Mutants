@@ -23,9 +23,9 @@ n_iterations = n_neurones ^ 2 * 5;
 global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients =  [0 knock_in]; [0.15, 0.3, 0.45, 4.0];    
-ratios = 0.5;  [0.4, 0.5, 0.6];
-beta2 =  [0.000625, 0.00625, 0.00625 * 10];  0.00625; % %[0, 1];
+gradients =  4.0; [0 knock_in]; [0.15, 0.3, 0.45, 4.0];    
+ratios = 0.5; [0.4, 0.5, 0.6];    
+beta2 =  0.00625;  [0.001, 0.00625, 0.01]; [0.000625, 0.00625, 0.00625 * 10];    % %[0, 1];
 repeats = 1:1;
 
 
@@ -91,17 +91,17 @@ L = prod(sz);
         plotting_dictionary.FTOCdictionary.XTickLabel = '';
         plotting_dictionary.FTOCdictionary.YTickLabel = '';
         plotting_dictionary.FTOCdictionary.FlipY = 0;
-        plotting_dictionary.FTOCdictionary.whole_map_title1 = ''; 'Whole map';
-        plotting_dictionary.FTOCdictionary.whole_map_title2 = ''; 'Largest Submap';
-        plotting_dictionary.FTOCdictionary.part_title1 = ''; 'First Part-Map';
-        plotting_dictionary.FTOCdictionary.part_title3 = ''; 'Second Part-Map';
+        % plotting_dictionary.FTOCdictionary.whole_map_title1 = ''; 'Whole map';
+        % plotting_dictionary.FTOCdictionary.whole_map_title2 = ''; 'Largest Submap';
+        % plotting_dictionary.FTOCdictionary.part_title1 = ''; 'First Part-Map';
+        % plotting_dictionary.FTOCdictionary.part_title3 = ''; 'Second Part-Map';
         plotting_dictionary.FTOCdictionary.part_subplot1_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot1_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot2_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot2_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
+        plotting_dictionary.FTOCdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot3_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
+        plotting_dictionary.FTOCdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.FTOCdictionary.part_subplot4_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
 
         plotting_dictionary.CTOFdictionary.directory_CTOF = 'results_plots/';
@@ -112,17 +112,17 @@ L = prod(sz);
         plotting_dictionary.CTOFdictionary.XTickLabel = '';
         plotting_dictionary.CTOFdictionary.YTickLabel = '';
         plotting_dictionary.CTOFdictionary.FlipY = 0;
-        plotting_dictionary.CTOFdictionary.whole_map_title1 = ''; 'Whole map';
-        plotting_dictionary.CTOFdictionary.whole_map_title2 = ''; 'Largest Submap';
-        plotting_dictionary.CTOFdictionary.part_title1 = ''; 'First Part-Map';
-        plotting_dictionary.CTOFdictionary.part_title3 = ''; 'Second Part-Map';
+        % plotting_dictionary.CTOFdictionary.whole_map_title1 = ''; 'Whole map';
+        % plotting_dictionary.CTOFdictionary.whole_map_title2 = ''; 'Largest Submap';
+        % plotting_dictionary.CTOFdictionary.part_title1 = ''; 'First Part-Map';
+        % plotting_dictionary.CTOFdictionary.part_title3 = ''; 'Second Part-Map';
         plotting_dictionary.CTOFdictionary.part_subplot1_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot1_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot2_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot2_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
+        plotting_dictionary.CTOFdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot3_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
+        plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.CTOFdictionary.part_subplot4_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
 
         plotting_dictionary.anatomy.directory = 'results_plots/';
@@ -138,15 +138,15 @@ L = prod(sz);
         plotting_dictionary.anatomy.transparency = 0.1;
         plotting_dictionary.anatomy.fontsize = 8;
         plotting_dictionary.anatomy.markersize = 8;
-        plotting_dictionary.anatomy.subplot1_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.anatomy.subplot1_ylabel = append('Retina (', char(8678), 'Dorsal-Ventral', char(8680),')') ;
-        plotting_dictionary.anatomy.subplot2_xlabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.anatomy.subplot2_ylabel = 'EphA3 Label';
-        plotting_dictionary.anatomy.subplot3_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
-        plotting_dictionary.anatomy.subplot3_ylabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.anatomy.subplot4_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
-        plotting_dictionary.anatomy.subplot4_ylabel = append('Retina (', char(8678), 'Nasal-Temporal', char(8680),')');
-        plotting_dictionary.anatomy.subplot5_xlabel = append('Colliculus (', char(8678), 'Caudal-Rostral', char(8680),')');
+        plotting_dictionary.anatomy.subplot1_xlabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.anatomy.subplot1_ylabel = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')') ;
+        plotting_dictionary.anatomy.subplot2_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        plotting_dictionary.anatomy.subplot2_ylabel = 'EphA / EphrinA';
+        plotting_dictionary.anatomy.subplot3_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        plotting_dictionary.anatomy.subplot3_ylabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.anatomy.subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        plotting_dictionary.anatomy.subplot4_ylabel = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
+        plotting_dictionary.anatomy.subplot5_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         plotting_dictionary.anatomy.subplot5_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
 
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ parfor ind = 1:L
         filename = sprintf('results_experiments/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_beta2=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, b2_truth, rep);
         experiment_obj = load(filename).old;
          
-        %perform a scanning experiment, plot, and analyse
+        % perform a scanning experiment, plot, and analyse
         analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, b2_truth, rep], 'SIMULATION');
         disp("finished analysis of scanning")
         if rep <= 1 && plot_figs
@@ -186,7 +186,7 @@ parfor ind = 1:L
         analysis_obj_anatomy = experiment_analysis(experiment_obj, 'ANATOMY', analysis_parameter_dictionary, [grad, rat, b2_truth, rep], 'SIMULATION');
         disp("finished analysis of anatomy")
         if rep <= 1 && plot_figs
-                experiment_plot(analysis_obj_anatomy, plotting_dictionary);
+               experiment_plot(analysis_obj_anatomy, plotting_dictionary);
         end
 
         %append the statistics to an array
@@ -203,21 +203,69 @@ parfor ind = 1:L
         disp("finished plot of anatomy")
 
         % %construct VFO plots
-        % visual_field_overlap(analysis_obj_scanner, plotting_dictionary.anatomy)
+        %visual_field_overlap(analysis_obj_scanner, plotting_dictionary.anatomy)
 end
 
 % generate statistics
 % plot_statistics(stats_vec, gradients, ratios, beta2, repeats);
 
 % generate paper plots
-
 % print statistics
 for i = 1:L
-        [u, s, t, rep] = ind2sub(sz, ind); 
+        [u, s, t, rep] = ind2sub(sz, i); 
         grad = gradients(u);
         rat = ratios(s); 
         b2_truth = beta2(t);
-        if grad == 0.0 && rat == 0.5 && b2_truth = 0.00625 && rep == 1
-                disp("0.0")
-                disp("Map Quality")
-                disp()
+        if rat == 0.5 && b2_truth == 0.00625 && rep == 1
+                WMnnodes = stats_vec{i}(3);
+                WMVFO = stats_vec{i}(33);
+                WMqual = stats_vec{i}(5);
+
+                PM1nnodes = stats_vec{i}(43);
+                PM1qual = stats_vec{i}(45);
+                PM2nnodes = stats_vec{i}(46);
+                PM2qual = stats_vec{i}(48);
+
+                sprintf('For a DR of %0.2f, cell ratio of %0.2f, and Gamma of %0.2f there are %d nodes selected in the whole map. The VFO is %0.2f and the map quality is %0.2f. The first part map has %d nodes and the map quality is %0.2f. The second part map has %d nodes and the map quality is %0.2f. \n', grad, rat, b2_truth,  WMnnodes, WMVFO, WMqual, PM1nnodes, PM1qual, PM2nnodes, PM2qual)
+        end
+
+        if rat == 0.4 && b2_truth == 0.00625 && rep == 1
+                WMnnodes = stats_vec{i}(3);
+                WMVFO = stats_vec{i}(33);
+                WMqual = stats_vec{i}(5);
+
+                PM1nnodes = stats_vec{i}(43);
+                PM1qual = stats_vec{i}(45);
+                PM2nnodes = stats_vec{i}(46);
+                PM2qual = stats_vec{i}(48);
+
+                sprintf('For a DR of %0.2f, cell ratio of %0.2f, and Gamma of %0.2f there are %d nodes selected in the whole map. The VFO is %0.2f and the map quality is %0.2f. The first part map has %d nodes and the map quality is %0.2f. The second part map has %d nodes and the map quality is %0.2f. \n', grad, rat, b2_truth,  WMnnodes, WMVFO, WMqual, PM1nnodes, PM1qual, PM2nnodes, PM2qual)
+        end
+
+        if rat == 0.6 && b2_truth == 0.00625 && rep == 1
+                WMnnodes = stats_vec{i}(3);
+                WMVFO = stats_vec{i}(33);
+                WMqual = stats_vec{i}(5);
+
+                PM1nnodes = stats_vec{i}(43);
+                PM1qual = stats_vec{i}(45);
+                PM2nnodes = stats_vec{i}(46);
+                PM2qual = stats_vec{i}(48);
+
+                sprintf('For a DR of %0.2f, cell ratio of %0.2f, and Gamma of %0.2f there are %d nodes selected in the whole map. The VFO is %0.2f and the map quality is %0.2f. The first part map has %d nodes and the map quality is %0.2f. The second part map has %d nodes and the map quality is %0.2f. \n', grad, rat, b2_truth,  WMnnodes, WMVFO, WMqual, PM1nnodes, PM1qual, PM2nnodes, PM2qual)
+        end
+
+        if rat == 0.5 && grad == 2.0 && rep == 1
+                WMnnodes = stats_vec{i}(3);
+                WMVFO = stats_vec{i}(33);
+                WMqual = stats_vec{i}(5);
+
+                PM1nnodes = stats_vec{i}(43);
+                PM1qual = stats_vec{i}(45);
+                PM2nnodes = stats_vec{i}(46);
+                PM2qual = stats_vec{i}(48);
+
+                sprintf('For a DR of %0.2f, cell ratio of %0.2f, and Gamma of %0.2f there are %d nodes selected in the whole map. The VFO is %0.2f and the map quality is %0.2f. The first part map has %d nodes and the map quality is %0.2f. The second part map has %d nodes and the map quality is %0.2f. \n', grad, rat, b2_truth,  WMnnodes, WMVFO, WMqual, PM1nnodes, PM1qual, PM2nnodes, PM2qual)
+        end
+end 
+

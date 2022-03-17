@@ -6,7 +6,7 @@ function [] = anatomy(obj, dict, plot_axes)
     % 4. The average anatomical projection of all collicular cells within a threshold of slice ML
     % 5. The average projection of epha3 and wt cell colour coded within a threshold slice DV
     % 6. The distribution of cells over the collicilus colour coded
-
+lw = 2.5
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %Load Data
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -203,23 +203,23 @@ fig = figure('Position', [0, 0, 400, 1600]);
     subplot(7,1,3)
     %scatter confusingly doesn't have 'MarkerSize' keyword. It's given after the data.
     if ~isempty(subplot2_ephA3_y)
-        gradients1 = plot(subplot2_ephA3_x, subplot2_ephA3_y, 'Color', epha3_colour);
+        gradients1 = plot(subplot2_ephA3_x, subplot2_ephA3_y, 'Color', epha3_colour,'LineWidth', lw);
         % line([0 1], [min(subplot1_ephA3_y) min(subplot1_ephA3_y)], 'LineStyle', '--', 'Color', epha3_colour);
     else
-        gradients1 = plot(subplot2_WT_x, subplot2_WT_y, 'Color', epha3_colour);
+        gradients1 = plot(subplot2_WT_x, subplot2_WT_y, 'Color', epha3_colour, 'LineWidth', lw);
     end
     hold on
-    gradients2 = plot(subplot2_WT_x, subplot2_WT_y, 'Color', wt_colour);
-    line([0 1], [max(subplot2_WT_y) max(subplot2_WT_y)],'LineStyle', '--', 'Color', wt_colour);
-    line([0 1], [1.5 1.5],'LineStyle', '--', 'Color', 'white');
+    gradients2 = plot(subplot2_WT_x, subplot2_WT_y, 'Color', wt_colour, 'LineWidth', lw);
+    line([0 1], [max(subplot2_WT_y) max(subplot2_WT_y)],'LineStyle', '--', 'Color', wt_colour, 'LineWidth', lw);
+    line([0 1], [1.5 1.5],'LineStyle', '--', 'Color', 'white', 'LineWidth', lw);
     hold on 
-    gradients3 = plot(subplot2_ephrinA_x, subplot2_ephrinA_y, 'Color', sc_colour);
+    gradients3 = plot(subplot2_ephrinA_x, subplot2_ephrinA_y, 'Color', sc_colour, 'LineWidth', lw);
     %line(subplot1_ephrinA_x, subplot1_ephrinA_y)
     xlabel(subplot2_xlabel, 'FontSize', fs);
     ylabel(subplot2_ylabel, 'FontSize', fs);
     set(gca, 'XDir','reverse');
     if plot_axes == 1
-        legend([gradients1 gradients2 gradients3],{'EphA3+','WT Ret','Colliculus'},'Location','northeast','FontSize', fs * 0.5);
+        legend([gradients1 gradients2 gradients3],{'EphA3+','WT','Colliculus'},'Location','northeast','FontSize', fs * 0.5);
     end
     xlim([0,1]);
     ylim([0,1.5]);
@@ -281,10 +281,10 @@ annotation('line', [0.25 0.75], [0.572 0.572], 'Color', 'k', 'LineWidth', 2);
 %Save
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 orient tall;
-axis tight;
+axis tight; 
 
 %print(save_dir,'-dpng');
-exportgraphics(fig, save_dir, 'Resolution', 500);
+exportgraphics(fig, save_dir, 'Resolution', 300);
 
 
 

@@ -1,0 +1,220 @@
+
+ans =
+
+    'For a DR of 0.00, cell ratio of 0.40, and Gamma of 0.01 there are 475 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.89. The first part map has 242 nodes and the map quality is 97.93. The second part map has 233 nodes and the map quality is 97.00. 
+     '
+
+
+ans =
+
+    'For a DR of 0.00, cell ratio of 0.40, and Gamma of 0.01 there are 475 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.89. The first part map has 242 nodes and the map quality is 97.93. The second part map has 233 nodes and the map quality is 97.00. 
+     '
+
+
+ans =
+
+    'For a DR of 0.20, cell ratio of 0.40, and Gamma of 0.01 there are 485 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.32. The first part map has 257 nodes and the map quality is 98.05. The second part map has 228 nodes and the map quality is 96.05. 
+     '
+
+
+ans =
+
+    'For a DR of 0.40, cell ratio of 0.40, and Gamma of 0.01 there are 485 nodes selected in the whole map. The VFO is 0.03 and the map quality is 91.75. The first part map has 257 nodes and the map quality is 97.67. The second part map has 228 nodes and the map quality is 83.77. 
+     '
+
+
+ans =
+
+    'For a DR of 0.60, cell ratio of 0.40, and Gamma of 0.01 there are 464 nodes selected in the whole map. The VFO is 0.28 and the map quality is 85.13. The first part map has 296 nodes and the map quality is 94.93. The second part map has 168 nodes and the map quality is 94.64. 
+     '
+
+
+ans =
+
+    'For a DR of 0.80, cell ratio of 0.40, and Gamma of 0.01 there are 440 nodes selected in the whole map. The VFO is 0.40 and the map quality is 82.05. The first part map has 234 nodes and the map quality is 94.44. The second part map has 206 nodes and the map quality is 94.17. 
+     '
+
+
+ans =
+
+    'For a DR of 1.00, cell ratio of 0.40, and Gamma of 0.01 there are 426 nodes selected in the whole map. The VFO is 0.50 and the map quality is 78.87. The first part map has 195 nodes and the map quality is 95.38. The second part map has 231 nodes and the map quality is 95.67. 
+     '
+
+
+ans =
+
+    'For a DR of 1.20, cell ratio of 0.40, and Gamma of 0.01 there are 416 nodes selected in the whole map. The VFO is 0.61 and the map quality is 75.48. The first part map has 171 nodes and the map quality is 95.91. The second part map has 245 nodes and the map quality is 96.73. 
+     '
+
+
+ans =
+
+    'For a DR of 1.40, cell ratio of 0.40, and Gamma of 0.01 there are 412 nodes selected in the whole map. The VFO is 0.60 and the map quality is 77.67. The first part map has 148 nodes and the map quality is 95.27. The second part map has 264 nodes and the map quality is 95.45. 
+     '
+
+
+ans =
+
+    'For a DR of 1.60, cell ratio of 0.40, and Gamma of 0.01 there are 396 nodes selected in the whole map. The VFO is 0.62 and the map quality is 79.04. The first part map has 123 nodes and the map quality is 95.12. The second part map has 273 nodes and the map quality is 95.97. 
+     '
+
+
+ans =
+
+    'For a DR of 1.80, cell ratio of 0.40, and Gamma of 0.01 there are 384 nodes selected in the whole map. The VFO is 0.61 and the map quality is 77.34. The first part map has 95 nodes and the map quality is 87.37. The second part map has 289 nodes and the map quality is 94.12. 
+     '
+
+
+ans =
+
+    'For a DR of 2.00, cell ratio of 0.40, and Gamma of 0.01 there are 392 nodes selected in the whole map. The VFO is 0.67 and the map quality is 75.00. The first part map has 86 nodes and the map quality is 93.02. The second part map has 306 nodes and the map quality is 93.46. 
+     '
+
+
+ans =
+
+    'For a DR of 0.00, cell ratio of 0.50, and Gamma of 0.01 there are 485 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.73. The first part map has 257 nodes and the map quality is 97.67. The second part map has 228 nodes and the map quality is 96.93. 
+     '
+
+
+ans =
+
+    'For a DR of 0.00, cell ratio of 0.50, and Gamma of 0.01 there are 485 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.73. The first part map has 257 nodes and the map quality is 97.67. The second part map has 228 nodes and the map quality is 96.93. 
+     '
+
+
+ans =
+
+    'For a DR of 0.20, cell ratio of 0.50, and Gamma of 0.01 there are 475 nodes selected in the whole map. The VFO is 0.00 and the map quality is 96.00. The first part map has 242 nodes and the map quality is 97.52. The second part map has 233 nodes and the map quality is 93.99. 
+     '
+
+
+ans =
+
+    'For a DR of 0.40, cell ratio of 0.50, and Gamma of 0.01 there are 475 nodes selected in the whole map. The VFO is 0.02 and the map quality is 87.37. The first part map has 242 nodes and the map quality is 97.93. The second part map has 233 nodes and the map quality is 76.82. 
+     '
+
+
+ans =
+
+    'For a DR of 0.60, cell ratio of 0.50, and Gamma of 0.01 there are 450 nodes selected in the whole map. The VFO is 0.33 and the map quality is 82.89. The first part map has 301 nodes and the map quality is 94.68. The second part map has 149 nodes and the map quality is 92.62. 
+     '
+
+
+ans =
+
+    'For a DR of 0.80, cell ratio of 0.50, and Gamma of 0.01 there are 436 nodes selected in the whole map. The VFO is 0.47 and the map quality is 79.59. The first part map has 250 nodes and the map quality is 94.00. The second part map has 186 nodes and the map quality is 95.70. 
+     '
+
+
+ans =
+
+    'For a DR of 1.00, cell ratio of 0.50, and Gamma of 0.01 there are 421 nodes selected in the whole map. The VFO is 0.53 and the map quality is 41.33. The first part map has 211 nodes and the map quality is 95.26. The second part map has 210 nodes and the map quality is 96.67. 
+     '
+
+
+ans =
+
+    'For a DR of 1.20, cell ratio of 0.50, and Gamma of 0.01 there are 415 nodes selected in the whole map. The VFO is 0.58 and the map quality is 74.22. The first part map has 190 nodes and the map quality is 96.32. The second part map has 225 nodes and the map quality is 95.56. 
+     '
+
+
+ans =
+
+    'For a DR of 1.40, cell ratio of 0.50, and Gamma of 0.01 there are 415 nodes selected in the whole map. The VFO is 0.66 and the map quality is 75.90. The first part map has 177 nodes and the map quality is 97.74. The second part map has 238 nodes and the map quality is 96.64. 
+     '
+
+
+ans =
+
+    'For a DR of 1.60, cell ratio of 0.50, and Gamma of 0.01 there are 415 nodes selected in the whole map. The VFO is 0.67 and the map quality is 72.53. The first part map has 172 nodes and the map quality is 95.35. The second part map has 243 nodes and the map quality is 95.47. 
+     '
+
+
+ans =
+
+    'For a DR of 1.80, cell ratio of 0.50, and Gamma of 0.01 there are 414 nodes selected in the whole map. The VFO is 0.73 and the map quality is 50.97. The first part map has 157 nodes and the map quality is 95.54. The second part map has 257 nodes and the map quality is 95.72. 
+     '
+
+
+ans =
+
+    'For a DR of 2.00, cell ratio of 0.50, and Gamma of 0.01 there are 413 nodes selected in the whole map. The VFO is 0.74 and the map quality is 54.24. The first part map has 142 nodes and the map quality is 95.07. The second part map has 271 nodes and the map quality is 95.20. 
+     '
+
+
+ans =
+
+    'For a DR of 2.00, cell ratio of 0.50, and Gamma of 0.01 there are 413 nodes selected in the whole map. The VFO is 0.74 and the map quality is 54.24. The first part map has 142 nodes and the map quality is 95.07. The second part map has 271 nodes and the map quality is 95.20. 
+     '
+
+
+ans =
+
+    'For a DR of 0.00, cell ratio of 0.60, and Gamma of 0.01 there are 475 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.89. The first part map has 242 nodes and the map quality is 97.93. The second part map has 233 nodes and the map quality is 97.00. 
+     '
+
+
+ans =
+
+    'For a DR of 0.00, cell ratio of 0.60, and Gamma of 0.01 there are 475 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.89. The first part map has 242 nodes and the map quality is 97.93. The second part map has 233 nodes and the map quality is 97.00. 
+     '
+
+
+ans =
+
+    'For a DR of 0.20, cell ratio of 0.60, and Gamma of 0.01 there are 485 nodes selected in the whole map. The VFO is 0.02 and the map quality is 95.67. The first part map has 257 nodes and the map quality is 97.67. The second part map has 228 nodes and the map quality is 92.98. 
+     '
+
+
+ans =
+
+    'For a DR of 0.40, cell ratio of 0.60, and Gamma of 0.01 there are 475 nodes selected in the whole map. The VFO is 0.01 and the map quality is 85.05. The first part map has 242 nodes and the map quality is 97.52. The second part map has 233 nodes and the map quality is 71.24. 
+     '
+
+
+ans =
+
+    'For a DR of 0.60, cell ratio of 0.60, and Gamma of 0.01 there are 441 nodes selected in the whole map. The VFO is 0.34 and the map quality is 80.73. The first part map has 313 nodes and the map quality is 95.53. The second part map has 128 nodes and the map quality is 92.97. 
+     '
+
+
+ans =
+
+    'For a DR of 0.80, cell ratio of 0.60, and Gamma of 0.01 there are 425 nodes selected in the whole map. The VFO is 0.48 and the map quality is 75.29. The first part map has 265 nodes and the map quality is 95.09. The second part map has 160 nodes and the map quality is 95.62. 
+     '
+
+
+ans =
+
+    'For a DR of 1.00, cell ratio of 0.60, and Gamma of 0.01 there are 416 nodes selected in the whole map. The VFO is 0.54 and the map quality is 43.99. The first part map has 240 nodes and the map quality is 95.42. The second part map has 176 nodes and the map quality is 96.59. 
+     '
+
+
+ans =
+
+    'For a DR of 1.20, cell ratio of 0.60, and Gamma of 0.01 there are 416 nodes selected in the whole map. The VFO is 0.63 and the map quality is 73.32. The first part map has 221 nodes and the map quality is 95.48. The second part map has 195 nodes and the map quality is 96.41. 
+     '
+
+
+ans =
+
+    'For a DR of 1.40, cell ratio of 0.60, and Gamma of 0.01 there are 416 nodes selected in the whole map. The VFO is 0.67 and the map quality is 72.84. The first part map has 214 nodes and the map quality is 97.20. The second part map has 202 nodes and the map quality is 95.05. 
+     '
+
+
+ans =
+
+    'For a DR of 1.60, cell ratio of 0.60, and Gamma of 0.01 there are 414 nodes selected in the whole map. The VFO is 0.69 and the map quality is 41.06. The first part map has 192 nodes and the map quality is 94.79. The second part map has 222 nodes and the map quality is 93.69. 
+     '
+
+
+ans =
+
+    'For a DR of 1.80, cell ratio of 0.60, and Gamma of 0.01 there are 417 nodes selected in the whole map. The VFO is 0.74 and the map quality is 41.01. The first part map has 192 nodes and the map quality is 95.31. The second part map has 225 nodes and the map quality is 96.44. 
+     '
+
+
+ans =
+
+    'For a DR of 2.00, cell ratio of 0.60, and Gamma of 0.01 there are 415 nodes selected in the whole map. The VFO is 0.76 and the map quality is 69.40. The first part map has 181 nodes and the map quality is 96.13. The second part map has 234 nodes and the map quality is 93.59. 
