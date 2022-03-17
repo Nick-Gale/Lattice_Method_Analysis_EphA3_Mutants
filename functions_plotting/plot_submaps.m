@@ -36,15 +36,30 @@ input_type = SuperObject.Lattice.input_type;
 
     subplot(h2);
     if isfield(dictionary, 'whole_map_title1')
-        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title1]);
+        % title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title1]);
     else
         title('');
     end
     % title(h2, {['ID', sprintf('(%0.2f, %0.2f, %0.2f, %0.2f)', id)]; [text,', Whole map']});
+    if isfield(dictionary, 'part_subplot1_xlabel')
+        xlabel(dictionary.part_subplot1_xlabel);
+    else
+        xlabel('')
+    end
+
+    if isfield(dictionary, 'part_subplot1_ylabel')
+        ylabel(dictionary.part_subplot1_ylabel);
+    else
+        ylabel('');
+    end
 
     subplot(h1)
-    title(['n(nodes): ', num2str(N1)]);
-
+    % title(['n(nodes): ', num2str(N1)]);
+    if isfield(dictionary, 'part_subplot3_xlabel')
+        xlabel(dictionary.part_subplot3_xlabel);
+    else
+        xlabel('');
+    end
     h2=subplot(2,2,2);
     h1=subplot(2,2,4);
 
@@ -52,15 +67,38 @@ input_type = SuperObject.Lattice.input_type;
 
     subplot(h2);
     if isfield(dictionary, 'whole_map_title2')
-        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title2]);
+        % title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title2]);
     else
         title('')
     end
     % title({['(EphA3-Ki, Ilset2-Fraction, Beta2-KO): (', sprintf('%0.2f, %0.2f, %0.2f, %0.2f', id), ')', newline,  direction, ',', input_type]; ['Largest ordered submap']});
+    if isfield(dictionary, 'part_subplot2_xlabel')
+        xlabel(dictionary.part_subplot2_xlabel);
+    else
+        xlabel('');
+    end
+
+    if isfield(dictionary, 'part_subplot2_ylabel')
+        ylabel(dictionary.part_subplot2_ylabel);
+    else
+        ylabel('');
+    end
+
 
     subplot(h1)
-    title(['n(nodes): ', num2str(N2), ' of ', num2str(N1), ' (',num2str(round(100 * N2 / N1)),'%)']);
+    % title(['n(nodes): ', num2str(N2), ' of ', num2str(N1), ' (',num2str(round(100 * N2 / N1)),'%)']);
 
+    if isfield(dictionary, 'part_subplot4_xlabel')
+        xlabel(dictionary.part_subplot4_xlabel);
+    else
+        xlabel('');
+    end
+    
+    if isfield(dictionary, 'part_subplot4_ylabel')
+        ylabel(dictionary.part_subplot4_ylabel);
+    else
+        ylabel('');
+    end
     orient tall
 
     if PRINT==1
@@ -91,7 +129,7 @@ if ~isempty(divider)
     subplot(h2);
 
     if isfield(dictionary, 'part_title1')
-        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title1]);
+        % title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title1]);
     else
         title('');
     end
@@ -112,8 +150,8 @@ if ~isempty(divider)
 
     subplot(h1)
 
-    title2 = sprintf('n(nodes): %d of %d (%d%%)', N12, N11, round(100*N12/N11));
-    title(title2)
+    %title2 = sprintf('n(nodes): %d of %d (%d%%)', N12, N11, round(100*N12/N11));
+    %title(title2)
 
     if isfield(dictionary, 'part_subplot3_xlabel')
         xlabel(dictionary.part_subplot3_xlabel);
@@ -140,7 +178,7 @@ if ~isempty(divider)
     subplot(h2)
     plot(1:100/100, 1:100/100)
     if isfield(dictionary, 'part_title3')
-        title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title3]);
+        %title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title3]);
     else
         title('');
     end
@@ -160,8 +198,8 @@ if ~isempty(divider)
 
     subplot(h1)
 
-    title4 = sprintf('n(nodes): %d of %d (%d%%)', N22, N21, round(100*N22/N21));
-    title(title4);
+    %title4 = sprintf('n(nodes): %d of %d (%d%%)', N22, N21, round(100*N22/N21));
+    %title(title4);
 
     if isfield(dictionary, 'part_subplot4_xlabel')
         xlabel(dictionary.part_subplot4_xlabel);

@@ -1,0 +1,64 @@
+
+    'For a DR of 0.00 there are 485 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.73. The first part map has 257 nodes and the map quality is 97.67. The second part map has 228 nodes and the map quality is 96.93. 
+     '
+
+
+
+    'For a DR of 0.00 there are 485 nodes selected in the whole map. The VFO is 0.01 and the map quality is 97.73. The first part map has 257 nodes and the map quality is 97.67. The second part map has 228 nodes and the map quality is 96.93. 
+     '
+
+
+
+    'For a DR of 0.20 there are 475 nodes selected in the whole map. The VFO is 0.00 and the map quality is 96.00. The first part map has 242 nodes and the map quality is 97.52. The second part map has 233 nodes and the map quality is 93.99. 
+     '
+
+
+
+    'For a DR of 0.40 there are 475 nodes selected in the whole map. The VFO is 0.02 and the map quality is 87.37. The first part map has 242 nodes and the map quality is 97.93. The second part map has 233 nodes and the map quality is 76.82. 
+     '
+
+
+
+    'For a DR of 0.60 there are 450 nodes selected in the whole map. The VFO is 0.33 and the map quality is 82.89. The first part map has 301 nodes and the map quality is 94.68. The second part map has 149 nodes and the map quality is 92.62. 
+     '
+
+
+    'For a DR of 0.80 there are 436 nodes selected in the whole map. The VFO is 0.47 and the map quality is 79.59. The first part map has 250 nodes and the map quality is 94.00. The second part map has 186 nodes and the map quality is 95.70. 
+     '
+
+
+
+    'For a DR of 1.00 there are 421 nodes selected in the whole map. The VFO is 0.53 and the map quality is 41.33. The first part map has 211 nodes and the map quality is 95.26. The second part map has 210 nodes and the map quality is 96.67. 
+     '
+
+
+    'For a DR of 1.20 there are 415 nodes selected in the whole map. The VFO is 0.58 and the map quality is 74.22. The first part map has 190 nodes and the map quality is 96.32. The second part map has 225 nodes and the map quality is 95.56. 
+     '
+
+
+    'For a DR of 1.40 there are 415 nodes selected in the whole map. The VFO is 0.66 and the map quality is 75.90. The first part map has 177 nodes and the map quality is 97.74. The second part map has 238 nodes and the map quality is 96.64. 
+     '
+
+
+    'For a DR of 1.60 there are 415 nodes selected in the whole map. The VFO is 0.67 and the map quality is 72.53. The first part map has 172 nodes and the map quality is 95.35. The second part map has 243 nodes and the map quality is 95.47. 
+     '
+
+
+    'For a DR of 1.80 there are 414 nodes selected in the whole map. The VFO is 0.73 and the map quality is 50.97. The first part map has 157 nodes and the map quality is 95.54. The second part map has 257 nodes and the map quality is 95.72. 
+     '
+
+
+    'For a DR of 2.00 there are 413 nodes selected in the whole map. The VFO is 0.74 and the map quality is 54.24. The first part map has 142 nodes and the map quality is 95.07. The second part map has 271 nodes and the map quality is 95.20. 
+     '
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    'For a DR of 2.00 and Gamma of 0.0010 there are 426 nodes selected in the whole map. The VFO is 0.74 and the map quality is 71.60. The first part map has 140 nodes and the map quality is 95.00. The second part map has 286 nodes and the map quality is 96.50. 
+     '
+
+
+    'For a DR of 2.00 and Gamma of 0.0063 there are 413 nodes selected in the whole map. The VFO is 0.74 and the map quality is 54.24. The first part map has 142 nodes and the map quality is 95.07. The second part map has 271 nodes and the map quality is 95.20. 
+     '
+
+
+    'For a DR of 2.00 and Gamma of 0.0100 there are 419 nodes selected in the whole map. The VFO is 0.72 and the map quality is 69.93. The first part map has 155 nodes and the map quality is 96.13. The second part map has 264 nodes and the map quality is 95.83. 
+
+    For a DR of 4.00, cell ratio of 0.50, and Gamma of 0.01 there are 407 nodes selected in the whole map. The VFO is 0.76 and the map quality is 73.46. The first part map has 120 nodes and the map quality is 94.17. The second part map has 287 nodes and the map quality is 96.52
