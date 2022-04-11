@@ -110,5 +110,6 @@ parfor ind = 1:1
 end
 toc
 
-%change back into the route directory
+%change back into the route directory and clean up
 cd('../../')
+rmdir('./results_experiments/ITER/', 's')

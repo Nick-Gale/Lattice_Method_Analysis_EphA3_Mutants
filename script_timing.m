@@ -15,13 +15,13 @@ addpath('src/functions_analysis/')
 %% set the parameters that need to be passed to all workers in the parallel pool as global
 
 global n_neurones n_iterations
-n_neurones = [100, 500, 1000, 2000, 3000, 4000, 5000];
+n_neurones = [100, 500, 1000]%, 2000, 3000, 4000, 5000, 10000];
 n_iterations = n_neurones .^ 2 .* 5;
 
 global gradients ratios beta2 repeats sz L
-grad = 0;
-rat = 0.5;
-gamma = 0.00625;
+gradients =[0];
+ratios = [0.5];
+gamma = [0.00625];
 % create the iteration object
 sz = [length(gradients), length(ratios), length(gamma), length(n_neurones)];
 L = prod(sz);
@@ -88,14 +88,14 @@ for ind = 1:L
         obj = RetinalMap(file_name);
         initializeRandomGenerator(obj)
         obj.run()
-        neuronestiming(n, 1) = nneur
-        neuronestiming(n, 2) = toc
+        neuronestiming(n, 1) = nneur;
+        neuronestiming(n, 2) = toc;
 
-        data_file = sprintf('../../results_experiments/timing/TimingTest_WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d', nneur, niter, grad, rat, g, n)
-        delete data_file
-        delete file_name
+        data_file = sprintf('../../results_experiments/timing/TimingTest_WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d.mat', nneur, niter, grad, rat, g, n);
+        delete(data_file)
+        delete(file_name)
 end
-%change back into the route directory
+%change back into the route directory, write data and clean up.
 cd('../../')
-
-writematrix(neuronestiming, '/results_experiments/timing/timing_results.txt',a)
+writematrix(neuronestiming, './results_experiments/timing/timing_results.txt')
+rmdir('./results_experiments/timing/ITER/', 's')
