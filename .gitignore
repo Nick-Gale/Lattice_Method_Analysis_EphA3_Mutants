@@ -3,8 +3,8 @@ results_experiments/ITER/*
 src/functions_retinal_simulations/SAVE/*
 src/functions_retinal_simulations/FIGS/*
 notes/*
-script_timing.m
-script_stiching_thesis.m
+script_timing
+script_stiching_thesis
 results_plots/stiched_plots/thesis_CTOF_lattice_plots.png
 results_plots/stiched_plots/thesis_FTOC_lattice_plots.png
 results_plots/generated_plots/*
