@@ -1,5 +1,4 @@
 # ignore the plots
-results_plots/*
 results_experiments/*
 results_experiments/ITER/*
 functions_retinal_simulations/SAVE/*

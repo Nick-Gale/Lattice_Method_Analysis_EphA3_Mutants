@@ -2,11 +2,11 @@
 %% Load all necessary functions
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
-        addpath('functions_activity/')
-        addpath('functions_lattice_method/')
-        addpath('functions_plotting/')
-        addpath('functions_retinal_simulations/')
-        addpath("functions_analysis/")
+        addpath('src/functions_activity/')
+        addpath('src/functions_lattice_method/')
+        addpath('src/functions_plotting/')
+        addpath('src/functions_retinal_simulations/')
+        addpath("src/functions_analysis/")
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Load experimental data
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ global n_neurones n_iterations
 n_neurones = 10000;
 n_iterations = n_neurones ^ 2 * 5;
 
-global gradients ratios beta2 repeats sz L
+global gradients ratios gamma repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients =  4.0; [0 knock_in]; [0.15, 0.3, 0.45, 4.0];    
@@ -41,8 +41,6 @@ end
 if isempty(gcp('nocreate'))
         parpool('local', 28);
 end
-
-
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Set the appropriate global parameters for analysis in a dictionary
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,10 +88,12 @@ end
 %%      
         vfnttext = append('Visual Field (', char(8678), 'Nasal-Temporal', char(8680),')');
         vfdvtext = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
+        crctext = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        cmltext = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
         
-        plotting_dictionary.Phase.directory = 'results_plots/';
+        plotting_dictionary.Phase.directory = 'results_plots/generated_plots/';
 
-        plotting_dictionary.FTOCdictionary.directory_FTOC = 'results_plots/';
+        plotting_dictionary.FTOCdictionary.directory_FTOC = 'results_plots/generated_plots/';
         plotting_dictionary.FTOCdictionary.XLim = [0, 1];
         plotting_dictionary.FTOCdictionary.YLim = [0, 1];
         plotting_dictionary.FTOCdictionary.XTick = [0, 1];
@@ -106,12 +106,12 @@ end
         plotting_dictionary.FTOCdictionary.part_subplot1_ylabel = vfdvtext;
         plotting_dictionary.FTOCdictionary.part_subplot2_xlabel = vfnttext;
         plotting_dictionary.FTOCdictionary.part_subplot2_ylabel = vfdvtext;
-        plotting_dictionary.FTOCdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot3_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
-        plotting_dictionary.FTOCdictionary.part_subplot4_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
+        plotting_dictionary.FTOCdictionary.part_subplot3_xlabel = crctext;
+        plotting_dictionary.FTOCdictionary.part_subplot3_ylabel = cmltext;
+        plotting_dictionary.FTOCdictionary.part_subplot4_xlabel = crctext;
+        plotting_dictionary.FTOCdictionary.part_subplot4_ylabel = cmltext;
 
-        plotting_dictionary.CTOFdictionary.directory_CTOF = 'results_plots/';
+        plotting_dictionary.CTOFdictionary.directory_CTOF = 'results_plots/generated_plots/';
         plotting_dictionary.CTOFdictionary.XLim = [0, 1];
         plotting_dictionary.CTOFdictionary.YLim = [0, 1];
         plotting_dictionary.CTOFdictionary.XTick = [0, 1];
@@ -124,15 +124,15 @@ end
         plotting_dictionary.CTOFdictionary.part_subplot1_ylabel = vfdvtext;
         plotting_dictionary.CTOFdictionary.part_subplot2_xlabel = vfnttext;
         plotting_dictionary.CTOFdictionary.part_subplot2_ylabel = vfdvtext;
-        plotting_dictionary.CTOFdictionary.part_subplot3_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot3_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
-        plotting_dictionary.CTOFdictionary.part_subplot4_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
+        plotting_dictionary.CTOFdictionary.part_subplot3_xlabel = crctext;
+        plotting_dictionary.CTOFdictionary.part_subplot3_ylabel = cmltext;
+        plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = crctext;
+        plotting_dictionary.CTOFdictionary.part_subplot4_ylabel = cmltext;
 
         plotting_dictionary.CTOFdictionary.shrink = 0.2;
         plotting_dictionary.FTOCdictionary.shrink = 0.2;
 
-        plotting_dictionary.anatomy.directory = 'results_plots/';
+        plotting_dictionary.anatomy.directory = 'results_plots/generated_plots/';
         plotting_dictionary.anatomy.DV = 0.5;
         plotting_dictionary.anatomy.ML = 0.4;
         plotting_dictionary.anatomy.threshold = 0.05;
@@ -147,14 +147,14 @@ end
         plotting_dictionary.anatomy.markersize = 8;
         plotting_dictionary.anatomy.subplot1_xlabel = vfnttext;
         plotting_dictionary.anatomy.subplot1_ylabel = vfdvtext;
-        plotting_dictionary.anatomy.subplot2_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        plotting_dictionary.anatomy.subplot2_xlabel = crctext;
         plotting_dictionary.anatomy.subplot2_ylabel = 'EphA / EphrinA';
-        plotting_dictionary.anatomy.subplot3_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        plotting_dictionary.anatomy.subplot3_xlabel = crctext;
         plotting_dictionary.anatomy.subplot3_ylabel = vfnttext;
-        plotting_dictionary.anatomy.subplot4_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
+        plotting_dictionary.anatomy.subplot4_xlabel = crctext;
         plotting_dictionary.anatomy.subplot4_ylabel = vfnttext;
-        plotting_dictionary.anatomy.subplot5_xlabel = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
-        plotting_dictionary.anatomy.subplot5_ylabel = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
+        plotting_dictionary.anatomy.subplot5_xlabel = crctext;
+        plotting_dictionary.anatomy.subplot5_ylabel = cmltext;
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ parfor ind = 1:L
         g = gamma(t);
         
         %load the data
-        filename = sprintf('results_experiments/experiment_configs/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, g, rep);
+        filename = sprintf('results_experiments/experiment_objects/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, g, rep);
         experiment_obj = load(filename).old;
          
         % perform a scanning experiment, plot, and analyse
