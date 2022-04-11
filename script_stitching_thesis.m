@@ -26,13 +26,13 @@ for i = 1:length(dr)/2
 end
 
 for i = 1:length(dr)/2
-        filename1 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d)_SCANNER_FTOC.png', dr(i), r, g, rep);
+        filename1 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_FTOC.png', dr(i), r, g, rep);
         fig1 = cat(2, fig1,  imread(filename1));
         L = size(fig1, 1);
         dividing_bar = zeros(L, bar_size, 3);
         fig1 = cat(2, fig1, dividing_bar);
 
-        filename2 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d)_SCANNER_FTOC.png', dr(length(dr)/2+i), r, g, rep);
+        filename2 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_FTOC.png', dr(length(dr)/2+i), r, g, rep);
         fig2 = cat(2, fig2, imread(filename2));
         L = size(fig2, 1);
         dividing_bar = zeros(L, bar_size, 3);
@@ -56,7 +56,7 @@ figure
 fig = insertText(fig, [0.1 * w 0.01 * h; 0.5 * w 0.01 * h; 0.9 * w 0.01 * h; ], titles1, 'TextColor','black', 'FontSize', 50, 'BoxColor', 'white');
 
 fig = insertText(fig, [0.1 * w 0.95 * h; 0.5 * w 0.95 * h; 0.9 * w 0.95 * h; ], titles2, 'TextColor','black', 'FontSize', 50, 'BoxColor', 'white');
-imwrite(fig, "./results_plots/thesis_FTOC_lattice_plots.png")
+imwrite(fig, "./results_plots/stitched_plots/thesis_FTOC_lattice_plots.png")
 
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % CTOF Lattice Scanner Plots dR
@@ -71,13 +71,13 @@ for i = 1:length(dr)/2
 end
 
 for i = 1:length(dr)/2
-        filename1 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d)_SCANNER_CTOF.png', dr(i), r, g, rep);
+        filename1 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_CTOF.png', dr(i), r, g, rep);
         fig1 = cat(2, fig1,  imread(filename1));
         L = size(fig1, 1);
         dividing_bar = zeros(L, bar_size, 3);
         fig1 = cat(2, fig1, dividing_bar);
 
-        filename2 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d)_SCANNER_CTOF.png', dr(length(dr)/2+i), r, g, rep);
+        filename2 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_CTOF.png', dr(length(dr)/2+i), r, g, rep);
         fig2 = cat(2, fig2, imread(filename2));
         L = size(fig2, 1);
         dividing_bar = zeros(L, bar_size, 3);
@@ -101,4 +101,4 @@ figure
 fig = insertText(fig, [0.1 * w 0.01 * h; 0.5 * w 0.01 * h; 0.9 * w 0.01 * h; ], titles1, 'TextColor','black', 'FontSize', 50, 'BoxColor', 'white');
 
 fig = insertText(fig, [0.1 * w 0.95 * h; 0.5 * w 0.95 * h; 0.9 * w 0.95 * h; ], titles2, 'TextColor','black', 'FontSize', 50, 'BoxColor', 'white');
-imwrite(fig, "./results_plots/thesis_CTOF_lattice_plots.png")
+imwrite(fig, "./results_plots/stitched_plots/thesis_CTOF_lattice_plots.png")
