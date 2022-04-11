@@ -6,7 +6,6 @@ function [] = anatomy(obj, dict, plot_axes)
     % 4. The average anatomical projection of all collicular cells within a threshold of slice ML
     % 5. The average projection of epha3 and wt cell colour coded within a threshold slice DV
     % 6. The distribution of cells over the collicilus colour coded
-lw = 2.5
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %Load Data
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
