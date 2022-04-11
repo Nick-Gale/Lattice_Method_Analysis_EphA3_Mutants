@@ -31,7 +31,7 @@ function [] = visual_field_overlap(obj, dict)
     cp = [0.4940, 0.1840, 0.5560];
     sz = 20;
     shrink = 0.2;
-    save_dir = strcat(dict.directory, sprintf('figure_visual_field_overlap_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', id(1), id(2), id(3), id(4)));
+    save_dir = strcat(dict.directory, sprintf('figure_visual_field_overlap_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', id(1), id(2), id(3), id(4)));
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %Create plotting data
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------

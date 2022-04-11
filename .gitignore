@@ -4,3 +4,8 @@ results_experiments/*
 results_experiments/ITER/*
 functions_retinal_simulations/SAVE/*
 functions_retinal_simulations/FIGS/*
+notes/*
+script_timing.m
+script_stiching_thesis.m
+results_plots/stiched_plots/thesis_CTOF_lattice_plots.png
+results_plots/stiched_plots/thesis_FTOC_lattice_plots.png

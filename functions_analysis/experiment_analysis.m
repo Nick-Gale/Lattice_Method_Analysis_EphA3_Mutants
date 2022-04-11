@@ -1,4 +1,4 @@
-function SuperObject = experiment_analysis(hjorth_object, scan_type, dict, id, data_source)
+function MapObject = experiment_analysis(hjorth_object, scan_type, dict, id, data_source)
 %% In this function we are analysing a retinal object and generating a lattice object and results. The output object contains several fields broken into three major components: Biological, Lattice, and Results.
 %% The biological subfield contains relevant measurements from either data or a model output - the lattice object inputs. In this case it's a Hjorth Retinal Object.
 %% The results subfield contains the data that will be used to generate statistics and plots
@@ -32,7 +32,7 @@ if data_source == 'SIMULATION'
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %%
     %read out is optionally lengthed with phases for scanning type (CtoF, CtoF, FtoC, FtoC; phase1, phase2, activity1, activity2)
-    phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, 1:length(retinal_positions_NT), retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, dict.anatomical_scan_radius, dict.random_seed);
+    phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, 1:length(retinal_positions_NT), retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, dict.random_seed);
     CTOF_full_field_positions = phase_activity_readout{1}; CTOF_full_collicular_positions = phase_activity_readout{2};
     FTOC_full_field_positions = phase_activity_readout{3}; FTOC_full_collicular_positions = phase_activity_readout{4};
     if scan_type == 'SCANNER'
@@ -117,13 +117,13 @@ end
 
     if ~isempty(FTOC_submap1_indexes)
         % perform a rescan
-        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap1_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights,  dict.anatomical_scan_radius, dict.random_seed);
+        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap1_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, dict.random_seed);
         CTOF_full_field_positions_part = phase_activity_readout{1}; CTOF_full_collicular_positions_part = phase_activity_readout{2};
         FTOC_full_field_positions_part = phase_activity_readout{3}; FTOC_full_collicular_positions_part = phase_activity_readout{4};
         FTOCsubmap1 = lattice("FTOC", FTOC_submap1_indexes, FTOC_full_field_positions_part, FTOC_full_collicular_positions_part, dict.FTOC_area_scaling, 1.0 * dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, 0.5 * dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
     else
         % perform a rescan
-        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap2_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights,  dict.anatomical_scan_radius, dict.random_seed);
+        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap2_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, dict.random_seed);
         CTOF_full_field_positions_part = phase_activity_readout{1}; CTOF_full_collicular_positions_part = phase_activity_readout{2};
         FTOC_full_field_positions_part = phase_activity_readout{3}; FTOC_full_collicular_positions_part = phase_activity_readout{4};
         FTOCsubmap1 = lattice("FTOC", FTOC_submap2_indexes, FTOC_full_field_positions_part, FTOC_full_collicular_positions_part, dict.FTOC_area_scaling, dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
@@ -132,13 +132,13 @@ end
 
     if ~isempty(FTOC_submap2_indexes)
         % perform a rescan
-        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap2_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights,  dict.anatomical_scan_radius, dict.random_seed);
+        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap2_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, dict.random_seed);
         CTOF_full_field_positions_part = phase_activity_readout{1}; CTOF_full_collicular_positions_part = phase_activity_readout{2};
         FTOC_full_field_positions_part = phase_activity_readout{3}; FTOC_full_collicular_positions_part = phase_activity_readout{4};
         FTOCsubmap2 = lattice("FTOC", FTOC_submap2_indexes, FTOC_full_field_positions_part, FTOC_full_collicular_positions_part, dict.FTOC_area_scaling, 1.0 * dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
     else
         % perform a rescan
-        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap1_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights,  dict.anatomical_scan_radius, dict.random_seed);
+        phase_activity_readout = phase_position_link(scan_type, dict.retinal_firing_rate, dict.baseline_collicular_firing_rate, dict.collicular_inhibitory_scale, dict.collicular_excitatory_scale, dict.collicular_inhibtory_amplitude, dict.collicular_excitatory_amplitude, dict.dt, dict.bar_width, dict.bar_freq, dict.time, dict.average_radius, FTOC_submap1_indexes, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, dict.random_seed);
         CTOF_full_field_positions_part = phase_activity_readout{1}; CTOF_full_collicular_positions_part = phase_activity_readout{2};
         FTOC_full_field_positions_part = phase_activity_readout{3}; FTOC_full_collicular_positions_part = phase_activity_readout{4};
         FTOCsubmap2 = lattice("FTOC", FTOC_submap1_indexes, FTOC_full_field_positions_part, FTOC_full_collicular_positions_part, dict.FTOC_area_scaling, dict.spacing_points_fraction, dict.spacing_radius_multiplier, dict.spacing_upper_bound, dict.spacing_lower_bound, dict.min_points, dict.triangle_tolerance, dict.max_trial_scale_factor, dict.min_spacing_fraction, dict.min_spacing_reduction_factor, dict.random_seed, dict.create_new_map_FTOC);
@@ -146,45 +146,45 @@ end
     disp("FTOC: Submap 2 - done")
 
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-%% Construct the super object which contains the biological information, the lattice information, and the statistical information
+%% Construct the map object which contains the biological information, the lattice information, and the statistical information
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    SuperObject.Biology.collicular_positions_RC = collicular_positions_RC;
-    SuperObject.Biology.collicular_positions_ML = collicular_positions_ML;
-    SuperObject.Biology.retinal_positions_NT = retinal_positions_NT;
-    SuperObject.Biology.retinal_positions_DV = retinal_positions_DV;
-    SuperObject.Biology.ephA3 = ephA3;
-    SuperObject.Biology.connections = connections;
-    SuperObject.Biology.weights = weights;
-    SuperObject.Biology.RGCEphA = RGCEphA;
-    SuperObject.Biology.RGCEphB = RGCEphB;
-    SuperObject.Biology.SCephrinA = SCephrinA;
-    SuperObject.Biology.SCephrinB = SCephrinB;
+    MapObject.Biology.collicular_positions_RC = collicular_positions_RC;
+    MapObject.Biology.collicular_positions_ML = collicular_positions_ML;
+    MapObject.Biology.retinal_positions_NT = retinal_positions_NT;
+    MapObject.Biology.retinal_positions_DV = retinal_positions_DV;
+    MapObject.Biology.ephA3 = ephA3;
+    MapObject.Biology.connections = connections;
+    MapObject.Biology.weights = weights;
+    MapObject.Biology.RGCEphA = RGCEphA;
+    MapObject.Biology.RGCEphB = RGCEphB;
+    MapObject.Biology.SCephrinA = SCephrinA;
+    MapObject.Biology.SCephrinB = SCephrinB;
     if scan_type == 'SCANNER';
-        SuperObject.Biology.phases_azimuthal = phases_azimuthal;
-        SuperObject.Biology.phases_elevational = phases_elevational;
-        SuperObject.Biology.bulk_activity_azimuthal = bulk_activity_azimuthal;
-        SuperObject.Biology.bulk_activity_elevational = bulk_activity_elevational;
+        MapObject.Biology.phases_azimuthal = phases_azimuthal;
+        MapObject.Biology.phases_elevational = phases_elevational;
+        MapObject.Biology.bulk_activity_azimuthal = bulk_activity_azimuthal;
+        MapObject.Biology.bulk_activity_elevational = bulk_activity_elevational;
     end
-    SuperObject.id = id;
-    SuperObject.Lattice.filter_ratio = ratio_of_filtered;
-    SuperObject.Lattice.divider = divider;
-    SuperObject.Lattice.input_type = scan_type;
-    SuperObject.Lattice.CTOFwholemap = CTOFwholemap;
-    SuperObject.Lattice.CTOFsubmap1 = CTOFsubmap1;
-    SuperObject.Lattice.CTOFsubmap2 = CTOFsubmap2;
-    SuperObject.Lattice.FTOCwholemap = FTOCwholemap;
-    SuperObject.Lattice.CTOF_full_field_positions = CTOF_full_field_positions;
-    SuperObject.Lattice.filtered_indexes_CTOF = CTOF_filtered_indexes;
-    SuperObject.Lattice.filtered_field_CTOF = CTOF_full_field_positions(CTOF_filtered_indexes, :);
-    SuperObject.Lattice.filtered_colliculus_CTOF = CTOF_full_collicular_positions(CTOF_filtered_indexes, :);
-    SuperObject.Lattice.retained_field_CTOF = CTOF_full_field_positions(CTOF_retained_indexes, :);
-    SuperObject.Lattice.retained_colliculus_CTOF = CTOF_full_collicular_positions(CTOF_retained_indexes, :);
-    SuperObject.Lattice.filtered_indexes_FTOC = FTOC_filtered_indexes;
-    SuperObject.Lattice.filtered_field_FTOC = FTOC_full_field_positions(FTOC_filtered_indexes, :);
-    SuperObject.Lattice.filtered_colliculus_FTOC = FTOC_full_collicular_positions(FTOC_filtered_indexes, :);    
-    SuperObject.Lattice.retained_field_FTOC = FTOC_full_field_positions(FTOC_retained_indexes, :);
-    SuperObject.Lattice.retained_colliculus_FTOC = FTOC_full_collicular_positions(FTOC_retained_indexes, :);
-    SuperObject.Lattice.FTOCsubmap1 = FTOCsubmap1;
-    SuperObject.Lattice.FTOCsubmap2 = FTOCsubmap2;
-    SuperObject.Lattice.statistics = stats(CTOFwholemap, CTOFsubmap1, CTOFsubmap2, FTOCwholemap, FTOCsubmap1, FTOCsubmap2);
+    MapObject.id = id;
+    MapObject.Lattice.filter_ratio = ratio_of_filtered;
+    MapObject.Lattice.divider = divider;
+    MapObject.Lattice.input_type = scan_type;
+    MapObject.Lattice.CTOFwholemap = CTOFwholemap;
+    MapObject.Lattice.CTOFsubmap1 = CTOFsubmap1;
+    MapObject.Lattice.CTOFsubmap2 = CTOFsubmap2;
+    MapObject.Lattice.FTOCwholemap = FTOCwholemap;
+    MapObject.Lattice.CTOF_full_field_positions = CTOF_full_field_positions;
+    MapObject.Lattice.filtered_indexes_CTOF = CTOF_filtered_indexes;
+    MapObject.Lattice.filtered_field_CTOF = CTOF_full_field_positions(CTOF_filtered_indexes, :);
+    MapObject.Lattice.filtered_colliculus_CTOF = CTOF_full_collicular_positions(CTOF_filtered_indexes, :);
+    MapObject.Lattice.retained_field_CTOF = CTOF_full_field_positions(CTOF_retained_indexes, :);
+    MapObject.Lattice.retained_colliculus_CTOF = CTOF_full_collicular_positions(CTOF_retained_indexes, :);
+    MapObject.Lattice.filtered_indexes_FTOC = FTOC_filtered_indexes;
+    MapObject.Lattice.filtered_field_FTOC = FTOC_full_field_positions(FTOC_filtered_indexes, :);
+    MapObject.Lattice.filtered_colliculus_FTOC = FTOC_full_collicular_positions(FTOC_filtered_indexes, :);    
+    MapObject.Lattice.retained_field_FTOC = FTOC_full_field_positions(FTOC_retained_indexes, :);
+    MapObject.Lattice.retained_colliculus_FTOC = FTOC_full_collicular_positions(FTOC_retained_indexes, :);
+    MapObject.Lattice.FTOCsubmap1 = FTOCsubmap1;
+    MapObject.Lattice.FTOCsubmap2 = FTOCsubmap2;
+    MapObject.Lattice.statistics = stats(CTOFwholemap, CTOFsubmap1, CTOFsubmap2, FTOCwholemap, FTOCsubmap1, FTOCsubmap2);

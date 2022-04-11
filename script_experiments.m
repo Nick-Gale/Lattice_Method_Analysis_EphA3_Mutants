@@ -22,8 +22,8 @@ global gradients ratios beta2 repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients = [0 knock_in 4.0];
-ratios = 0.5; % [0.4, 0.5, 0.6];
-beta2 = [0.01, 0.001]; % 0.000625; % [0.00625, 0.00625 * 5, 0.00625 * 10];%[0, 1];
+ratios = [0.4, 0.5, 0.6];
+gamma = [0.01, 0.000625, 0.001];
 repeats = 1:1;
 
 % create the iteration object
@@ -53,31 +53,28 @@ end
 
 %% create the pool, be nice about system resources
 if isempty(gcp('nocreate'))
-    parpool('local', 28);
+        parpool('local', 28);
 end
 
 %change into the directory of the Hjorth pipeline
 cd('functions_retinal_simulations')
-counter = 0;
 tic
 parfor ind = 1:L
         [u, s, t, rep] = ind2sub(sz, ind);
         grad = gradients(u);
         rat = ratios(s);
-        b2_truth = beta2(t);
+        g = gamma(t);
 
-        bact = 1 / (0.05 * 4320);
-        gamma = b2_truth;
         chemical_scale = 1;
-        alpha = 90; % 90%19 * chemical_scale;
-        beta = 135; % 135%28.5 * chemical_scale;
+        alpha = 90;
+        beta = 135;
             
         %copy the base experimental file
-        file_name = sprintf('../results_experiments/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_beta2truth=%d.txt', n_neurones, grad, rat, b2_truth);
-        copyfile('../results_experiments/WillshawGale_owens_base.txt', file_name)
+        file_name = sprintf('../results_experiments/experiment_configs/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_gamma=%d.txt', n_neurones, grad, rat, g);
+        copyfile('../results_experiments/experiment_configs/WillshawGale_owens_base.txt', file_name)
 
         %modify the gradient file
-        gradient_file = sprintf('../results_experiments/gradient_files/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_beta2truth=%d.csv', n_neurones, grad, rat, b2_truth);
+        gradient_file = sprintf('../results_experiments/gradient_files/experiment_id_n_neurones=%d_EphA3-ki=%f_Ilset2ratio=%f_gamma=%d.csv', n_neurones, grad, rat, g);
         
         %modify the key experimental parameters
         fileID = fopen(file_name, 'a+');
@@ -90,22 +87,17 @@ parfor ind = 1:L
         fprintf(fileID, 'obj.alphaReverseChem = 0;, \n'); 
         fprintf(fileID, 'obj.betaReverseChem = 0;, \n');
         fprintf(fileID, 'obj.gammaAct = %f;, \n', gamma);
-        if b2_truth == 1
-                fprintf(fileID, 'obj.gammaAct = %f;, \n', 0.000625);
-                fprintf(fileID, 'obj.bAct = %f;, \n', 0.2);
-        end
+
         
         %set the save targets
         fprintf(fileID, 'obj.reportStep = %f, \n', n_iterations + 1);
-        fprintf(fileID, [sprintf('obj.simName = %s', ''''), sprintf('WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_beta2=%d_repeat=%d', n_neurones, n_iterations, grad, rat, b2_truth, rep), sprintf('%s \n', '''')]);
+        fprintf(fileID, [sprintf('obj.simName = %s', ''''), sprintf('WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d', n_neurones, n_iterations, grad, rat, g, rep), sprintf('%s \n', '''')]);
         fprintf(fileID, [sprintf('obj.dataPath = %s', ''''), '../results_experiments', sprintf('%s \n', '''')]);
         fprintf(fileID, [sprintf('obj.dataPath = %s', ''''), '../results_experiments', sprintf('%s \n', '''')]);
-
         fclose(fileID);
-        %run
         
         %run the computation
-        if ~isfile(sprintf('../results_experiments/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_beta2=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, b2_truth, rep))
+        if ~isfile(sprintf('../results_experiments/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, g, rep))
                 tic
                 obj = RetinalMap(file_name);
                 initializeRandomGenerator(obj)

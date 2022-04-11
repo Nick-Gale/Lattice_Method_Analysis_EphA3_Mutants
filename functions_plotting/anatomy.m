@@ -40,10 +40,10 @@ lw = 2.5
     fs = dict.fontsize;
     markersize = dict.markersize;
 
-    save_dir = strcat(dict.directory, sprintf('figure_anatomy_ID(EphA3Ki, Ratio, B2, Repeats): (%0.2f, %0.2f, %d, %d).png', id(1), id(2), id(3), id(4)));
+    save_dir = strcat(dict.directory, sprintf('figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', id(1), id(2), id(3), id(4)));
 
     if plot_axes == 1
-        figure_label = sprintf('Object ID (EphA3Ki, Ratio, B2, Repeat): (%0.2f, %0.2f, %d, %d)', id(1), id(2), id(3), id(4));
+        figure_label = sprintf('Object ID (EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)', id(1), id(2), id(3), id(4));
 
         subplot1_xlabel = dict.subplot1_xlabel;
         subplot1_ylabel = dict.subplot1_ylabel;
@@ -60,7 +60,7 @@ lw = 2.5
         subplot5_xlabel = dict.subplot5_xlabel;
         subplot5_ylabel = dict.subplot5_ylabel;
     elseif plot_axes == 0
-        figure_label = sprintf('Object ID (EphA3Ki, Ratio, B2, Repeat): (%0.2f, %0.2f, %d, %d)', id(1), id(2), id(3), id(4));
+        figure_label = sprintf('Object ID (EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)', id(1), id(2), id(3), id(4));
         subplot1_xlabel = ''; % dict.subplot1_xlabel;
         subplot1_ylabel = '';
 
@@ -141,11 +141,6 @@ lw = 2.5
     %average phase projection from RC coliculus to NT retina within ML
     subplot3_x = collicular_positions_RC(ml_slice_indexes);
     subplot3_y = field_positions_NT(ml_slice_indexes);
-
-    % %average anatomical projection from RC coliculus to NT retina within ML
-    % average_retinal_projection = (retinal_collicular_connectivity * retinal_positions_NT) ./ sum(retinal_collicular_connectivity, 2);
-    % subplot3_x = collicular_positions_RC(ml_slice_indexes);
-    % subplot3_y = average_retinal_projection(ml_slice_indexes);
     
     %average projection from NT retina to RC colliculus with labelled cell origins within DV;
     average_collicular_projection_RC = (collicular_positions_RC' * retinal_collicular_connectivity)' ./ sum(retinal_collicular_connectivity, 1)';
@@ -201,10 +196,8 @@ fig = figure('Position', [0, 0, 400, 1600]);
 
 %figure 2
     subplot(7,1,3)
-    %scatter confusingly doesn't have 'MarkerSize' keyword. It's given after the data.
     if ~isempty(subplot2_ephA3_y)
         gradients1 = plot(subplot2_ephA3_x, subplot2_ephA3_y, 'Color', epha3_colour,'LineWidth', lw);
-        % line([0 1], [min(subplot1_ephA3_y) min(subplot1_ephA3_y)], 'LineStyle', '--', 'Color', epha3_colour);
     else
         gradients1 = plot(subplot2_WT_x, subplot2_WT_y, 'Color', epha3_colour, 'LineWidth', lw);
     end
@@ -214,7 +207,6 @@ fig = figure('Position', [0, 0, 400, 1600]);
     line([0 1], [1.5 1.5],'LineStyle', '--', 'Color', 'white', 'LineWidth', lw);
     hold on 
     gradients3 = plot(subplot2_ephrinA_x, subplot2_ephrinA_y, 'Color', sc_colour, 'LineWidth', lw);
-    %line(subplot1_ephrinA_x, subplot1_ephrinA_y)
     xlabel(subplot2_xlabel, 'FontSize', fs);
     ylabel(subplot2_ylabel, 'FontSize', fs);
     set(gca, 'XDir','reverse');
@@ -269,10 +261,8 @@ fig = figure('Position', [0, 0, 400, 1600]);
 
     xlabel(subplot5_xlabel, 'FontSize', fs);
     ylabel(subplot5_ylabel, 'FontSize', fs);
-    %set(gca, 'YDir','reverse');
     axis equal;
     set(gca, 'YTick', [0, 0.5, 1, 1.5]);
-    %axis([0 1 0 1]);
 
 %put a line between subplots 2 and 3. This is where the axes change from retinal on x to retinal on y
 annotation('line', [0.25 0.75], [0.572 0.572], 'Color', 'k', 'LineWidth', 2);
