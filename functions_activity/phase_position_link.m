@@ -1,4 +1,4 @@
-function [vargout] = phase_position_link(scan_type, retinal_firing_rate, baseline_collicular_firing_rate, collicular_inhibitory_scale, collicular_excitatory_scale, collicular_inhibtory_amplitude, collicular_excitatory_amplitude, dt, bar_width, bar_freq, time, average_radius, idxs, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, anatomical_scan_radius, seed)
+function [vargout] = phase_position_link(scan_type, retinal_firing_rate, baseline_collicular_firing_rate, collicular_inhibitory_scale, collicular_excitatory_scale, collicular_inhibtory_amplitude, collicular_excitatory_amplitude, dt, bar_width, bar_freq, time, average_radius, idxs, retinal_positions_NT, retinal_positions_DV, collicular_positions_RC, collicular_positions_ML, connections, weights, seed)
     
 %this function takes a scanning type and a connectivity data to generate phases which are asscociated with a colliculus postion.
 if scan_type == "ANATOMY"

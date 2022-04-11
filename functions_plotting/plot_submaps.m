@@ -102,7 +102,7 @@ input_type = SuperObject.Lattice.input_type;
     orient tall
 
     if PRINT==1
-        filename=[dir, 'figure_wholemaps_ID(EphA3Ki, Ratio, B2, Repeats): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
+        filename=[dir, 'figure_wholemaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
         print(filename, '-dpng')
     end
 
@@ -215,7 +215,7 @@ if ~isempty(divider)
 
 
     % put the overlaps
-    shrink = 0.2; % PUT THIS IN THE DICTIONARY
+    dictionary.shrink = 0.2; %
     if direction == "FTOC"
         poly1 = polyshape(B.coll_chosen(boundary(B.coll_chosen(:, 1), B.coll_chosen(:, 2), shrink), :));
         poly2 = polyshape(C.coll_chosen(boundary(C.coll_chosen(:, 1), C.coll_chosen(:, 2), shrink), :));
@@ -240,12 +240,10 @@ if ~isempty(divider)
         alpha(0.1)
     end
 
-
-
     orient tall
 
     if PRINT==1
-        filename=[dir, 'figure_submaps_ID(EphA3Ki, Ratio, B2, Repeats): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
+        filename=[dir, 'figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
         % exportgraphics(gcf, filename, 'Resolution', 500)
         print(filename, '-dpng')
     end
