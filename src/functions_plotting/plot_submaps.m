@@ -1,20 +1,20 @@
-function [] = plot_submaps(SuperObject, dictionary, dir, direction, PRINT)
+function [] = plot_submaps(MapObject, dictionary, dir, direction, PRINT)
 
 if direction == 'CTOF'
-    A = SuperObject.Lattice.CTOFwholemap;
-    B = SuperObject.Lattice.CTOFsubmap1;
-    C = SuperObject.Lattice.CTOFsubmap2;
+    A = MapObject.Lattice.CTOFwholemap;
+    B = MapObject.Lattice.CTOFsubmap1;
+    C = MapObject.Lattice.CTOFsubmap2;
 elseif direction == 'FTOC'
-    A = SuperObject.Lattice.FTOCwholemap;
-    B = SuperObject.Lattice.FTOCsubmap1;
-    C = SuperObject.Lattice.FTOCsubmap2;
+    A = MapObject.Lattice.FTOCwholemap;
+    B = MapObject.Lattice.FTOCsubmap1;
+    C = MapObject.Lattice.FTOCsubmap2;
 else
     disp('Please use a correct direction FTOC/CTOF')
 end
 
-id = SuperObject.id;
-divider = SuperObject.Lattice.divider;
-input_type = SuperObject.Lattice.input_type;
+id = MapObject.id;
+divider = MapObject.Lattice.divider;
+input_type = MapObject.Lattice.input_type;
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Whole-Map Plots
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ input_type = SuperObject.Lattice.input_type;
     h2 = subplot(2,2,1);
     h1 = subplot(2,2,3);
 
-    Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
+    Dplot_lattice(MapObject.Lattice, A, dictionary, direction, h1, h2, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
     hold on
 
     N1 = A.numpoints;
@@ -36,7 +36,7 @@ input_type = SuperObject.Lattice.input_type;
 
     subplot(h2);
     if isfield(dictionary, 'whole_map_title1')
-        % title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title1]);
+        % title([direction ' ' MapObject.Lattice.input_type ': ' dictionary.whole_map_title1]);
     else
         title('');
     end
@@ -63,11 +63,11 @@ input_type = SuperObject.Lattice.input_type;
     h2=subplot(2,2,2);
     h1=subplot(2,2,4);
 
-    Dplot_lattice(SuperObject.Lattice, A, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
+    Dplot_lattice(MapObject.Lattice, A, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
 
     subplot(h2);
     if isfield(dictionary, 'whole_map_title2')
-        % title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.whole_map_title2]);
+        % title([direction ' ' MapObject.Lattice.input_type ': ' dictionary.whole_map_title2]);
     else
         title('')
     end
@@ -116,7 +116,7 @@ if ~isempty(divider)
     h2=subplot(2,2,1);
     h1=subplot(2,2,3);
 
-    Dplot_lattice(SuperObject.Lattice, B, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both')
+    Dplot_lattice(MapObject.Lattice, B, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both')
     hold on;
 
     % if filtering using mean RC values
@@ -129,7 +129,7 @@ if ~isempty(divider)
     subplot(h2);
 
     if isfield(dictionary, 'part_title1')
-        % title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title1]);
+        % title([direction ' ' MapObject.Lattice.input_type ': ' dictionary.part_title1]);
     else
         title('');
     end
@@ -164,7 +164,7 @@ if ~isempty(divider)
 
     h1=subplot(2,2,4);
 
-    Dplot_lattice(SuperObject.Lattice, C, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
+    Dplot_lattice(MapObject.Lattice, C, dictionary, direction, h1, h2, 'SubGraph', 1, 'PointNumbers', 0, 'AxisStyle', 'crosshairs_nobars', 'HighStd', 1, 'Orientation', 1, 'Outline', 'both');
 
     hold on
 
@@ -178,7 +178,7 @@ if ~isempty(divider)
     subplot(h2)
     plot(1:100/100, 1:100/100)
     if isfield(dictionary, 'part_title3')
-        %title([direction ' ' SuperObject.Lattice.input_type ': ' dictionary.part_title3]);
+        %title([direction ' ' MapObject.Lattice.input_type ': ' dictionary.part_title3]);
     else
         title('');
     end
@@ -215,10 +215,9 @@ if ~isempty(divider)
 
 
     % put the overlaps
-    dictionary.shrink = 0.2; %
     if direction == "FTOC"
-        poly1 = polyshape(B.coll_chosen(boundary(B.coll_chosen(:, 1), B.coll_chosen(:, 2), shrink), :));
-        poly2 = polyshape(C.coll_chosen(boundary(C.coll_chosen(:, 1), C.coll_chosen(:, 2), shrink), :));
+        poly1 = polyshape(B.coll_chosen(boundary(B.coll_chosen(:, 1), B.coll_chosen(:, 2), dictionary.shrink), :));
+        poly2 = polyshape(C.coll_chosen(boundary(C.coll_chosen(:, 1), C.coll_chosen(:, 2), dictionary.shrink), :));
         poly_intersect = intersect(poly2, poly1);
         subplot(2,2,3)
         plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])
@@ -229,8 +228,8 @@ if ~isempty(divider)
     end
 
     if direction == "CTOF"
-        poly1 = polyshape(B.field_chosen(boundary(B.field_chosen(:, 1), B.field_chosen(:, 2), shrink), :));
-        poly2 = polyshape(C.field_chosen(boundary(C.field_chosen(:, 1), C.field_chosen(:, 2), shrink), :));
+        poly1 = polyshape(B.field_chosen(boundary(B.field_chosen(:, 1), B.field_chosen(:, 2), dictionary.shrink), :));
+        poly2 = polyshape(C.field_chosen(boundary(C.field_chosen(:, 1), C.field_chosen(:, 2), dictionary.shrink), :));
         poly_intersect = intersect(poly2, poly1);
         subplot(2,2,1)
         plot(poly_intersect, 'FaceColor', [0.4940 0.1840 0.5560])

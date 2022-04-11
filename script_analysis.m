@@ -178,18 +178,20 @@ parfor ind = 1:L
          
         % perform a scanning experiment, plot, and analyse
         analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');
-        disp("finished analysis of scanning")
-        if rep <= 1 && plot_figs
+        disp("Finished analysis of scanning")
+        if (rep == 1) && plot_figs
                experiment_plot(analysis_obj_scanner, plotting_dictionary);
         end
-        disp("finished plot of scanning")
+        disp("Finished plot of scanning")
 
         %perform an anatomical experiment, plot, and analyse
         analysis_obj_anatomy = experiment_analysis(experiment_obj, 'ANATOMY', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');
-        disp("finished analysis of anatomy")
+        disp("Finished analysis of anatomy")
         if (rep == 1) && plot_figs
                experiment_plot(analysis_obj_anatomy, plotting_dictionary);
         end
+        disp("Finished plot of anatomy")
+
 
         %append the statistics to an array
         if record_stats
@@ -197,14 +199,13 @@ parfor ind = 1:L
         end 
 
         %  construct a series of pure injection plots with axes labels only for the leftmost plot
-        if (rep == 1) && plots_figs
+        if (rep == 1) && plot_figs
                 if u==1
                       anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 else
                       anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 end
         end
-        disp("finished plot of anatomy")
 
         if print_stats == true
                 print_indexed_stats(grad, rat, g)
