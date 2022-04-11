@@ -22,7 +22,7 @@ bar_size = 5;
     ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
 
     for i = 1:length(dr)
-        filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, g, rep);
+        filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, g, rep);
         fig = cat(2, fig, imread(filename));
     end
     imshow(fig)
@@ -39,12 +39,12 @@ bar_size = 5;
         fig1 = [];
         fig2 = []; 
         for i = [1, 3]
-            filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', epha3, ratios(i), g, rep);
+            filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', epha3, ratios(i), g, rep);
             fig1 = cat(2, fig1, imread(filename));
         end
 
         for i = 1:length(gamma)
-            filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', epha3, r, gamma(i), rep);
+            filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', epha3, r, gamma(i), rep);
             fig2 = cat(2, fig2, imread(filename));
         end
 
@@ -64,13 +64,13 @@ bar_size = 5;
     fig2 = [];
 
     for i = 1:length(dr)
-        filename1 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_FTOC.png', dr(i), r, g, rep);
+        filename1 = sprintf('./results_plots/generated_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_FTOC.png', dr(i), r, g, rep);
         fig1 = cat(2, fig1, imread(filename1));
         L = size(fig1, 1);
         % dividing_bar = zeros(L, bar_size, 3);
         % fig1 = cat(2, fig1, dividing_bar);
 
-        filename2 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_CTOF.png', dr(i), r, g, rep);
+        filename2 = sprintf('./results_plots/generated_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_CTOF.png', dr(i), r, g, rep);
         fig2 = cat(2, fig2, imread(filename2));
         L = size(fig2, 1);
         % dividing_bar = zeros(L, bar_size, 3);
@@ -99,24 +99,24 @@ bar_size = 5;
     fig4 = [];
 
     bar_size = 5;
-    filename1 = sprintf('./results_plots/figure_wholemaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_FTOC.png', epha3, r, g, rep);
+    filename1 = sprintf('./results_plots/generated_plots/figure_wholemaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_FTOC.png', epha3, r, g, rep);
     fig1 = cat(2, fig1, imread(filename1));
     L = size(fig1, 1);
     dividing_bar = zeros(L, bar_size, 3);
     fig1 = cat(2, dividing_bar, fig1);
     fig1 = cat(2, fig1, dividing_bar);
-    filename2 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_FTOC.png', epha3, r, g, rep);
+    filename2 = sprintf('./results_plots/generated_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_FTOC.png', epha3, r, g, rep);
     fig2 = cat(2, fig2, imread(filename2));
     fig1 = cat(2, fig1, fig2);
     fig1 = cat(2, fig1, dividing_bar);
 
-    filename3 = sprintf('./results_plots/figure_wholemaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_CTOF.png', epha3, r, g, rep);
+    filename3 = sprintf('./results_plots/generated_plots/figure_wholemaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_CTOF.png', epha3, r, g, rep);
     fig3 = cat(2, fig3, imread(filename3));
     L = size(fig3, 1);
     dividing_bar = zeros(L, bar_size, 3);
     fig3 = cat(2, dividing_bar, fig3);
     fig3 = cat(2, fig3, dividing_bar);
-    filename4 = sprintf('./results_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_CTOF.png', epha3, r, g, rep);
+    filename4 = sprintf('./results_plots/generated_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_ANATOMY_CTOF.png', epha3, r, g, rep);
     fig4 = cat(2, fig4, imread(filename4));
     fig3 = cat(2, fig3, fig4);
     fig3 = cat(2, fig3, dividing_bar);
@@ -147,19 +147,19 @@ bar_size = 5;
     fig3 = [];
 
     bar_size = 5;
-    filename1 = sprintf('./results_plots/stats_largest_vfo.png');
+    filename1 = sprintf('./results_plots/generated_plots/stats_largest_vfo.png');
     fig1 = cat(2, fig1, imread(filename1));
     L = size(fig1, 1);
     dividing_bar = zeros(L, bar_size, 3);
     %fig1 = cat(2, fig1, dividing_bar);
 
-    filename2 = sprintf('./results_plots/stats_largest_co.png');
+    filename2 = sprintf('./results_plots/generated_plots/stats_largest_co.png');
     fig2 = cat(2, fig2, imread(filename2));
     L = size(fig2, 1);
     dividing_bar = zeros(L, bar_size, 3);
     %fig2 = cat(2, fig2, dividing_bar);
 
-    filename3 = sprintf('./results_plots/stats_qualities.png');
+    filename3 = sprintf('./results_plots/generated_plots/stats_qualities.png');
     fig3 = cat(2, fig3, imread(filename3));
     L = size(fig3, 1);
     dividing_bar = zeros(L, bar_size, 3);
@@ -194,7 +194,7 @@ bar_size = 5;
      ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
 
      for i = 1:length(dr)
-         filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(1), rep);
+         filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(1), rep);
          fig = cat(2, fig, imread(filename));
      end
      imshow(fig)
@@ -211,7 +211,7 @@ bar_size = 5;
      ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
 
      for i = 1:length(dr)
-         filename = sprintf('./results_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(3), rep);
+         filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, gamma(3), rep);
          fig = cat(2, fig, imread(filename));
     end
      imshow(fig)
