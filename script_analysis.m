@@ -23,9 +23,9 @@ n_iterations = n_neurones ^ 2 * 5;
 global gradients ratios gamma repeats sz L
 tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
-gradients =  4.0; [0 knock_in]; [0.15, 0.3, 0.45, 4.0];    
+gradients = unique([0 knock_in]); [0.15, 0.3, 0.45, 4.0];    
 ratios = 0.5; [0.4, 0.5, 0.6];    
-gamma =  0.00625;  [0.001, 0.00625, 0.01];
+gamma = 1; [0.000625, 0.001, 0.00625, 0.01, 0.0625]; 0.00625; 
 repeats = 1:1;
 
 
@@ -90,6 +90,8 @@ end
         vfdvtext = append('Visual Field (', char(8678), 'Dorsal-Ventral', char(8680),')');
         crctext = append('Colliculus (', char(8678), 'Rostral-Caudal', char(8680),')');
         cmltext = append('Colliculus (', char(8678), 'Medial-Lateral', char(8680),')');
+
+        fs = 12;
         
         plotting_dictionary.Phase.directory = 'results_plots/generated_plots/';
 
@@ -110,6 +112,7 @@ end
         plotting_dictionary.FTOCdictionary.part_subplot3_ylabel = cmltext;
         plotting_dictionary.FTOCdictionary.part_subplot4_xlabel = crctext;
         plotting_dictionary.FTOCdictionary.part_subplot4_ylabel = cmltext;
+        plotting_dictionary.FTOCdictionary.fontsize = 23;
 
         plotting_dictionary.CTOFdictionary.directory_CTOF = 'results_plots/generated_plots/';
         plotting_dictionary.CTOFdictionary.XLim = [0, 1];
@@ -128,6 +131,7 @@ end
         plotting_dictionary.CTOFdictionary.part_subplot3_ylabel = cmltext;
         plotting_dictionary.CTOFdictionary.part_subplot4_xlabel = crctext;
         plotting_dictionary.CTOFdictionary.part_subplot4_ylabel = cmltext;
+        plotting_dictionary.CTOFdictionary.fontsize = 23;
 
         plotting_dictionary.CTOFdictionary.shrink = 0.2;
         plotting_dictionary.FTOCdictionary.shrink = 0.2;
@@ -143,7 +147,7 @@ end
         plotting_dictionary.anatomy.wt_colour = [0.6350 0.0780 0.1840]; 
         plotting_dictionary.anatomy.inj_colour = [0 0.4470 0.7410];
         plotting_dictionary.anatomy.transparency = 0.1;
-        plotting_dictionary.anatomy.fontsize = 8;
+        plotting_dictionary.anatomy.fontsize = 9;
         plotting_dictionary.anatomy.markersize = 8;
         plotting_dictionary.anatomy.subplot1_xlabel = vfnttext;
         plotting_dictionary.anatomy.subplot1_ylabel = vfdvtext;
@@ -176,19 +180,19 @@ parfor ind = 1:L
         filename = sprintf('results_experiments/experiment_objects/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, g, rep);
         experiment_obj = load(filename).old;
          
-        % perform a scanning experiment, plot, and analyse
-        analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');
-        disp("Finished analysis of scanning")
-        if (rep == 1) && plot_figs
-               experiment_plot(analysis_obj_scanner, plotting_dictionary);
-        end
-        disp("Finished plot of scanning")
+        % % perform a scanning experiment, plot, and analyse
+        % analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');
+        % disp("Finished analysis of scanning")
+        % if (rep == 1) && plot_figs
+        %        experiment_plot(analysis_obj_scanner, plotting_dictionary);
+        % end
+        % disp("Finished plot of scanning")
 
         %perform an anatomical experiment, plot, and analyse
         analysis_obj_anatomy = experiment_analysis(experiment_obj, 'ANATOMY', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');
         disp("Finished analysis of anatomy")
         if (rep == 1) && plot_figs
-               experiment_plot(analysis_obj_anatomy, plotting_dictionary);
+        %       experiment_plot(analysis_obj_anatomy, plotting_dictionary);
         end
         disp("Finished plot of anatomy")
 
@@ -201,9 +205,9 @@ parfor ind = 1:L
         %  construct a series of pure injection plots with axes labels only for the leftmost plot
         if (rep == 1) && plot_figs
                 if u==1
-                      anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
+                      anatomy_reduced(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
                 else
-                      anatomy(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
+                      anatomy_reduced(analysis_obj_anatomy, plotting_dictionary.anatomy, 0);
                 end
         end
 

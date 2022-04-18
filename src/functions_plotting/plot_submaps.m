@@ -18,7 +18,9 @@ input_type = MapObject.Lattice.input_type;
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %% Whole-Map Plots
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    figure(1);
+    close all
+    fig = figure('Position', [0, 0, 1200, 1200]);
+
     clf
 
     text = A.description;
@@ -42,13 +44,13 @@ input_type = MapObject.Lattice.input_type;
     end
     % title(h2, {['ID', sprintf('(%0.2f, %0.2f, %0.2f, %0.2f)', id)]; [text,', Whole map']});
     if isfield(dictionary, 'part_subplot1_xlabel')
-        xlabel(dictionary.part_subplot1_xlabel);
+        xlabel(dictionary.part_subplot1_xlabel, 'FontSize', dictionary.fontsize);
     else
         xlabel('')
     end
 
     if isfield(dictionary, 'part_subplot1_ylabel')
-        ylabel(dictionary.part_subplot1_ylabel);
+        ylabel(dictionary.part_subplot1_ylabel, 'FontSize', dictionary.fontsize);
     else
         ylabel('');
     end
@@ -56,9 +58,15 @@ input_type = MapObject.Lattice.input_type;
     subplot(h1)
     % title(['n(nodes): ', num2str(N1)]);
     if isfield(dictionary, 'part_subplot3_xlabel')
-        xlabel(dictionary.part_subplot3_xlabel);
+        xlabel(dictionary.part_subplot3_xlabel, 'FontSize',  dictionary.fontsize);
     else
         xlabel('');
+    end
+
+    if isfield(dictionary, 'part_subplot3_ylabel')
+        ylabel(dictionary.part_subplot3_ylabel, 'FontSize',  dictionary.fontsize);
+    else
+        ylabel('');
     end
     h2=subplot(2,2,2);
     h1=subplot(2,2,4);
@@ -73,13 +81,13 @@ input_type = MapObject.Lattice.input_type;
     end
     % title({['(EphA3-Ki, Ilset2-Fraction, Beta2-KO): (', sprintf('%0.2f, %0.2f, %0.2f, %0.2f', id), ')', newline,  direction, ',', input_type]; ['Largest ordered submap']});
     if isfield(dictionary, 'part_subplot2_xlabel')
-        xlabel(dictionary.part_subplot2_xlabel);
+        xlabel(dictionary.part_subplot2_xlabel, 'FontSize', dictionary.fontsize);
     else
         xlabel('');
     end
 
     if isfield(dictionary, 'part_subplot2_ylabel')
-        ylabel(dictionary.part_subplot2_ylabel);
+        ylabel(dictionary.part_subplot2_ylabel, 'FontSize', dictionary.fontsize);
     else
         ylabel('');
     end
@@ -89,21 +97,24 @@ input_type = MapObject.Lattice.input_type;
     % title(['n(nodes): ', num2str(N2), ' of ', num2str(N1), ' (',num2str(round(100 * N2 / N1)),'%)']);
 
     if isfield(dictionary, 'part_subplot4_xlabel')
-        xlabel(dictionary.part_subplot4_xlabel);
+        xlabel(dictionary.part_subplot4_xlabel, 'FontSize', dictionary.fontsize);
     else
         xlabel('');
     end
     
     if isfield(dictionary, 'part_subplot4_ylabel')
-        ylabel(dictionary.part_subplot4_ylabel);
+        ylabel(dictionary.part_subplot4_ylabel, 'FontSize', dictionary.fontsize);
     else
         ylabel('');
     end
     orient tall
 
     if PRINT==1
+        fig = gcf;
         filename=[dir, 'figure_wholemaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
-        print(filename, '-dpng')
+        %print(filename, '-dpng')
+        exportgraphics(fig, filename, 'Resolution', 300);
+
     end
 
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -111,6 +122,9 @@ input_type = MapObject.Lattice.input_type;
 %%---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if ~isempty(divider)
     figure(2);
+    close all
+    fig = figure('Position', [0, 0, 1200, 1200]);
+
     clf
 
     h2=subplot(2,2,1);
@@ -137,13 +151,13 @@ if ~isempty(divider)
     subtitle('');
 
     if isfield(dictionary, 'part_subplot1_xlabel')
-        xlabel(dictionary.part_subplot1_xlabel);
+        xlabel(dictionary.part_subplot1_xlabel, 'FontSize', dictionary.fontsize);
     else
         xlabel('')
     end
 
     if isfield(dictionary, 'part_subplot1_ylabel')
-        ylabel(dictionary.part_subplot1_ylabel);
+        ylabel(dictionary.part_subplot1_ylabel, 'FontSize',  dictionary.fontsize);
     else
         ylabel('');
     end
@@ -154,12 +168,16 @@ if ~isempty(divider)
     %title(title2)
 
     if isfield(dictionary, 'part_subplot3_xlabel')
-        xlabel(dictionary.part_subplot3_xlabel);
+        xlabel(dictionary.part_subplot3_xlabel, 'FontSize', dictionary.fontsize);
     else
         xlabel('');
     end
 
-    ylabel(dictionary.part_subplot3_ylabel)
+    if isfield(dictionary, 'part_subplot3_ylabel')
+        ylabel(dictionary.part_subplot3_ylabel, 'FontSize', dictionary.fontsize)
+    else
+        ylabel('');
+    end
     h2=subplot(2,2,2);
 
     h1=subplot(2,2,4);
@@ -185,13 +203,13 @@ if ~isempty(divider)
     subtitle('');
     
     if isfield(dictionary, 'part_subplot2_xlabel')
-        xlabel(dictionary.part_subplot2_xlabel);
+        xlabel(dictionary.part_subplot2_xlabel, 'FontSize', dictionary.fontsize);
     else
         xlabel('');
     end
 
     if isfield(dictionary, 'part_subplot2_ylabel')
-        ylabel(dictionary.part_subplot2_ylabel);
+        ylabel(dictionary.part_subplot2_ylabel, 'FontSize', dictionary.fontsize);
     else
         ylabel('');
     end
@@ -202,13 +220,13 @@ if ~isempty(divider)
     %title(title4);
 
     if isfield(dictionary, 'part_subplot4_xlabel')
-        xlabel(dictionary.part_subplot4_xlabel);
+        xlabel(dictionary.part_subplot4_xlabel, 'FontSize', dictionary.fontsize);
     else
         xlabel('');
     end
     
     if isfield(dictionary, 'part_subplot4_ylabel')
-        ylabel(dictionary.part_subplot4_ylabel);
+        ylabel(dictionary.part_subplot4_ylabel, 'FontSize', dictionary.fontsize);
     else
         ylabel('');
     end
@@ -240,11 +258,25 @@ if ~isempty(divider)
     end
 
     orient tall
+    axis tight
 
     if PRINT==1
+        % a = subplot(2,2,1);
+        % b = subplot(2,2,2);
+        % c = subplot(2,2,3);
+        % d = subplot(2,2,4);
+
+        % a.PositionConstraint = "InnerPosition";
+        % b.PositionConstraint = "InnerPosition";
+        % c.PositionConstraint = "InnerPosition";
+        % d.PositionConstraint = "InnerPosition";
+
+        fig = gcf;
         filename=[dir, 'figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (', sprintf('%0.2f, %0.2f, %d, %d', id(1), id(2),id(3), id(4)), ')_', input_type, '_', direction, '.png'];
         % exportgraphics(gcf, filename, 'Resolution', 500)
-        print(filename, '-dpng')
+        % print(filename, '-dpng')
+        exportgraphics(fig, filename, 'Resolution', 300);
+
     end
 end
 
