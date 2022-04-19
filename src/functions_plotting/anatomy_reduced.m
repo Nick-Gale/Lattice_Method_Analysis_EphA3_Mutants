@@ -1,4 +1,4 @@
-function [] = anatomy(obj, dict, plot_axes)
+function [] = anatomy(obj, dict, plot_axes, dr)
     % this function takes a super object and produces an image with six subplots: 
     % 1. Colour coded retinal location
     % 2. Colour coded gradients with two lines showing where slices in the DV axis are to be taken. Gradients are Eph in the retina and Eprhin in the colliculus - both the A system
@@ -175,6 +175,7 @@ fig = figure('Position', [0, 0, 400, 1600]);
     alpha(transparency);
     xlabel(subplot3_xlabel, 'FontSize', fs);
     ylabel(subplot3_ylabel, 'FontSize', fs);
+    title(sprintf('ΔR = %0.3f', dr), 'FontSize', 15)
     set(gca, 'YDir','reverse');
     axis equal;
     axis([0 1 0 1]);

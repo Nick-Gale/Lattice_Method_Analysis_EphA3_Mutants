@@ -1,6 +1,6 @@
 % ranges
 dr = [0.00, 0.4, 0.8, 1.2, 1.6, 2.0];
-gamma = [0.00625, 0.001, 0.00625, 0.01, 0.0625] + eps(1);
+gamma = [0.000625, 0.001, 0.00625, 0.01, 0.0625] + eps(1);
 ratios = [0.4, 0.5, 0.6];
 
 %instances
@@ -12,24 +12,27 @@ rep = 1;
 % parameters
 bar_size = 5;
 
-% %%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-% %% Anatomy plots dR
-% %%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-%     %load the images 
-%         fig = [];
-%         titles = {"A", "B", "C", "D", "E", "F"};
-%         plot_title = 'A B C D E F';
-%         ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
+%%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%% Anatomy plots dR
+%%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    %load the images 
+        fig = [];
+        titles = {"A", "B", "C", "D", "E", "F"};
+        plot_title = 'A B C D E F';
+        ordinals = '(1) \n  (2) \n (3) \n (4) \n (5) \n (6)';
 
-%         for i = 1:length(dr)
-%             filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, g, rep);
-%             fig = cat(2, fig, imread(filename));
-%         end
-%         imshow(fig)
-%         annotation('textbox', [0.13 0.03 0.8 0.1],'String', titles)
+        for i = 1:length(dr)
+            filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, g, rep);
+            fig = cat(2, fig, imread(filename));
+        end
+        imshow(fig)
+        annotation('textbox', [0.13 0.03 0.8 0.1],'String', titles)
 
 
-%         imwrite(fig, "./results_plots/stitched_plots/paper_anatomy_dr.png", 'png')
+        imwrite(fig, "./results_plots/stitched_plots/paper_anatomy_dr.png", 'png')
+%%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%% Anatomy plots Activity
+%%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     for j = 1:length(gamma)
     %load the images 
         fig = [];
@@ -78,8 +81,26 @@ bar_size = 5;
         fig1 = cat(2, fig1, imread(filename1));
         L = size(fig1, 1);
         filename2 = sprintf('./results_plots/generated_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_CTOF.png', dr(i), r, g, rep);
-        fig2 = cat(2, fig2, imread(filename2));
-        L = size(fig2, 1);
+        
+        if i == 1
+            fig2 = cat(2, fig2, imread(filename2));
+            L = size(fig2, 1);  
+        elseif size(imread(filename2),2) == size(fig2,2)
+            fig2 = cat(2, fig2, imread(filename2));
+            L = size(fig2, 1);
+        else
+            i 
+            temp = imread(filename2);
+            size(fig2)
+            size(temp)
+
+            size(fig2,2) - size(temp, 2)
+            temp = padarray(temp, [0,size(fig2,2) - size(temp, 2),0], 0, 'pre');
+            fig2 = cat(2, fig2, temp);
+            L = size(fig2, 1);
+        end
+
+
     end
 
     L = size(fig1, 2);

@@ -25,7 +25,7 @@ tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients = unique([0 knock_in]); [0.15, 0.3, 0.45, 4.0];    
 ratios = 0.5; [0.4, 0.5, 0.6];    
-gamma = 1; [0.000625, 0.001, 0.00625, 0.01, 0.0625]; 0.00625; 
+gamma =  [0.000625, 0.001, 0.00625, 0.01, 0.0625]; 1; 0.00625; 
 repeats = 1:1;
 
 
@@ -205,9 +205,9 @@ parfor ind = 1:L
         %  construct a series of pure injection plots with axes labels only for the leftmost plot
         if (rep == 1) && plot_figs
                 if u==1
-                      anatomy_reduced(analysis_obj_anatomy, plotting_dictionary.anatomy, 1);
+                      anatomy_reduced(analysis_obj_anatomy, plotting_dictionary.anatomy, 1, grad / 3.54);
                 else
-                      anatomy_reduced(analysis_obj_anatomy, plotting_dictionary.anatomy, 0);
+                      anatomy_reduced(analysis_obj_anatomy, plotting_dictionary.anatomy, 0, grad / 3.54);
                 end
         end
 
