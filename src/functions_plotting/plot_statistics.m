@@ -34,8 +34,8 @@ alp = 0.05;
     xlim([1/3.54 * gradients(1) - b_width, 1/3.54 * gradients(length(gradients)) + b_width])
     alpha(alp);
     xlabel('Magnitude of EphA3 knockin (DR)');
-    ylabel('Visual Field Overlap (%)');
-    %title(''); title('Visual Field Overlap of C-to-F Part-Maps');
+    ylabel('Visual Field Duplication (%)');
+   % title('Visual Field Duplication of C-to-F Part-Maps');
     saveas(gcf, 'results_plots/stats_largest_vfo.png');
     hold off
     close(5);
@@ -110,8 +110,8 @@ alp = 0.05;
     ylim([mi, ma]);
     alpha(alp);
     title(''); xlabel('Magnitude of EphA3 knockin (DR)');
-    ylabel('Overlap Fraction');
-    %title('Mean Projection Location');
+    ylabel('Mean Projection Location');
+    title('Distributions of Mean Projection Location');
     
     saveas(gcf, 'results_plots/stats_mean_projection.png');
     hold off
@@ -153,7 +153,7 @@ alp = 0.05;
     alpha(alp);
     xlabel('Magnitude of EphA3 knockin (DR)');
     ylabel('Map Quality (%)');
-    %title(''); title('Distributions of Map Quality by Submap Division');
+    title('Distributions of Map Quality by Submap Division');
 
     saveas(gcf, 'results_plots/stats_qualities.png');
     hold off

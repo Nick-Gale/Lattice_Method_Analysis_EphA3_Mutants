@@ -17,7 +17,7 @@
 %%
 %% set the parameters that need to be passed to all workers in the parallel pool as global
 global n_neurones n_iterations
-n_neurones = 10000;
+n_neurones = 2000;
 n_iterations = n_neurones ^ 2 * 5;
 
 global gradients ratios gamma repeats sz L
@@ -25,8 +25,8 @@ tel = 1.0;
 knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients = unique([0 knock_in]); [0.15, 0.3, 0.45, 4.0];    
 ratios = 0.5; [0.4, 0.5, 0.6];    
-gamma =  [0.000625, 0.001, 0.00625, 0.01, 0.0625]; 1; 0.00625; 
-repeats = 1:1;
+gamma =  0.00625; [0.000625, 0.001, 0.00625, 0.01, 0.0625]; 1; 
+repeats = 1:100;
 
 
 % create the iteration objects and set up a parallel pool
@@ -216,8 +216,36 @@ parfor ind = 1:L
         end
 end
 
-% generate statistics
+%% generate statistics
 if record_stats
         plot_statistics(stats_vec, gradients, ratios, gamma, repeats);
 end
 
+ks2testmat = zeros(length(gradients), length(repeats));
+
+for ind = 1:L
+        [u, s, t, rep] = ind2sub(sz, ind); 
+        grad = gradients(u);
+        rat = ratios(s); 
+        g = gamma(t);
+        stats = stats_vec{ind};
+        stats;
+        ks2testmat(u, rep) = stats(33);
+end
+
+pvals = zeros(length(gradients), length(gradients));
+sig95 = zeros(length(gradients), length(gradients));
+
+for i = 1:length(gradients)
+        for j = 1:length(gradients)
+                dist1 = ks2testmat(i, :);
+                dist2 = ks2testmat(j, :);
+                try
+                        [log, p] = kstest2(dist1,dist2)
+                        sig95(i, j) = log;
+                        pvals(i, j) = p;
+                end
+        end
+end
+sig95
+pvals
