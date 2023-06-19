@@ -216,6 +216,8 @@ fig = figure('Position', [0, 0, 400, 1600]);
     ylabel(subplot5_ylabel, 'FontSize', fs);
     axis equal;
     set(gca, 'YTick', [0, 0.5, 1, 1.5]);
+    set(gca, 'YDir','reverse');
+
 
 % put a line between subplots 2 and 3. This is where the axes change from retinal on x to retinal on y
 % annotation('line', [0.25 0.75], [0.572 0.572], 'Color', 'k', 'LineWidth', 2);

@@ -1,4 +1,4 @@
-function [] = anatomy(obj, dict, plot_axes)
+function [] = anatomy(obj, dict, plot_axes, dr)
     % this function takes a super object and produces an image with six subplots: 
     % 1. Colour coded retinal location
     % 2. Colour coded gradients with two lines showing where slices in the DV axis are to be taken. Gradients are Eph in the retina and Eprhin in the colliculus - both the A system
@@ -69,14 +69,11 @@ function [] = anatomy(obj, dict, plot_axes)
         subplot3_xlabel = ''; % dict.subplot3_xlabel;
         subplot3_ylabel = '';
 
-        subplot4_xlabel = '' % dict.subplot4_xlabel;
+        subplot4_xlabel = ''; % dict.subplot4_xlabel;
         subplot4_ylabel = '';
 
-        subplot5_xlabel = ''; % dict.subplot5_xlabel;
+        subplot5_xlabel = dict.subplot5_xlabel;
         subplot5_ylabel = '';
-
-        subplot6_xlabel = dict.subplot6_xlabel;
-        subplot6_ylabel = '';
     else
         disp("Plot_axes should be logical (0/1)")
     end
@@ -172,6 +169,8 @@ fig = figure('Position', [0, 0, 400, 1600]);
 %figure 1
     plt1 = subplot(7,1,2);
     scatter(subplot1_ephA3_x, subplot1_ephA3_y,  markersize, 'filled', 'MarkerEdgeColor', epha3_colour, 'MarkerFaceColor', epha3_colour);
+    plttitle = strcat("DR = ", string(dr));
+    title(plttitle)
     alpha(transparency);
     hold on;
 
@@ -189,11 +188,13 @@ fig = figure('Position', [0, 0, 400, 1600]);
     ylabel(subplot1_ylabel, 'FontSize', fs);
     line([0 1],[DV_slice_location DV_slice_location],'Color','k');
     set(gca, 'XDir', 'reverse');
+
     axis equal;
     axis([0 1 0 1]);
     set(gca, 'YTick', [0, 0.5, 1, 1.5])
 
 %figure 2
+lw = 2; % MAGIC NUMBER ALERT
     subplot(7,1,3)
     if ~isempty(subplot2_ephA3_y)
         gradients1 = plot(subplot2_ephA3_x, subplot2_ephA3_y, 'Color', epha3_colour,'LineWidth', lw);
@@ -262,6 +263,10 @@ fig = figure('Position', [0, 0, 400, 1600]);
     ylabel(subplot5_ylabel, 'FontSize', fs);
     axis equal;
     set(gca, 'YTick', [0, 0.5, 1, 1.5]);
+    if dict.FlipY==1
+        set(gca, 'YDir','reverse');
+    end
+
 
 %put a line between subplots 2 and 3. This is where the axes change from retinal on x to retinal on y
 annotation('line', [0.25 0.75], [0.572 0.572], 'Color', 'k', 'LineWidth', 2);

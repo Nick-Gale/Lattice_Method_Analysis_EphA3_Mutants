@@ -1,12 +1,4 @@
 function [] = visual_field_overlap(obj, dict)
-    % this function takes a super object and produces an image with six subplots: 
-    % 1. Colour coded retinal location
-    % 2. Colour coded gradients with two lines showing where slices in the DV axis are to be taken. Gradients are Eph in the retina and Eprhin in the colliculus - both the A system
-    % 3. The average phase projection of all collicular cells within a threshold of slice ML
-    % 4. The average anatomical projection of all collicular cells within a threshold of slice ML
-    % 5. The average projection of epha3 and wt cell colour coded within a threshold slice DV
-    % 6. The distribution of cells over the collicilus colour coded
-
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %Load Data
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,9 +18,9 @@ function [] = visual_field_overlap(obj, dict)
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %Load Parameters
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    cb = [0, 0.4470, 0.7410];
-    cr = [0.6350, 0.0780, 0.1840];
-    cp = [0.4940, 0.1840, 0.5560];
+    cb = [0, 0, 0]; [0, 0.4470, 0.7410];
+    cr = [0, 0, 0]; [0.6350, 0.0780, 0.1840];
+    cp = [0, 0, 0]; [0.4940, 0.1840, 0.5560];
     sz = 20;
     shrink = 0.2;
     save_dir = strcat(dict.directory, sprintf('figure_visual_field_overlap_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', id(1), id(2), id(3), id(4)));
@@ -54,6 +46,8 @@ function [] = visual_field_overlap(obj, dict)
     if ~isempty(p1_indexes_g2)
         scatter(partmap2_field(p2_indexes_g1, 1), partmap2_field(p2_indexes_g1, 2), sz, cp, 'filled');
     end
+    
+    set(gca, 'YDir','reverse');
     set(gca, 'XDir','reverse');
     axis equal;
     axis([0 1 0 1]);

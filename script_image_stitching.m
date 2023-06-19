@@ -24,6 +24,7 @@ bar_size = 5;
         for i = 1:length(dr)
             filename = sprintf('./results_plots/generated_plots/figure_anatomy_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d).png', dr(i), r, g, rep);
             fig = cat(2, fig, imread(filename));
+            titles{i} = strcat(titles{i}, string(dr(i)));
         end
         imshow(fig)
         annotation('textbox', [0.13 0.03 0.8 0.1],'String', titles)
@@ -53,7 +54,7 @@ bar_size = 5;
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 % Anatomy plots dBeta2
 %------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     %load the images 
+     % load the images 
      fig = [];
      titles = {"A", "B", "C", "D", "E", "F"};
      plot_title = 'A B C D E F';
@@ -76,7 +77,7 @@ bar_size = 5;
     fig1 = [];
     fig2 = [];
 
-    for i = 1:length(dr)
+    for i = 1:length(dr);
         filename1 = sprintf('./results_plots/generated_plots/figure_submaps_ID(EphA3Ki, Ratio, Gamma, Repeat): (%0.2f, %0.2f, %d, %d)_SCANNER_FTOC.png', dr(i), r, g, rep);
         fig1 = cat(2, fig1, imread(filename1));
         L = size(fig1, 1);
