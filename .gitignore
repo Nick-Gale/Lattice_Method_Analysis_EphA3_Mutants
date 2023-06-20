@@ -8,4 +8,5 @@ script_stiching_thesis
 results_plots/stiched_plots/thesis_CTOF_lattice_plots.png
 results_plots/stiched_plots/thesis_FTOC_lattice_plots.png
 results_plots/generated_plots/*
-results_experiments/timing/ITER/*rm -r --cached
+results_experiments/timing/ITER/*
+data_filtereds
