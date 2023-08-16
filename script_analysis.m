@@ -17,7 +17,7 @@
 %%
 %% set the parameters that need to be passed to all workers in the parallel pool as global
 global n_neurones n_iterations
-n_neurones = 10000;
+n_neurones = 2000;
 n_iterations = n_neurones ^ 2 * 5;
 
 global gradients ratios gamma repeats sz L
@@ -26,7 +26,7 @@ knock_in = (-tel:(tel - (-tel))/10:tel) + tel;
 gradients = unique([0 knock_in]); [0.15, 0.3, 0.45, 4.0];    
 ratios = 0.5; [0.4, 0.5, 0.6];    
 gamma =  0.00625; [0.000625, 0.001, 0.00625, 0.01, 0.0625]; 1; 
-repeats = 1:1;
+repeats = 1:100;
 
 
 % create the iteration objects and set up a parallel pool
@@ -172,23 +172,26 @@ print_stats = false;
 record_stats = (n_neurones == 2000);
 
 parfor ind = 1:L
+        disp(ind)
         %choose the experiment
         [u, s, t, rep] = ind2sub(sz, ind); 
         grad = gradients(u);
         rat = ratios(s); 
         g = gamma(t);
+        disp([grad, rat, g])
         
         %load the data
         filename = sprintf('results_experiments/experiment_objects/WillshawGale_n=%d_iterations=%d_ephA3KI=%f_ilset2proportion=%f_gamma=%d_repeat=%d.mat', n_neurones, n_iterations, grad, rat, g, rep);
         experiment_obj = load(filename).old;
          
-        % perform a scanning experiment, plot, and analyse
-        analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');
-        disp("Finished analysis of scanning")
-        if (rep == 1) && plot_figs
-               experiment_plot(analysis_obj_scanner, plotting_dictionary);
-        end
-        disp("Finished plot of scanning")
+        % % perform a scanning experiment, plot, and analyse
+        % analysis_obj_scanner = experiment_analysis(experiment_obj, 'SCANNER', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');
+        % disp("Finished analysis of scanning")
+        % if (rep == 1) && plot_figs
+        %         disp("Here")
+        %        experiment_plot(analysis_obj_scanner, plotting_dictionary);
+        % end
+        % disp("Finished plot of scanning")
 
         % % perform an anatomical experiment, plot, and analyse
         analysis_obj_anatomy = experiment_analysis(experiment_obj, 'ANATOMY', analysis_parameter_dictionary, [grad, rat, g, rep], 'SIMULATION');

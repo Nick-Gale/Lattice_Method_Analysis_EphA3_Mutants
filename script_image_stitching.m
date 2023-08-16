@@ -70,9 +70,9 @@ bar_size = 5;
 
      imwrite(fig, "./results_plots/stitched_plots/paper_anatomy_dr_beta2.png")
 
-%%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-%%Lattice Scanner Plots dR
-%%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%Lattice Scanner Plots dR
+%------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     fig = [];
     fig1 = [];
     fig2 = [];
@@ -100,9 +100,10 @@ bar_size = 5;
             fig2 = cat(2, fig2, temp);
             L = size(fig2, 1);
         end
-
-
     end
+
+
+    
 
     L = size(fig1, 2);
 
@@ -171,19 +172,19 @@ bar_size = 5;
     fig3 = [];
 
     bar_size = 5;
-    filename1 = sprintf('./results_plots/generated_plots/stats_largest_vfo.png');
+    filename1 = sprintf('./results_plots/stats_largest_vfo.png');
     fig1 = cat(2, fig1, imread(filename1));
     L = size(fig1, 1);
     dividing_bar = zeros(L, bar_size, 3);
     %fig1 = cat(2, fig1, dividing_bar);
 
-    filename2 = sprintf('./results_plots/generated_plots/stats_largest_co.png');
+    filename2 = sprintf('./results_plots/stats_largest_co.png');
     fig2 = cat(2, fig2, imread(filename2));
     L = size(fig2, 1);
     dividing_bar = zeros(L, bar_size, 3);
     %fig2 = cat(2, fig2, dividing_bar);
 
-    filename3 = sprintf('./results_plots/generated_plots/stats_qualities.png');
+    filename3 = sprintf('./results_plots/stats_qualities.png');
     fig3 = cat(2, fig3, imread(filename3));
     L = size(fig3, 1);
     dividing_bar = zeros(L, bar_size, 3);

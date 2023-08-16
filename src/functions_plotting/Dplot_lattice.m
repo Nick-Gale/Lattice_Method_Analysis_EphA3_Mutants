@@ -239,10 +239,10 @@ function h = Dplot_lattice_hjorth(so, object, plotting_dictionary, direction, h1
         axis off
     end
 
-    set_axis_props(plotting_dictionary);
-    set(gca, 'XDIR', 'reverse');
-    set(gca, 'YDIR', 'reverse');
-
+    set_axis_props(plotting_dictionary); % there is a quirk with axis orientation in this function flipping only the y-axis
+    set(gca, 'XDIR', 'reverse'); % set this for visual orientation rather than anatomical orientation
+    set(gca, 'YDIR', 'normal'); % set this 'normal' for visual orientation rather than anatomical orientation.
+    
     if Title
         title(plotting_dictionary.title);
     end

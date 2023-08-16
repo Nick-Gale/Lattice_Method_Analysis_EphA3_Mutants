@@ -34,7 +34,7 @@ alp = 0.05;
     xlim([1/3.54 * gradients(1) - b_width, 1/3.54 * gradients(length(gradients)) + b_width])
     alpha(alp);
     xlabel('Magnitude of EphA3 knockin (DR)');
-    ylabel('Visual Field Duplication (%)');
+    ylabel('Visual Field Overlap (%)');
    % title('Visual Field Duplication of C-to-F Part-Maps');
     saveas(gcf, 'results_plots/stats_largest_vfo.png');
     hold off
